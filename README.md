@@ -1,1 +1,1 @@
-# Portofólio-Algoritmos Avançados para a Bioinformática
+# Portofólio - Algoritmos Avançados para a Bioinformática
