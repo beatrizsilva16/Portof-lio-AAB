@@ -2,4 +2,4 @@
 Master in Bioinformatics, department of Informatics, University of Minho
 
 
-pg45465
+Beatriz Silva, pg45465
