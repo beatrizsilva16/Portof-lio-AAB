@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class BWT:
     
     def __init__(self, seq = "", buildsufarray = False):
