@@ -1,5 +1,5 @@
 from MySeq import MySeq
-from MyMotifs import MyMotifs
+from scr.MyMotifs import MyMotifs
 
 
 class MotifFinding:
