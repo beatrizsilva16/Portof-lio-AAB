@@ -1,7 +1,6 @@
 from EvolAlgorithm import EvolAlgorithm
-from Popul import PopulInt, PopulReal
-from MotifFinding import MotifFinding
-from MyMotifs import MyMotifs
+from Popul import PopulInt
+from scr.MotifFinding import MotifFinding
 
 
 def createMatZeros(nl, nc):
@@ -50,13 +49,13 @@ class EAMotifsReal (EvolAlgorithm):
 
 
 def test1():
-    ea = EAMotifsInt(100, 1000, 50, "exemploMotifs.txt")
+    ea = EAMotifsInt(100, 1000, 50, "../Aula 1 - Motifs/exemploMotifs.txt")
     ea.run()
     ea.printBestSolution()
 
 
 def test2():
-    ea = EAMotifsReal(100, 2000, 50, "exemploMotifs.txt", 2)
+    ea = EAMotifsReal(100, 2000, 50, "../Aula 1 - Motifs/exemploMotifs.txt", 2)
     ea.run()
     ea.printBestSolution()
 

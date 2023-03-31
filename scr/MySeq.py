@@ -1,13 +1,13 @@
 class MySeq:
 
-    def __init__(self, seq, tipo="dna"):
+    def __init__(self, seq: str, seq_type: str) -> None:
         self.seq = seq.upper()
-        self.tipo = tipo
+        self.seq_type = seq_type
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.seq)
 
-    def __getitem__(self, n):
+    def __getitem__(self, n: int) -> str:
         return self.seq[n]
 
     def __getslice__(self, i, j):
@@ -20,16 +20,16 @@ class MySeq:
         print(self.seq)
 
     def alfabeto(self):
-        if (self.tipo == "dna"):
+        if (self.seq_type == "dna"):
             return "ACGT"
-        elif (self.tipo == "rna"):
+        elif (self.seq_type == "rna"):
             return "ACGU"
-        elif (self.tipo == "protein"):
+        elif (self.seq_type == "protein"):
             return "ACDEFGHIKLMNPQRSTVWY"
         else:
             return None
 
-    def valida(self):
+    def valida(self) -> bool:
         alf = self.alfabeto()
         res = True
         i = 0
@@ -237,29 +237,3 @@ class MySeq:
                 larg = prot
         return larg
 
-
-# teste
-def teste():
-    seq_dna = input("Sequencia:")
-    s1 = MySeq(seq_dna)
-    s1.printseq()
-
-    if s1.validaER():
-        print("Sequencia valida")
-        print("Transcricao: ")
-        s1.transcricao().printseq()
-        print("Complemento inverso:")
-        s1.compInverso().printseq()
-        print("Traducao: ")
-        s1.traduzSeq().printseq()
-        print("ORFs:")
-        for orf in s1.orfs():
-            orf.printseq()
-        print("Maior proteina nas ORFs:")
-        s1.maiorProteinaORFs().printseq()
-    else:
-        print("Sequencia invalida")
-
-
-if __name__ == "__main__":
-    teste()

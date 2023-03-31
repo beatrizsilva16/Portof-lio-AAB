@@ -1,37 +1,76 @@
+
 from MySeq import MySeq
 from scr.MyMotifs import MyMotifs
-
+from random import randint
+from random import random
+from typing import Union
+from typing import List
 
 class MotifFinding:
+    """
+    Class implemented for searching for recurrent patterns in a biological sequence,
+    that can be DNA or proteins.
+    The pattern to look for can be an exact sequence or a degenerate consensus in which there are
+    ambiguous characters.
+    """
 
-    def __init__(self, size=8, seqs=None):
-        self.motifSize = size
-        if (seqs != None):
+    def __init__(self, size: int = 8, seqs=None) -> None:
+        """
+        Method storing the values used in the other methods.
+        :param size: size of the motif to search
+        :param seqs: list of sequences to search
+        """
+        self.motifSize = size #guarda o tamanho
+        if (seqs != None): # se a lista tiver sequencias
             self.seqs = seqs
-            self.alphabet = seqs[0].alfabeto()
+            self.alphabet = seqs[0].alphabet()
         else:
             self.seqs = []
 
-    def __len__(self):
+    def __len__(self) -> int:
+        """
+        Method returning the length of sequences
+        :return: returns the length of sequences
+        """
         return len(self.seqs)
 
-    def __getitem__(self, n):
+    def __getitem__(self, n: int) -> None:
+        """
+        Method that allows returning an item from the indexing of an instance
+        :param n: position of the value we want to return.
+        :return: characteristic of the position entered
+        """
         return self.seqs[n]
 
-    def seqSize(self, i):
+    def seqSize(self, i: int) -> int:
+        """
+        Method returning the length of the sequence
+        :param i: index of the sequence in the sequence list.
+        :return: length of the sequence with index i from the sequence list.
+        """
         return len(self.seqs[i])
 
-    def readFile(self, fic, t):
-        for s in open(fic, "r"):
-            self.seqs.append(MySeq(s.strip().upper(), t))
-        self.alphabet = self.seqs[0].alfabeto()
+    def readFile(self, file: str, type: str) -> None:
+        """
+        Method that reads the sequence file.
+        :param file: sequence file.
+        :param type: type of the sequences.
+        """
+        for seq in open(file, "r"):
+            self.seqs.append(MySeq(seq.strip().upper(), type))
+        self.alphabet = self.seqs[0].alphabet()
 
-    def createMotifFromIndexes(self, indexes):
-        pseqs = []
+    def createMotifFromIndexes(self, indexes: List):
+        """
+        Method implementing probabilistic motifs of the MyMotif type.
+        :param indexes: list of the indexes of the starting positions of the motif
+        :return: of the sub-sequences used to create the motif.
+        """
+        motif_subseq = []
         for i, ind in enumerate(indexes):
-            pseqs.append(
+            motif_subseq.append(
                 MySeq(self.seqs[i][ind:(ind+self.motifSize)], self.seqs[i].tipo))
-        return MyMotifs(pseqs)
+        return MyMotifs(motif_subseq)
 
     # SCORES
 
@@ -172,64 +211,3 @@ class MotifFinding:
             acum += (f[ind] + 0.01)
             ind += 1
         return ind-1
-
-
-# tests
-
-def test1():
-    sm = MotifFinding()
-    sm.readFile("exemploMotifs.txt", "dna")
-    sol = [25, 20, 2, 55, 59]
-    sa = sm.score(sol)
-    print(sa)
-    scm = sm.scoreMult(sol)
-    print(scm)
-
-
-def test2():
-    print("Test exhaustive:")
-    seq1 = MySeq("ATAGAGCTGA", "dna")
-    seq2 = MySeq("ACGTAGATGA", "dna")
-    seq3 = MySeq("AAGATAGGGG", "dna")
-    mf = MotifFinding(3, [seq1, seq2, seq3])
-    sol = mf.exhaustiveSearch()
-    print("Solution", sol)
-    print("Score: ", mf.score(sol))
-    print("Consensus:", mf.createMotifFromIndexes(sol).consensus())
-
-    print("Branch and Bound:")
-    sol2 = mf.branchAndBound()
-    print("Solution: ", sol2)
-    print("Score:", mf.score(sol2))
-    print("Consensus:", mf.createMotifFromIndexes(sol2).consensus())
-
-    print("Heuristic consensus: ")
-    sol1 = mf.heuristicConsensus()
-    print("Solution: ", sol1)
-    print("Score:", mf.score(sol1))
-
-
-def test3():
-    mf = MotifFinding()
-    mf.readFile("exemploMotifs.txt", "dna")
-    print("Branch and Bound:")
-    sol = mf.branchAndBound()
-    print("Solution: ", sol)
-    print("Score:", mf.score(sol))
-    print("Consensus:", mf.createMotifFromIndexes(sol).consensus())
-
-
-def test4():
-    mf = MotifFinding()
-    mf.readFile("exemploMotifs.txt", "dna")
-    print("Heuristic stochastic")
-    sol = mf.heuristicStochastic()
-    print("Solution: ", sol)
-    print("Score:", mf.score(sol))
-    print("Score mult:", mf.scoreMult(sol))
-    print("Consensus:", mf.createMotifFromIndexes(sol).consensus())
-
-    sol2 = mf.gibbs(1000)
-    print("Score:", mf.score(sol2))
-    print("Score mult:", mf.scoreMult(sol2))
-
