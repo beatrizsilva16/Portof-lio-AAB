@@ -104,7 +104,14 @@ class Indiv:
 
 class IndivInt (Indiv):
 
-    def __init__(self, size, genes=[], lb=0, ub=1):
+    def __init__(self, size: int, genes: list = [], lb: int = 0, ub: int =1):
+        """
+        Subclass to implement individuals with binary representation.
+        :param size: size of the list of genes
+        :param genes: list of genes (representative of genome), by default []
+        :param lb: lower limits of the range for representing genes, by default 0
+        :param ub: upper limits of the range for representing genes, by default 1
+        """
         self.lb = lb
         self.ub = ub
         self.genes = genes
@@ -112,7 +119,12 @@ class IndivInt (Indiv):
         if not self.genes:
             self.initRandom(size)
 
-    def initRandom(self, size):
+    def initRandom(self, size: int) -> None:
+        """
+        Method that generates a list of genes of the individual (random int numbers between upper and lower bounds)
+        :param size:  number of genes to generate
+        :return:
+        """
         self.genes = []
         for _ in range(size):
             self.genes.append(randint(0, self.ub))
@@ -125,13 +137,13 @@ class IndivInt (Indiv):
 
 class IndivReal(Indiv):
 
-    def initRandom(self, size: int):
+    def initRandom(self, size: int) -> None:
         # The initRandom method initializes the genes of the individual with random values in the interval [lb, ub].
         # In this case, the genes are initialized with random float values between lb and ub using the random function
         # and list comprehension.
         self.genes = [random() * (self.ub - self.lb) + self.lb for _ in range(size)]
 
-    def mutation(self):
+    def mutation(self) -> None:
         # The mutation method performs a mutation operation on one randomly selected gene in the individual.
         s = len(self.genes)
         pos = randint(0, s - 1)
