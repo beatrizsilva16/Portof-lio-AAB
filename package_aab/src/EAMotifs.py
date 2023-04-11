@@ -1,6 +1,6 @@
-from EvolAlgorithm import EvolAlgorithm
-from Popul import PopulInt
-from scr.MotifFinding import MotifFinding
+from package_aab.src.EvolAlgorithm import EvolAlgorithm
+from package_aab.src.Popul import PopulInt, PopulReal
+from package_aab.src.MotifFinding import MotifFinding
 
 
 def createMatZeros(nl, nc):
@@ -39,23 +39,30 @@ class EAMotifsInt (EvolAlgorithm):
 
 class EAMotifsReal (EvolAlgorithm):
     def __init__(self, popsize, numits, noffspring, filename):
-        pass
+        self.motifs = MotifFinding()
+        self.motifs.readFile(filename, "dna")
+        indsize = len(self.motifs) * self.motifs.motifSize
+        EvolAlgorithm.__init__(self, popsize, numits, noffspring, indsize)
 
     def initPopul(self, indsize):
-        pass
+        self.popul = PopulReal(self.popsize, indsize, [])
 
     def evaluate(self, indivs):
-        pass
+        for i in range(len(indivs)):
+            ind = indivs[i]
+            sol = ind.getGenes()
+            fit = self.motifs.score(sol)
+            ind.setFitness(fit)
 
 
 def test1():
-    ea = EAMotifsInt(100, 1000, 50, "../Aula 1 - Motifs/exemploMotifs.txt")
+    ea = EAMotifsInt(100, 1000, 50, "exemploMotifs.txt")
     ea.run()
     ea.printBestSolution()
 
 
 def test2():
-    ea = EAMotifsReal(100, 2000, 50, "../Aula 1 - Motifs/exemploMotifs.txt", 2)
+    ea = EAMotifsReal(100, 2000, 50, "exemploMotifs.txt", 2)
     ea.run()
     ea.printBestSolution()
 
