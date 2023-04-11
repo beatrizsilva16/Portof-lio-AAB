@@ -1,5 +1,5 @@
 import unittest
-from bwt import BWT
+from package_aab.src.BTW import BWT
 
 
 class test_BWT(unittest.TestCase):
