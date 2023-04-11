@@ -119,13 +119,18 @@ class PopulInt(Popul):
 
 class PopulReal(Popul):
 
-    def __init__(self, popsize, indsize, lb=0.0, ub=1.0, indivs=[]):
+    def __init__(self, popsize: int, indsize: int, lb: float = 0.0, ub: float = 1.0, indivs: list = []) -> None:
         # Call the constructor of the base class with the given arguments
         Popul.__init__(self, popsize, indsize, indivs)
         self.lb = lb
         self.ub = ub
+        Popul.__init__(self, popsize, indsize, indivs)
 
-    def initRandomPop(self):
+    def initRandomPop(self) -> None:
+        """
+        Method that initializes the population (creates instances of IndivReal class)
+        :return:
+        """
         self.indivs = []
         # Create a new IndivReal object for each individual in the population
         for _ in range(self.popsize):
