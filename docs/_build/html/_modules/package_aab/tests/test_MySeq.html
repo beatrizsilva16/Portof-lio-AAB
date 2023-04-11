@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package_aab.tests.test_MySeq &#8212; AABB  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for package_aab.tests.test_MySeq</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">package_aab.src</span> <span class="kn">import</span> <span class="n">MySeq</span>
+
+
+<div class="viewcode-block" id="test_MySeq"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MySeq.test_MySeq">[docs]</a><span class="k">class</span> <span class="nc">test_MySeq</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="test_MySeq.setUp"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MySeq.test_MySeq.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq_dna1</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;ACTGCCAT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq_dna2</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;ATGCATGAAT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq_dna3</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;ATGCCCGCTTT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq_rna1</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;ACUGCCGUCAUA&quot;</span><span class="p">,</span> <span class="s2">&quot;rna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq_rna2</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;AGAAUGACGACCUAG&quot;</span><span class="p">,</span> <span class="s2">&quot;rna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq_prot1</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;MFLSP_AHMGREQTG_&quot;</span><span class="p">,</span> <span class="s2">&quot;prot&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MySeq.test_transcricao"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MySeq.test_MySeq.test_transcricao">[docs]</a>    <span class="k">def</span> <span class="nf">test_transcricao</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_dna1</span><span class="o">.</span><span class="n">transcription</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;ACUGCCAU&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="test_MySeq.test_reverseComplement"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MySeq.test_MySeq.test_reverseComplement">[docs]</a>    <span class="k">def</span> <span class="nf">test_reverseComplement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_dna1</span><span class="o">.</span><span class="n">reverseComplement</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;ATGGCAGT&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MySeq.test_rnaCodon"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MySeq.test_MySeq.test_rnaCodon">[docs]</a>    <span class="k">def</span> <span class="nf">test_rnaCodon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_rna1</span><span class="o">.</span><span class="n">rnaCodon</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ACU&quot;</span><span class="p">,</span> <span class="s2">&quot;GCC&quot;</span><span class="p">,</span> <span class="s2">&quot;GUC&quot;</span><span class="p">,</span> <span class="s2">&quot;AUA&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MySeq.test_seqTranslation"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MySeq.test_MySeq.test_seqTranslation">[docs]</a>    <span class="k">def</span> <span class="nf">test_seqTranslation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_dna3</span><span class="o">.</span><span class="n">seqTranslation</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;MPA&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MySeq.test_orfs"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MySeq.test_MySeq.test_orfs">[docs]</a>    <span class="k">def</span> <span class="nf">test_orfs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_dna2</span><span class="o">.</span><span class="n">orfs</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MHE&quot;</span><span class="p">,</span> <span class="s2">&quot;CMN&quot;</span><span class="p">,</span> <span class="s2">&quot;A_&quot;</span><span class="p">,</span> <span class="s2">&quot;IHA&quot;</span><span class="p">,</span> <span class="s2">&quot;FMH&quot;</span><span class="p">,</span> <span class="s2">&quot;SC&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">test</span><span class="p">,</span> <span class="n">truth</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">),</span> <span class="n">truth</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MySeq.test_allProtein"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MySeq.test_MySeq.test_allProtein">[docs]</a>    <span class="k">def</span> <span class="nf">test_allProtein</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_prot1</span><span class="o">.</span><span class="n">allProtein</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MFLSP&quot;</span><span class="p">,</span> <span class="s2">&quot;MGREQTG&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">test</span><span class="p">,</span> <span class="n">truth</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">),</span> <span class="n">truth</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MySeq.test_longestProteinSeq"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MySeq.test_MySeq.test_longestProteinSeq">[docs]</a>    <span class="k">def</span> <span class="nf">test_longestProteinSeq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_prot1</span><span class="o">.</span><span class="n">longestProteinSeq</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;MGREQTG&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">AABB</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Beatriz Silva.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
