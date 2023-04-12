@@ -104,7 +104,7 @@ class Indiv:
 
 class IndivInt (Indiv):
 
-    def __init__(self, size: int, genes: list = [], lb: int = 0, ub: int =1):
+    def __init__(self, size: int, genes: list = [], lb: int = 0, ub: int = 1):
         """
         Subclass to implement individuals with binary representation.
         :param size: size of the list of genes
