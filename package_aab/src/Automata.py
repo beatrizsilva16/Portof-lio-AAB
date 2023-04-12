@@ -23,6 +23,7 @@ class Automata:
         self.alphabet = alphabet  # all the characters present in our sequence
         self.transitionTable = {}  # dictionary of the transition table
         self.buildTransitionTable(pattern)  # saves the transition table
+
     def buildTransitionTable(self, pattern: str):
         """
         Method that constructs the transition table. The transition table returns the next
@@ -32,9 +33,12 @@ class Automata:
         for char_p in range(self.numstates):  # loop through each character in the pattern
             for char in self.alphabet:  # loop through each character in the alphabet
                 possible_pattern = pattern[:char_p] + char  # creates all possible patterns
-                match_next_state = overlap(possible_pattern, pattern)  # finds the overlap between the possible
-                # pattern and the pattern adds the next state to the transition table for the current state and
-                # character
+                # patern[:char_p] represents the history of previous states. By adding char to
+                #the end of this slice, we create a new pattern that includes the current state and
+                # the history of previous states.
+                match_next_state = overlap(possible_pattern, pattern)  # find the overlap between each possible
+                # pattern and the original pattern. The resulting overlap represents the next state of
+                # the automaton machine.
                 self.transitionTable[(char_p, char)] = match_next_state
                 # the transition table is a dictionary where each key is a tuple with the current state
                 # and character and the value is the next state

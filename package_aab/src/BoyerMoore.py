@@ -15,7 +15,7 @@ class BoyerMoore:
 
         self.occ = {}  # creates an empty dictionary to store the character occurrence
 
-        # # create lists of size equal to the default + 1. each initialized with zeros
+        # create lists of size equal to the default + 1. each initialized with zeros
         self.f = [0] * (len(self.pattern) + 1)  # list of size of pattern + 1, initialized with zeros
         self.s = [0] * (len(self.pattern) + 1)  # list of the size of the pattern + 1, initialized with zeros
 

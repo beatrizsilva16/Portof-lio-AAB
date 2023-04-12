@@ -154,6 +154,7 @@ class IndivReal(Indiv):
         self.genes = []
         for _ in range(size):
             self.genes.append(uniform(self.lb, self.ub))
+
     def mutation(self) -> None:
         """
         Method for real representations that alters a single gene (mutation)

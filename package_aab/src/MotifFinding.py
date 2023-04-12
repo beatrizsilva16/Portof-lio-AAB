@@ -266,7 +266,7 @@ class MotifFinding:
         :return: list of starting positions s (representative of the best motif found)
         """
         # Initialize the MotifFinding object with the first two sequences
-        mf = MotifFinding(self.motifSize, self.seqs[:2])
+        mf = MotifFinding(self.motifSize, self.seqs[:2])  # first two fixes positions
         # Obtain the starting positions with exhaustive search for the first two sequences
         s = mf.exhaustiveSearch()
         # For each of the following sequences, iteratively, choose the best starting position in the sequence, in order

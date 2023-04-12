@@ -3,9 +3,9 @@ from typing import List
 
 class BWT:
     """
-    Class for implementing the Burrows-Hweeler algorithm where different methods have been created. The algorithm is useful for
-    compressing large sequences, thus reducing their space. Moreover, it is possible to find patterns in the
-    compression format efficiently.
+    Class for implementing the Burrows-Hweeler algorithm where different methods have been created.
+    The algorithm is useful for compressing large sequences, thus reducing their space. Moreover,
+    it is possible to find patterns in the compression format efficiently.
     """
     def __init__(self, seq='', buildsufarray=False, sa=None):
         self.bwt = self.build_bwt(seq, buildsufarray)
@@ -27,7 +27,6 @@ class BWT:
             ls.append(text[i:] + text[:i])
         # Alphabetically sort the obtained sequences.
         ls.sort()
-
         # Get the Burrows-Wheeler Transform (BWT):
         res = ''
         for i in range(len(text)):  # For each character in the sequence,
@@ -51,12 +50,12 @@ class BWT:
         Method to get the original sequence
         :return: string of the original sequence
         """
-        # Note that the 1st symbol of the sequence should be immediately after the $.
+        # The 1st symbol of the sequence should be immediately after the $.
         firstcol = self.get_first_col()  # Call method to get the 1st column to index.
         res = ""
         c = "$"  # $ is the first character.
         occ = 1  # First occurrence.
-        for i in range(len(self.bwt)):   # Traverse BWT (last column)
+        for i in range(len(self.bwt)):  # Traverse BWT (last column)
             # Find the index where $ occurs for the first time.
             pos = findithocc(self.bwt, c, occ)
             c = firstcol[pos]  # in the first column tells us which letter it corresponds to, #gives us the value of "$"

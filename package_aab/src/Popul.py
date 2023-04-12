@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from package_aab.src.Ind import Indiv, IndivInt, IndivReal
+from package_aab.src.Indiv import Indiv, IndivInt, IndivReal
 from random import random
 
 
