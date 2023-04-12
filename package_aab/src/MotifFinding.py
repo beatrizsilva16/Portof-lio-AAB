@@ -339,21 +339,20 @@ class MotifFinding:
         :param num_iterations: number of iterations
         :return: list of best scores
         """
-        # Initialize starting positions
+        # Initialize randomly starting positions
         s = []
         for i in range(len(self.seqs)):
-            s.append(randint(0, len(
-                self.seqs[i]) - self.motifSize - 1))
+            s.append(randint(0, len(self.seqs[i]) - self.motifSize - 1))
 
         # Initialize best score and positions
-        best_score = self.score(s)
+        best_score = self.score(s)  # calculate score based on the initial positions
         bests = list(s)
 
         # Perform Gibbs Sampling
-        for it in range(num_iterations):
+        for it in range(num_iterations):  # loop for the specified number of iterations
             # Choose a sequence at random
-            seq_idx = randint(0, len(self.seqs) - 1)
-            seq = self.seqs[seq_idx]
+            seq_idx = randint(0, len(self.seqs) - 1)  # choose a random sequence index
+            seq = self.seqs[seq_idx]  # get the corresponding sequence
 
             # Remove the selected sequence from positions and sequences
             s.pop(seq_idx)
@@ -387,6 +386,7 @@ class MotifFinding:
     def roulette(self, f: list) -> int:
         """
         Method implemented to simulate examples of a roulette wheel.
+        The probability of choosing a certain position is proportional to your score.
         :param f: list of positions
         :return: chosen value
         """

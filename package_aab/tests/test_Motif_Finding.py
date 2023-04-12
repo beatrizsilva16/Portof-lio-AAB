@@ -1,6 +1,6 @@
 import unittest
-from package_aab.src import MySeq
-from package_aab.src import MotifFinding
+from package_aab.src.MySeq import MySeq
+from package_aab.src.MotifFinding import MotifFinding
 
 
 class test_MotifFinding(unittest.TestCase):
