@@ -97,7 +97,7 @@ const Documentation = {
   LOCALE: "unknown",
 
   // gettext and ngettext don't access this so that the functions
-  // can safely bound to a different name (_ = docs.gettext)
+  // can safely bound to a different name (_ = Documentation_code.gettext)
   gettext: (string) => {
     const translated = Documentation.TRANSLATIONS[string];
     switch (typeof translated) {
@@ -149,7 +149,7 @@ const Documentation = {
         .createRange()
         .createContextualFragment(
           '<p class="highlight-link">' +
-            '<a href="javascript:docs.hideSearchWords()">' +
+            '<a href="javascript:Documentation_code.hideSearchWords()">' +
             Documentation.gettext("Hide Search Matches") +
             "</a></p>"
         )
