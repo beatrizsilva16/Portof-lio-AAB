@@ -1,5 +1,5 @@
 import unittest
-from package_aab.src import Indiv
+from package_aab.src.Ind import Indiv
 
 class TestIndiv(unittest.TestCase):
 

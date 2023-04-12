@@ -4,9 +4,10 @@ from typing import List
 class BoyerMoore:
     def __init__(self, alphabet=str, pattern=str):
         """
-        Class to implement the BoyerMoore algorithm, governed by two rules: Bad Caracter rule and Good Suffix Rule.
-        :param alphabet: alphabet of the sequence/text to analyze. In the bioinformatics field, they are typically nucleotide bases.
-        nucleotides.
+        Class to implement the BoyerMoore algorithm, governed by two rules: Bad Caracter
+        rule and Good Suffix Rule.
+        :param alphabet: alphabet of the sequence/text to analyze. In the bioinformatics field,
+        they are typically nucleotide bases nucleotides.
         :param pattern: pattern to find.
         """
         self.alphabet = alphabet

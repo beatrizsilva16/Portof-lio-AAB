@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from package_aab.src.Indiv import Indiv, IndivInt, IndivReal
+from package_aab.src.Ind import Indiv, IndivInt, IndivReal
 from random import random
 
 
 class Popul:
 
     # Initializes the population with random individuals or with a list of individuals if provided
-    def __init__(self, popsize, indsize, indivs=[]):
+    def __init__(self, popsize: int, indsize: int, indivs: list=[]) -> None:
         self.popsize = popsize
         self.indsize = indsize
         if indivs:
@@ -16,18 +16,18 @@ class Popul:
             self.initRandomPop()
 
     # Returns the individual at the specified index
-    def getIndiv(self, index):
+    def getIndiv(self, index: int) -> None:
         return self.indivs[index]
 
     # Initializes the population with random individuals
-    def initRandomPop(self):
+    def initRandomPop(self) -> None:
         self.indivs = []
         for _ in range(self.popsize):
             indiv_i = Indiv(self.indsize, [])
             self.indivs.append(indiv_i)
 
     # Returns a list of fitness values for the population or a subset of it
-    def getFitnesses(self, indivs=None):
+    def getFitnesses(self, indivs: list=None) -> list:
         fitnesses = []
         if not indivs:
             indivs = self.indivs
@@ -36,16 +36,16 @@ class Popul:
         return fitnesses
 
     # Returns the best solution (individual) in the population
-    def bestSolution(self):
+    def bestSolution(self) -> list:
         return max(self.indivs)
 
     # Returns the fitness value of the best solution (individual) in the population
-    def bestFitness(self):
+    def bestFitness(self) -> Union[int, float]:
         indv = self.bestSolution()
         return indv.getFitness()
 
     # Performs selection of n individuals using roulette wheel selection
-    def selection(self, n, indivs=None):
+    def selection(self, n: int, indivs: list=None) -> list:
         res = []
         fitnesses = list(self.linscaling(self.getFitnesses(indivs)))
         for _ in range(n):
@@ -55,7 +55,7 @@ class Popul:
         return res
 
     # Performs roulette wheel selection given a list of fitness values
-    def roulette(self, f):
+    def roulette(self, f: list) -> list:
         tot = sum(f)
         val = random()
         acum = 0.0
@@ -66,7 +66,7 @@ class Popul:
         return ind-1
 
     # Performs linear scaling of fitness values to the range [0,1]
-    def linscaling(self, fitnesses):
+    def linscaling(self, fitnesses: list) -> list:
         mx = max(fitnesses)
         mn = min(fitnesses)
         res = []
@@ -76,7 +76,7 @@ class Popul:
         return res
 
     # Performs recombination of parent individuals to generate offspring individuals
-    def recombination(self, parents, noffspring):
+    def recombination(self, parents: list, noffspring: int) -> list:
         offspring = []
         new_inds = 0
         while new_inds < noffspring:
@@ -91,7 +91,7 @@ class Popul:
         return offspring
 
     # Performs reinsertion of offspring individuals into the population
-    def reinsertion(self, offspring):
+    def reinsertion(self, offspring: list) -> None:
         tokeep = self.selection(self.popsize-len(offspring))
         ind_offsp = 0
         for i in range(self.popsize):
@@ -102,12 +102,12 @@ class Popul:
 
 class PopulInt(Popul):
 
-    def __init__(self, popsize, indsize, ub, indivs=[]):
+    def __init__(self, popsize: int, indsize: int, ub: int, indivs: list=[]) -> None:
         self.ub = ub
         # Call the constructor of the base class with the given arguments
         Popul.__init__(self, popsize, indsize, indivs)
 
-    def initRandomPop(self):
+    def initRandomPop(self) -> None:
         self.indivs = []
         # Create a new IndivInt object for each individual in the population
         for _ in range(self.popsize):
