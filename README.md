@@ -1,4 +1,4 @@
-# Portofólio - Algoritmos Avançados para a Bioinformática
+# Portfólio - Algoritmos Avançados para a Bioinformática
 
 Beatriz Silva, pg45465
 
