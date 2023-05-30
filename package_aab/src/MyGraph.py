@@ -454,15 +454,15 @@ class MyGraph:
         :param p: path
         :return: value of "False" or "True" if the Hamiltonian path is invalid or valid, respectively.
         """
-        if not self.check_if_valid_path(p): #se não for um caminho válido
+        if not self.check_if_valid_path(p):  # se não for um caminho válido
             return False
-        to_visit = list(self.get_nodes()) #lista dos nodos a visitar
-        if len(p) != len(to_visit): #verifica se o número de nodos do caminho for diferente do número de nodos a visitar
+        to_visit = list(self.get_nodes())  # lista dos nodos a visitar
+        if len(p) != len(to_visit):  # verifica se o número de nodos do caminho for diferente do número de nodos a visitar
             return False
-        for i in range(len(p)): #para cada nodo no caminho
-        #verifica se os nodos no caminho e na lista a visitar são iguais
-            if p[i] in to_visit: #se o nodo tiver na lista a visitar
-                to_visit.remove(p[i]) #remove da lista dos nodos a visitar
+        for i in range(len(p)):  # para cada nodo no caminho
+        # verifica se os nodos no caminho e na lista a visitar são iguais
+            if p[i] in to_visit:  # se o nodo tiver na lista a visitar
+                to_visit.remove(p[i])  #remove da lista dos nodos a visitar
                 return False
         if not to_visit: #caso contrário,se os nodos na lista de nodos não tiverem presentes na lista a visitar
             return True # é um caminho hamiltonian pois passou por todos os nodos e não existem mais nodos a visitar
