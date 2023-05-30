@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package_aab.src.MySeq &#8212; aab a documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for package_aab.src.MySeq</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+
+
+<div class="viewcode-block" id="MySeq"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq">[docs]</a><span class="k">class</span> <span class="nc">MySeq</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class presenting the methods that allow the manipulation of DNA, RNA and protein sequences.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seq_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that keeps the values from the rest of the methods.</span>
+<span class="sd">        :param seq: sequence introduced</span>
+<span class="sd">        :param seq_type: type of sequence introduced</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">=</span> <span class="n">seq_type</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that returns the length of the sequence introduced.</span>
+<span class="sd">        :return: length of the sequence introduced</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getslice__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that slices the sequence between i and j.</span>
+<span class="sd">        :param i: Start position</span>
+<span class="sd">        :param j: End position</span>
+<span class="sd">        :return:  String with the slice of the sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that allows returning an item from the indexing of an instance.</span>
+<span class="sd">        :param n: position of n.</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that represent the objects of the class as strings.</span>
+<span class="sd">        :return: objects as strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MySeq.printSeq"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.printSeq">[docs]</a>    <span class="k">def</span> <span class="nf">printSeq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that prints the complete sequence</span>
+<span class="sd">        :return: string of the complete sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MySeq.alphabet"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.alphabet">[docs]</a>    <span class="k">def</span> <span class="nf">alphabet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that verifies the type of sequence</span>
+<span class="sd">        :return: returns the possible characters of the sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">==</span> <span class="s2">&quot;dna&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;ACGT&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">==</span> <span class="s2">&quot;rna&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;ACGU&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">==</span> <span class="s2">&quot;protein&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;ACDEFGHIKLMNPQRSTVWY&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="MySeq.valida"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.valida">[docs]</a>    <span class="k">def</span> <span class="nf">valida</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that checks if all the characters in sequence are present in the alphabet defined</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">alf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">()</span>   <span class="c1"># obtain the alphabet</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># initialize the counter</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span> <span class="ow">and</span> <span class="n">res</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">alf</span><span class="p">:</span>  <span class="c1"># check if the current character is not in the alphabet</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># if it&#39;s in the alphabet, move to the next character</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MySeq.validateSeqRE"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.validateSeqRE">[docs]</a>    <span class="k">def</span> <span class="nf">validateSeqRE</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that validates the sequence according to the type of characters present through regular expressions.</span>
+<span class="sd">        :return: value True or False if the sequences are valid or invalid, respectively</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">==</span> <span class="s2">&quot;dna&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;[^ACTGactg]&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">==</span> <span class="s2">&quot;rna&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;[^ACUGacug]&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">==</span> <span class="s2">&quot;protein&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;[^ACDEFGHIKLMNPQRSTVWY_acdefghiklmnpqrstvwy]&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="MySeq.transcription"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.transcription">[docs]</a>    <span class="k">def</span> <span class="nf">transcription</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that returns the transcript sequence. Replacing of the thymine base &#39;T&#39; for the uracil base &#39;U&#39;</span>
+<span class="sd">        Only executes in case the object is a DNA sequence</span>
+<span class="sd">        :return: RNA sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">==</span> <span class="s2">&quot;dna&quot;</span><span class="p">:</span>  <span class="c1"># if the sequence if the type of dna</span>
+            <span class="k">return</span> <span class="n">MySeq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;U&quot;</span><span class="p">),</span> <span class="s2">&quot;rna&quot;</span><span class="p">)</span>  <span class="c1"># replace &quot;T&quot; for &quot;U&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="MySeq.reverseComplement"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.reverseComplement">[docs]</a>    <span class="k">def</span> <span class="nf">reverseComplement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that inverts and complements the sequence</span>
+<span class="sd">        Only executes in case the object is a DNA sequence</span>
+<span class="sd">        :return: DNA sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">!=</span> <span class="s2">&quot;dna&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="n">inv_comp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">MySeq</span><span class="p">(</span><span class="n">inv_comp</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MySeq.rnaCodon"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.rnaCodon">[docs]</a>    <span class="k">def</span> <span class="nf">rnaCodon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that searches for the codons in the sequence.</span>
+<span class="sd">        :returns: list of codons</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">codon</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">codon</span></div>
+
+<div class="viewcode-block" id="MySeq.seqTranslation"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.seqTranslation">[docs]</a>    <span class="k">def</span> <span class="nf">seqTranslation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that performs the translation of the sequence</span>
+<span class="sd">        :param initial_pos: determines the initial position of the reading sequence</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">!=</span> <span class="s2">&quot;dna&quot;</span><span class="p">):</span>  <span class="c1"># verifies if the sequence is type dna</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="n">seq_amino</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># initiate the empty string</span>
+        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">initial_pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>  <span class="c1"># read each caracter of the position</span>
+            <span class="c1"># inicia na posição inicial e para dois nucleótidos antes do final da sequência,</span>
+            <span class="c1"># de forma a ler o último codão inteiro</span>
+            <span class="c1"># incrementes 3 nucl (codons)</span>
+            <span class="n">codon</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="n">pos</span><span class="p">:</span><span class="n">pos</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># read codons</span>
+            <span class="n">seq_amino</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">codonTranslate</span><span class="p">(</span><span class="n">codon</span><span class="p">)</span>  <span class="c1"># add the protein correspondent to the codon</span>
+        <span class="k">return</span> <span class="n">MySeq</span><span class="p">(</span><span class="n">seq_amino</span><span class="p">,</span> <span class="s2">&quot;protein&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MySeq.orfs"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.orfs">[docs]</a>    <span class="k">def</span> <span class="nf">orfs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that determines the open reading frames (ORF), i.e. the sequences between the initiation codon</span>
+<span class="sd">        and the STOP codon. It generates six reading frames of the DNA sequence and the reverse complement.</span>
+<span class="sd">        :return: returns ORF&#39;s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">!=</span> <span class="s2">&quot;dna&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqTranslation</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1"># starts reading of the frame in the first position</span>
+        <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqTranslation</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># starts reading of the frame in the second position</span>
+        <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqTranslation</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># starts reading of the frame in the third position</span>
+        <span class="n">inv_comp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverseComplement</span><span class="p">()</span> <span class="c1">#determina o complemento inverso</span>
+        <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inv_comp</span><span class="o">.</span><span class="n">seqTranslation</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1"># starts reading of the frame in the last position</span>
+        <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inv_comp</span><span class="o">.</span><span class="n">seqTranslation</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># starts reading of the frame in the penúltima posição</span>
+        <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inv_comp</span><span class="o">.</span><span class="n">seqTranslation</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># starts reading of the frame in the antepenúltima posição</span>
+        <span class="k">return</span> <span class="n">frames</span></div>
+
+<div class="viewcode-block" id="MySeq.codonTranslate"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.codonTranslate">[docs]</a>    <span class="k">def</span> <span class="nf">codonTranslate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cod</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that translates codons into their respective amino acids.</span>
+<span class="sd">        :param cod: codon to look for in the codon table</span>
+<span class="sd">        :return: amino acid sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">codon_table</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;GCT&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;GCA&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;GCC&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;TGT&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;TGC&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;GAT&quot;</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;GAC&quot;</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;GAA&quot;</span><span class="p">:</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;GAG&quot;</span><span class="p">:</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;TTT&quot;</span><span class="p">:</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;TTC&quot;</span><span class="p">:</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;GGT&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;GGC&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;GGA&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;GGG&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;CAT&quot;</span><span class="p">:</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;CAC&quot;</span><span class="p">:</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;ATA&quot;</span><span class="p">:</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;ATT&quot;</span><span class="p">:</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;ATC&quot;</span><span class="p">:</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;AAA&quot;</span><span class="p">:</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;AAG&quot;</span><span class="p">:</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;TTA&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;TTG&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;CTT&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;CTC&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;CTA&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;CTG&quot;</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;ATG&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;AAT&quot;</span><span class="p">:</span> <span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;AAC&quot;</span><span class="p">:</span> <span class="s2">&quot;N&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;CCT&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;CCC&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;CCA&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;CCG&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;CAA&quot;</span><span class="p">:</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;CAG&quot;</span><span class="p">:</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;CGT&quot;</span><span class="p">:</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;CGC&quot;</span><span class="p">:</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;CGA&quot;</span><span class="p">:</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;CGG&quot;</span><span class="p">:</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;AGA&quot;</span><span class="p">:</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;AGG&quot;</span><span class="p">:</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;TCT&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;TCC&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;TCA&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;TCG&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;AGT&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;AGC&quot;</span><span class="p">:</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;ACT&quot;</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;ACC&quot;</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;ACA&quot;</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;ACG&quot;</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;GTT&quot;</span><span class="p">:</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;GTC&quot;</span><span class="p">:</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;GTA&quot;</span><span class="p">:</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;GTG&quot;</span><span class="p">:</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;TGG&quot;</span><span class="p">:</span> <span class="s2">&quot;W&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;TAT&quot;</span><span class="p">:</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;TAC&quot;</span><span class="p">:</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;TAA&quot;</span><span class="p">:</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;TAG&quot;</span><span class="p">:</span> <span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;TGA&quot;</span><span class="p">:</span> <span class="s2">&quot;_&quot;</span><span class="p">}</span> <span class="c1">#dicionário em que as chaves são os codões e os valores os aminoácidos</span>
+        <span class="k">if</span> <span class="n">cod</span> <span class="ow">in</span> <span class="n">codon_table</span><span class="p">:</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="n">codon_table</span><span class="p">[</span><span class="n">cod</span><span class="p">]</span> <span class="c1">#guarda o aminoácido correspondente ao codão</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="s2">&quot;X&quot;</span>  <span class="c1">#marca erros de procura com um X</span>
+        <span class="k">return</span> <span class="n">amin</span></div>
+
+<div class="viewcode-block" id="MySeq.longestProteinSeq"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.longestProteinSeq">[docs]</a>    <span class="k">def</span> <span class="nf">longestProteinSeq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method searching for the longest protein sequence</span>
+<span class="sd">        :return: longest proteic sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">!=</span> <span class="s2">&quot;prot&quot;</span><span class="p">):</span> <span class="c1">#determina se o tipo de sequência é uma proteína</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">seq_amin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="n">current_prot</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1">#string vazia para guardar a sequência que está a ser lida</span>
+        <span class="n">longest_prot</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1">#string vazia para guardar a sequência da maior proteina</span>
+        <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">seq_amin</span><span class="p">:</span> <span class="c1">#lê cada aminoácido na sequência</span>
+            <span class="k">if</span> <span class="n">aa</span> <span class="o">==</span> <span class="s2">&quot;_&quot;</span><span class="p">:</span> <span class="c1">#verifica se é um codão stop</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_prot</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">longest_prot</span><span class="p">):</span> <span class="c1">#verifica se a proteína que está a ser lida é superior</span>
+                    <span class="c1">#à última proteina gaurdada na lista de maior proteínas</span>
+                    <span class="n">longest_prot</span> <span class="o">=</span> <span class="n">current_prot</span> <span class="c1">#se for, guarda a proteína atual como a mais longa</span>
+                <span class="n">current_prot</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1">#volta a zerar a lista de proteínas atuais</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_prot</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">aa</span> <span class="o">==</span> <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="c1">#verifica se a proteina tem um cumprimento superior a zero</span>
+                    <span class="c1">#e começa a ler se o aminoácido for uma metionina.</span>
+                    <span class="n">current_prot</span> <span class="o">+=</span> <span class="n">aa</span> <span class="c1">#adiciona o aminoácido à lista</span>
+        <span class="k">return</span> <span class="n">MySeq</span><span class="p">(</span><span class="n">longest_prot</span><span class="p">,</span> <span class="s2">&quot;protein&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MySeq.allProtein"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.allProtein">[docs]</a>    <span class="k">def</span> <span class="nf">allProtein</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that constructs of a list with all the existing and possible proteins in the sequence. The sequence can be proteic or DNA</span>
+<span class="sd">        Only executes in case the object is a DNA or AMINO sequence</span>
+<span class="sd">        :return: DNA or amino sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">!=</span> <span class="s2">&quot;prot&quot;</span><span class="p">):</span>  <span class="c1"># verifica se a sequência é uma proteína</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">seq_aa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="n">current_prot</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># lista da proteína a ser lida</span>
+        <span class="n">prot_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># lista de proteínas totais</span>
+        <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">seq_aa</span><span class="p">:</span>  <span class="c1"># lê os aminoácidos da sequência</span>
+            <span class="k">if</span> <span class="n">aa</span> <span class="o">==</span> <span class="s2">&quot;_&quot;</span><span class="p">:</span>  <span class="c1"># verifica se é um codão stop</span>
+                <span class="k">if</span> <span class="n">current_prot</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">current_prot</span><span class="p">:</span>
+                        <span class="n">prot_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MySeq</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;protein&quot;</span><span class="p">))</span> <span class="c1"># adiciona as proteínas lidas na lista de proteínas totais</span>
+                    <span class="n">current_prot</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># zera a lista de proteínas lidas</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">aa</span> <span class="o">==</span> <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="c1"># verifica se é um codão de iniciação</span>
+                    <span class="n">current_prot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">current_prot</span><span class="p">)):</span>
+                    <span class="n">current_prot</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">aa</span> <span class="c1"># adiciona os aminoácidos à lista</span>
+        <span class="k">return</span> <span class="n">prot_list</span></div>
+
+<div class="viewcode-block" id="MySeq.largestOrfProtein"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MySeq.MySeq.largestOrfProtein">[docs]</a>    <span class="k">def</span> <span class="nf">largestOrfProtein</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to get the bigger protein in the sequence</span>
+<span class="sd">        :return: string with the bigger protein</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seq_type</span> <span class="o">!=</span> <span class="s2">&quot;prot&quot;</span><span class="p">):</span> <span class="c1"># verifica se a sequência é do tipo proteina</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">larg_prot</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;prot&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">orf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">orfs</span><span class="p">():</span> <span class="c1"># lê as ORF</span>
+            <span class="n">prot</span> <span class="o">=</span> <span class="n">orf</span><span class="o">.</span><span class="n">largestOrfProtein</span><span class="p">()</span> <span class="c1"># define as ORF como proteinas</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prot</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">larg_prot</span><span class="o">.</span><span class="n">seq</span><span class="p">):</span> <span class="c1"># verifica se a proteina a ler tem um comprimento superior</span>
+                <span class="c1"># à maior proteina.</span>
+                <span class="n">larg_prot</span> <span class="o">=</span> <span class="n">prot</span> <span class="c1"># se sim, define a proteina como a maior proteina</span>
+        <span class="k">return</span> <span class="n">larg_prot</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aab</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

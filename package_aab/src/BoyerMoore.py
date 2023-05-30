@@ -26,10 +26,13 @@ class BoyerMoore:
     def process_bcr(self):
         """
         Bad Character rule implementation.
+        This rule is used to skip over characters in the text that do not match the corresponding character in the
+        pattern. It precomputes the last occurrence of each character in the pattern and uses this information to
+        determine the number of positions to shift the pattern relative to the text when there is a mismatch.
         Method where a dictionary is created with all possible symbols (occ) as keys, and the values define
-        the rightmost position at which the symbol appears in the pattern (-1 means it does not occur). This allows you to
-        quickly calculate the number of positions to follow to search according to the mismatch in the pattern (value for
-        the symbol in the dictionary). Note that this value can be negative, meaning that the rule in this case
+        the rightmost position at which the symbol appears in the pattern (-1 means it does not occur). This allows you
+        to quickly calculate the number of positions to follow to search according to the mismatch in the pattern
+        (value for the symbol in the dictionary). Note that this value can be negative, meaning that the rule in this case
         is not useful and is ignored in the next iteration.
         """
         for s in self.alphabet:  # to each character in the alphabet:

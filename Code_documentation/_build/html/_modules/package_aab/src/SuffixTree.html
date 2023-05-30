@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package_aab.src.SuffixTree &#8212; aab a documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for package_aab.src.SuffixTree</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pprint</span>
+
+
+<div class="viewcode-block" id="SuffixTree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.SuffixTree.SuffixTree">[docs]</a><span class="k">class</span> <span class="nc">SuffixTree</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class that creates a suffix tree of a pattern that will be searched in a sequence.</span>
+<span class="sd">    It allows pre-processing a target sequence, making its search more efficient.</span>
+<span class="sd">    It is the solution to pre-process very large sequences, discovering which trees contain a given pattern,</span>
+<span class="sd">    finding out the longest common substring in a set of sequences and calculating the maximum overlap of a set of</span>
+<span class="sd">    sequences.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqs</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trie</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Trie structure represented as a dictionary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">{})}</span>  <span class="c1"># root node</span>
+        <span class="c1"># dictionary with tuples of each node</span>
+        <span class="c1"># 1st element is the suffix position (for leaves) or -1 (if not leaf -&gt; internal nodes)</span>
+        <span class="c1"># 2nd element corresponds to a dictionary</span>
+        <span class="c1"># keys: symbols of the arc; values: index of the destination nodes &lt;- represents the leaves of the tree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seqs</span> <span class="o">=</span> <span class="n">seqs</span>  <span class="c1"># Input sequences</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_seqs</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SuffixTree.check_seqs"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.SuffixTree.SuffixTree.check_seqs">[docs]</a>    <span class="k">def</span> <span class="nf">check_seqs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that verifies if the sequence introduced is a string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqs</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input sequence must be a string.&quot;</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="SuffixTree.print_tree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.SuffixTree.SuffixTree.print_tree">[docs]</a>    <span class="k">def</span> <span class="nf">print_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that prints the tree structure (dictionary)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trie</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+                
+<div class="viewcode-block" id="SuffixTree.add_node"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.SuffixTree.SuffixTree.add_node">[docs]</a>    <span class="k">def</span> <span class="nf">add_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">leaf_num</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that adds nodes to the tree.</span>
+<span class="sd">        :param origin: current node</span>
+<span class="sd">        :param symbol: character referring to the node to be added</span>
+<span class="sd">        :param leaf_num: leaf number (-1 is default, correspond to an internal node)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># add a node in the trie</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">origin</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">symbol</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num</span>  <span class="c1"># creates a new node and links it to an existing node</span>
+                                                  <span class="c1"># (via - origin parameter)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">leaf_num</span><span class="p">,</span> <span class="p">{})</span>  <span class="c1"># create new node with leaf number and empty dictionary</span></div>
+        
+<div class="viewcode-block" id="SuffixTree.add_suffix"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.SuffixTree.SuffixTree.add_suffix">[docs]</a>    <span class="k">def</span> <span class="nf">add_suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">suf_num</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that adds suffix to the tree.</span>
+<span class="sd">        :param p: pattern</span>
+<span class="sd">        :param suf_num: suffix number for leaves or -1 for non-leaves</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">pos</span><span class="p">],</span> <span class="n">suf_num</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">p</span><span class="p">[</span><span class="n">pos</span><span class="p">]]</span>
+            <span class="n">pos</span> <span class="o">+=</span> <span class="mi">1</span></div>
+    
+<div class="viewcode-block" id="SuffixTree.suffix_tree_from_seq"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.SuffixTree.SuffixTree.suffix_tree_from_seq">[docs]</a>    <span class="k">def</span> <span class="nf">suffix_tree_from_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that creates the suffix tree by adding a symbol (&quot;$&quot;) at the end of the sequence and calls the previous method</span>
+<span class="sd">        for each suffix in the sequence -&gt; no suffix will be prefixed with another suffix.</span>
+<span class="sd">        :param text: sequence that will be added to the tree</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">&quot;$&quot;</span>  <span class="c1"># adds &quot;$&quot; in the final text</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_suffix</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">:],</span> <span class="n">i</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SuffixTree.get_leafes_below"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.SuffixTree.SuffixTree.get_leafes_below">[docs]</a>    <span class="k">def</span> <span class="nf">get_leafes_below</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Auxiliary method to collect all the leafes below a given node.</span>
+<span class="sd">        param node: node from which the information of the sheets below this one are searched.</span>
+<span class="sd">        :return: list of sheets below a given node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="p">:</span> 
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">newnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+                <span class="n">leafes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_leafes_below</span><span class="p">(</span><span class="n">newnode</span><span class="p">)</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">leafes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="SuffixTree.find_pattern"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.SuffixTree.SuffixTree.find_pattern">[docs]</a>    <span class="k">def</span> <span class="nf">find_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that looks for patterns (trie) starting from the root until it reaches the end node or fails the search.</span>
+<span class="sd">        :param pattern: pattern to search for</span>
+<span class="sd">        :return: list of sheets below a given node or none (if search fails)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">pattern</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">pattern</span><span class="p">[</span><span class="n">pos</span><span class="p">]]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_leafes_below</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div></div>
+
+<span class="c1"># tests</span>
+
+<div class="viewcode-block" id="test"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.SuffixTree.test">[docs]</a><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="s2">&quot;TACTA&quot;</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="n">SuffixTree</span><span class="p">(</span><span class="s2">&quot;TACTA&quot;</span><span class="p">)</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">suffix_tree_from_seq</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">print_tree</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">find_pattern</span><span class="p">(</span><span class="s2">&quot;TA&quot;</span><span class="p">))</span>  <span class="c1"># output: [0,3]  values of the leafes</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">find_pattern</span><span class="p">(</span><span class="s2">&quot;ACG&quot;</span><span class="p">))</span>  <span class="c1"># output: None</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aab</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

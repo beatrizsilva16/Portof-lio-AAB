@@ -1,8 +1,3 @@
-
-"""
-Class: MotifFinding
-"""
-
 from package_aab.src.MySeq import MySeq
 from package_aab.src.MyMotifs import MyMotifs
 from random import randint
@@ -167,7 +162,7 @@ class MotifFinding:
         best_score = -1  # Define the best score as -1
         score_vect = []  # Create an empty list to store the vector of scores
         s = [0] * len(self.seqs)  # Create a list of zeros for the indices of the sequences
-        while s != None:  # While there are still more solutions to search
+        while s is not None:  # While there are still more solutions to search
             sc = self.score(s)  # Calculate the score for the current set of indices
             if sc > best_score:  # If the current score is better than the current best score
                 best_score = sc  # Set the current score as the new best score
@@ -266,30 +261,28 @@ class MotifFinding:
         :return: list of starting positions s (representative of the best motif found)
         """
         # Initialize the MotifFinding object with the first two sequences
-        mf = MotifFinding(self.motifSize, self.seqs[:2])  # first two fixes positions
-        # Obtain the starting positions with exhaustive search for the first two sequences
-        s = mf.exhaustiveSearch()
-        # For each of the following sequences, iteratively, choose the best starting position in the sequence, in order
-        # to maximize the score
-        for a in range(2, len(self.seqs)):
-            # Append a zero to the starting positions list for the new sequence
-            s.append(0)  # the algorithm does not know where the motif starts in this sequence
-                         # Once the algorithm iteratively determines the best starting position
-                         # for this sequence, it will replace the 0 with the actual starting position.
-            best_score = -1  # define the best score
-            melhorPosition = 0  # define the best position
-            # Check all possible starting positions for the new sequence and choose the one with the highest score
-            for b in range(self.seqSize(a) - self.motifSize + 1):
-                s[a] = b
-                scoreatual = self.score(s)  # calculates the score and sets it as current value
-                if scoreatual > best_score:  # if the current score is higher than the best
-                    best_score = scoreatual  # saves the current one as better
-                    melhorPosition = b  # returns the best position as the position with the best score
-                # returns the index of a as the best position
-                s[a] = melhorPosition
-        # Return the list of starting positions as representative of the best motif found
-        return s
+        mf = MotifFinding(self.motifSize, self.seqs[:2])
+        # Obtain the starting positions with the best scores with exhaustive search
+        s = mf.exhaustiveSearch()  # start positions are stored in 's'
 
+        # Iterate over the remaining sequences
+        for seq in self.seqs[2:]:
+            i = self.seqs.index(seq)  # get the index of the current sequence
+            s.append(0)  # Append 0 as the initial starting position for the new sequence
+                         # start searching for the motif in the new sequence in position 0
+            best_score = -1
+            best_position = 0
+
+            # Check all possible starting positions for the new sequence and choose the one with the highest score
+            for position in range(self.seqSize(i) - self.motifSize + 1):
+                s[-1] = position  # assigns the current position to the last element of the list 's'
+                                  # the last element of 's' represents that starting position for the
+                                  # current sequence considered
+                current_score = self.score(s)  # calculate the current score
+                if current_score > best_score:
+                    best_score = current_score
+                    best_position = position
+            s[-1] = best_position  # Set the best position for the new sequence
 
     def heuristicStochastic(self) -> list:
         """
@@ -297,36 +290,28 @@ class MotifFinding:
         starting positions to achieve the best profile (motif)
         :return: the vector of starting positions s (representative of the best motif found)
         """
-        # Initialize starting positions randomly
-        s = [0] * len(self.seqs)
-        for i in range(len(self.seqs)):  # run the list of sequences
-            s[i] = randint(0, self.seqSize(i) - self.motifSize)
+        best_Score_list = []
+        pos_iniciais = []
 
-        # Calculate the score of the starting positions
-        best_score = self.score(s)
+        for x in range(100):
+            pos_iniciais = [randint(0, self.seqSize(n) - self.motifSize) for n in range(len(self.seqs))]
+            motif = self.createMotifFromIndexes(pos_iniciais)
+            motif.createPWM()
+            score = self.scoreMult(pos_iniciais)
+            prev_score = score
+            new_score = score + 1
 
-        # Initialize the loop for improvement
-        improve = True  # sets the best one with true
-        while improve:  # as long as the improvement is true
-            # Create motif and PWM from current starting positions
-            motif = self.createMotifFromIndexes(s)  # defines the motifs from the index list
-            motif.createPWM()  # creates the PWM
+            while prev_score < new_score:
+                for k in range(len(pos_iniciais)):
+                    pos_iniciais[k] = motif.mostProbableSeq(self.seqs[k])
+                prev_score = new_score
+                new_score = self.scoreMult(pos_iniciais)
+                motif = self.createMotifFromIndexes(pos_iniciais)
+                motif.createPWM()
 
-            # Update starting positions based on the most probable sequence for each sequence
-            for i in range(len(self.seqs)):  # run the index list in the range of the number of sequences
-                s[i] = motif.mostProbableSeq(self.seqs[i])  # calculates the sub-sequence
+            best_Score_list.append(new_score)
 
-            # Calculate the score of the updated starting positions
-            scr = self.score(s)
-
-            # Check if there is improvement in score and update best_score accordingly
-            if scr > best_score:
-                best_score = scr
-            else:
-                improve = False
-
-        # Return the final list of starting positions
-        return s
+        return pos_iniciais
 
     # Gibbs sampling
     def gibbs(self, num_iterations :int) -> list:
@@ -405,3 +390,65 @@ class MotifFinding:
             ind += 1
         # Return the index of the chosen value in f
         return ind-1
+
+# tests
+def test1_1():
+    sm = MotifFinding()
+    sm.readFile("exemploMotifs.txt", "dna")
+    sol1 = [20, 25, 45, 50, 37]
+    sa = sm.score(sol1)
+    print(sa)  #output : 19
+    scm = sm.scoreMult(sol1)
+    print(scm)  # output: 0.0022118400000000005
+
+def test1_2():
+    sm = MotifFinding()
+    sm.readFile("exemploMotifs.txt", "dna")
+    sol2 = [57, 1, 5, 25, 0]
+    sa = sm.score(sol2)
+    print(sa)  #output : 20
+    scm = sm.scoreMult(sol2)
+    print(scm)  # output: 0.002949120000000001
+
+def test1_3():
+    sm = MotifFinding()
+    sm.readFile("exemploMotifs.txt", "dna")
+    sol3 = [1, 20, 50, 5, 2]
+    sa = sm.score(sol3)
+    print(sa)  #output : 24
+    scm = sm.scoreMult(sol3)
+    print(scm)  # output: 0.014929919999999998
+
+def test1_4():
+    sm = MotifFinding()
+    sm.readFile("exemploMotifs.txt", "dna")
+    sol4 = [60, 35, 9, 10, 40]
+    sa = sm.score(sol4)
+    print(sa) #output : 20
+    scm = sm.scoreMult(sol4)
+    print(scm)  # output: 0.0033177600000000003
+
+def test1_5():
+    sm = MotifFinding()
+    sm.readFile("exemploMotifs.txt", "dna")
+    sol4 = [52, 40, 9, 7, 1]
+    sa = sm.score(sol4)
+    print(sa) # output : 19
+    scm = sm.scoreMult(sol4)
+    print(scm)  # output:  0.00221184
+def test2():
+    print ("Test exhaustive:")
+    seq1 = MySeq("ATAGAGCTGA", "dna")
+    seq2 = MySeq("ACGTAGATGA", "dna")
+    seq3 = MySeq("AAGATAGGGG", "dna")
+    mf = MotifFinding(3, [seq1, seq2, seq3])
+    sol_es = mf.exhaustiveSearch()
+    print("Solution", sol_es)  # output: [1, 3, 4]
+    print("Score: ", mf.score(sol_es))  # output: 9
+    print("Consensus:", mf.createMotifFromIndexes(sol_es).consensus())  # consensus: TAG
+
+
+
+
+
+

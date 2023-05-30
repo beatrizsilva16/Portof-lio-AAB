@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package_aab.src.debrujin &#8212; aab a documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for package_aab.src.debrujin</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">package_aab.src.MyGraph</span> <span class="kn">import</span> <span class="n">MyGraph</span>
+
+<div class="viewcode-block" id="DeBruijnGraph"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.debrujin.DeBruijnGraph">[docs]</a><span class="k">class</span> <span class="nc">DeBruijnGraph</span><span class="p">(</span><span class="n">MyGraph</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class implemented to represent Bruijn graphs. These represent the fragments (k-mers) as</span>
+<span class="sd">    arcs of the graph and the nodes as sequences of size k-1, corresponding to prefixes or suffixes of the</span>
+<span class="sd">    fragments.</span>
+<span class="sd">    This class is a subclass of MyGraph and thus inherits all the methods defined in it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frags</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor method that stores the values used in the other methods</span>
+<span class="sd">        :param frags: a set of sequences (k-mers)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">MyGraph</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_deBruijn_graph</span><span class="p">(</span><span class="n">frags</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DeBruijnGraph.add_edge"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.debrujin.DeBruijnGraph.add_edge">[docs]</a>    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that adds the arc (o,d) to the graph, checking that it doesn&#39;t already exist there</span>
+<span class="sd">        param o: arc vertice</span>
+<span class="sd">        param d: vertex of arc</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">o</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#se o vertice o não existe</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="c1">#adiciona vertice o</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#se o vertice d não existe</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#adiciona vertice d</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#adiciona o valor d ao vertice o</span></div>
+
+<div class="viewcode-block" id="DeBruijnGraph.in_degree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.debrujin.DeBruijnGraph.in_degree">[docs]</a>    <span class="k">def</span> <span class="nf">in_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that calculates the degree of entry of node v</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: returns the node&#39;s degree of entry</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">count_nodes</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada nodo no grafo</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="c1">#se o nodo v se encontra no grafo</span>
+                <span class="n">count_nodes</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="c1">#contagem dos nodos presentes no grafo</span>
+        <span class="k">return</span> <span class="n">count_nodes</span></div>
+
+<div class="viewcode-block" id="DeBruijnGraph.create_deBruijn_graph"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.debrujin.DeBruijnGraph.create_deBruijn_graph">[docs]</a>    <span class="k">def</span> <span class="nf">create_deBruijn_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frags</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method implementing the creation of a DeBruijn graph</span>
+<span class="sd">        :param frags: a set of sequences</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">:</span> <span class="c1">#para cada sequência em fragmentos</span>
+            <span class="n">suffix_seq</span> <span class="o">=</span> <span class="n">suffix</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="c1">#cria o sufixo da sequência</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">suffix_seq</span><span class="p">)</span> <span class="c1">#adiciona o sufixo como um vertice ao grafo</span>
+            <span class="n">prefix_seq</span> <span class="o">=</span> <span class="n">prefix</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="c1">#cria o prefixo da sequência</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">prefix_seq</span><span class="p">)</span> <span class="c1">#adiciona o prefixo como um vertice ao grafo</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">prefix_seq</span><span class="p">,</span><span class="n">suffix_seq</span><span class="p">)</span> <span class="c1">#adiciona o arco entre o prefixo e o sufixo</span></div>
+
+<div class="viewcode-block" id="DeBruijnGraph.seq_from_path"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.debrujin.DeBruijnGraph.seq_from_path">[docs]</a>    <span class="k">def</span> <span class="nf">seq_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that gets the sequence from the constructed path.</span>
+<span class="sd">        param path: path of the list graph</span>
+<span class="sd">        :return: returns the sequence represented by the constructed path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1">#define o início da sequência como o primeiro nodo no caminho (nodo correspondente ao index 0 da lista path)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
+            <span class="c1">#para cada nodo presente no caminho desde o nodo correspondente ao index 1 da lista do caminho (path)</span>
+            <span class="nb">next</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1">#define o próximo nodo como sendo o nodo no index seguinte da lista do caminho</span>
+            <span class="n">seq</span> <span class="o">+=</span> <span class="nb">next</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#adiciona o nodo à sequêcia</span>
+        <span class="k">return</span> <span class="n">seq</span></div></div>
+
+
+<div class="viewcode-block" id="suffix"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.debrujin.suffix">[docs]</a><span class="k">def</span> <span class="nf">suffix</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method that gets the sequence suffix obtained in the &quot;seq_from_path&quot; method.</span>
+<span class="sd">    :param seq: sequence represented by the constructed path</span>
+<span class="sd">    :return: returns the sequence suffix seq, which corresponds to the sequence except the first character</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">seq</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span></div>
+
+
+<div class="viewcode-block" id="prefix"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.debrujin.prefix">[docs]</a><span class="k">def</span> <span class="nf">prefix</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method that gets the sequence prefix obtained in the &quot;seq_from_path&quot; method.</span>
+<span class="sd">    :param seq: sequence represented by the constructed path</span>
+<span class="sd">    :return: returns the sequence prefix seq, which corresponds to the sequence except the last character</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">seq</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="composition"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.debrujin.composition">[docs]</a><span class="k">def</span> <span class="nf">composition</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seq</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method that recovers the original sequence, giving as input values the obtained sequence and the value of k</span>
+<span class="sd">    param k: size of the fragments</span>
+<span class="sd">    param seq: sequence obtained</span>
+<span class="sd">    :return: returns the original sequence in list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">seq_original</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#criar lista vazia da sequência original</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span> <span class="c1">#percorre a sequência, subtraindo o tamanho do fragmento e incrementando + 1</span>
+        <span class="n">seq_original</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span><span class="p">])</span> <span class="c1">#adiciona à lista o fragmento de tamanho k</span>
+    <span class="n">seq_original</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span> <span class="c1">#ordenar a lista</span>
+    <span class="k">return</span> <span class="n">seq_original</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aab</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

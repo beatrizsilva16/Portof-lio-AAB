@@ -1,8 +1,3 @@
-
-"""
-Class:MySeq
-"""
-
 import re
 
 
@@ -38,8 +33,8 @@ class MySeq:
 
     def __getitem__(self, n: int) -> str:
         """
-        Método que permite devolver um item a partir da indexação de uma instância.
-        :param n: posição do valor que queremos devolver.
+        Method that allows returning an item from the indexing of an instance.
+        :param n: position of n.
         :return:
         """
         return self.seq[n]
@@ -61,7 +56,7 @@ class MySeq:
     def alphabet(self):
         """
         Method that verifies the type of sequence
-        :return: returns the possible caracters of the sequence.
+        :return: returns the possible characters of the sequence.
         """
         if self.seq_type == "dna":
             return "ACGT"
@@ -71,6 +66,22 @@ class MySeq:
             return "ACDEFGHIKLMNPQRSTVWY"
         else:
             return None
+
+    def valida(self):
+        """
+        Method that checks if all the characters in sequence are present in the alphabet defined
+        :return:
+        """
+        alf = self.alphabet()   # obtain the alphabet
+        res = True
+        i = 0  # initialize the counter
+        while i < len(self.seq) and res:
+            if self.seq[i] not in alf:  # check if the current character is not in the alphabet
+                res = False
+            else:
+                # if it's in the alphabet, move to the next character
+                i += 1
+        return res
 
     def validateSeqRE(self) -> bool:
         """
@@ -140,34 +151,34 @@ class MySeq:
         for pos in range(initial_pos, len(seq) - 2, 3):  # read each caracter of the position
             # inicia na posição inicial e para dois nucleótidos antes do final da sequência,
             # de forma a ler o último codão inteiro
-            # incrementa 3 nucleótidos (codões)
+            # incrementes 3 nucl (codons)
             codon = seq[pos:pos+3]  # read codons
             seq_amino += self.codonTranslate(codon)  # add the protein correspondent to the codon
         return MySeq(seq_amino, "protein")
 
     def orfs(self):
         """
-        Método que determina as open reading frames (ORF), i.e, as sequências compreendidas entre o codão de iniciação
-        e o codão STOP. Gera seis reading frames da sequência de DNA e do complemento inverso.
-        :return: devolve as ORF's
+        Method that determines the open reading frames (ORF), i.e. the sequences between the initiation codon
+        and the STOP codon. It generates six reading frames of the DNA sequence and the reverse complement.
+        :return: returns ORF's
         """
         if (self.seq_type != "dna"):
             return None
-        frames = [] #lista de frames
-        frames.append(self.seqTranslation(0)) #inicia a leitura da frame na primeira posição
-        frames.append(self.seqTranslation(1)) #inicia a leitura da frame na segunda posição
-        frames.append(self.seqTranslation(2)) #inicia a leitura da frame na terceira posição
+        frames = []
+        frames.append(self.seqTranslation(0)) # starts reading of the frame in the first position
+        frames.append(self.seqTranslation(1)) # starts reading of the frame in the second position
+        frames.append(self.seqTranslation(2)) # starts reading of the frame in the third position
         inv_comp = self.reverseComplement() #determina o complemento inverso
-        frames.append(inv_comp.seqTranslation(0)) #inicia a leitura da frame na última posição
-        frames.append(inv_comp.seqTranslation(1)) #inicia a leitura da frame na penúltima posição
-        frames.append(inv_comp.seqTranslation(2)) #inicia a leitura da frame na antepenúltima posição
+        frames.append(inv_comp.seqTranslation(0)) # starts reading of the frame in the last position
+        frames.append(inv_comp.seqTranslation(1)) # starts reading of the frame in the penúltima posição
+        frames.append(inv_comp.seqTranslation(2)) # starts reading of the frame in the antepenúltima posição
         return frames
 
     def codonTranslate(self, cod: str) -> str:
         """
-        Método que traduz os codões nos respetivos aminoácidos.
-        :param cod: codão a procurar na tabela de codões
-        :return: sequência de aminoácidos
+        Method that translates codons into their respective amino acids.
+        :param cod: codon to look for in the codon table
+        :return: amino acid sequence
         """
         codon_table = {"GCT": "A", "GCA": "A", "GCC": "A", "TGT": "C", "TGC": "C",
               "GAT": "D", "GAC": "D", "GAA": "E", "GAG": "E", "TTT": "F", "TTC": "F",
@@ -193,8 +204,8 @@ class MySeq:
 
     def longestProteinSeq(self):
         """
-        Método que procura a sequência proteíca mais comprida.
-        :return: maior sequência proteíca.
+        Method searching for the longest protein sequence
+        :return: longest proteic sequence
         """
         if (self.seq_type != "prot"): #determina se o tipo de sequência é uma proteína
             return None
@@ -219,22 +230,22 @@ class MySeq:
         Only executes in case the object is a DNA or AMINO sequence
         :return: DNA or amino sequence
         """
-        if (self.seq_type != "prot"):  #verifica se a sequência é uma proteína
+        if (self.seq_type != "prot"):  # verifica se a sequência é uma proteína
             return None
         seq_aa = self.seq.upper()
-        current_prot = []  #lista da proteína a ser lida
-        prot_list = []  #lista de proteínas totais
-        for aa in seq_aa:  #lê os aminoácidos da sequência
-            if aa == "_":  #verifica se é um codão stop
+        current_prot = []  # lista da proteína a ser lida
+        prot_list = []  # lista de proteínas totais
+        for aa in seq_aa:  # lê os aminoácidos da sequência
+            if aa == "_":  # verifica se é um codão stop
                 if current_prot:
                     for p in current_prot:
-                        prot_list.append(MySeq(p, "protein")) #adiciona as proteínas lidas na lista de proteínas totais
-                    current_prot = [] #zera a lista de proteínas lidas
+                        prot_list.append(MySeq(p, "protein")) # adiciona as proteínas lidas na lista de proteínas totais
+                    current_prot = [] # zera a lista de proteínas lidas
             else:
-                if aa == "M": #verifica se é um codão de iniciação
+                if aa == "M": # verifica se é um codão de iniciação
                     current_prot.append("")
                 for i in range(len(current_prot)):
-                    current_prot[i] += aa #adiciona os aminoácidos à lista
+                    current_prot[i] += aa # adiciona os aminoácidos à lista
         return prot_list
 
     def largestOrfProtein(self):
@@ -242,12 +253,12 @@ class MySeq:
         Method to get the bigger protein in the sequence
         :return: string with the bigger protein
         """
-        if (self.seq_type != "prot"): #verifica se a sequência é do tipo proteina
+        if (self.seq_type != "prot"): # verifica se a sequência é do tipo proteina
             return None
         larg_prot = MySeq("", "prot")
-        for orf in self.orfs(): #lê as ORF
-            prot = orf.largestOrfProtein() #define as ORF como proteinas
-            if len(prot.seq) > len(larg_prot.seq): #verifica se a proteina a ler tem um comprimento superior
+        for orf in self.orfs(): # lê as ORF
+            prot = orf.largestOrfProtein() # define as ORF como proteinas
+            if len(prot.seq) > len(larg_prot.seq): # verifica se a proteina a ler tem um comprimento superior
                 # à maior proteina.
-                larg_prot = prot #se sim, define a proteina como a maior proteina
+                larg_prot = prot # se sim, define a proteina como a maior proteina
         return larg_prot

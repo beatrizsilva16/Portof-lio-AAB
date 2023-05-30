@@ -1,0 +1,1491 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>package_aab.src package &#8212; aab a documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="AABB" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="package-aab-src-package">
+<h1>package_aab.src package<a class="headerlink" href="#package-aab-src-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-package_aab.src.Automata">
+<span id="package-aab-src-automata-module"></span><h2>package_aab.src.Automata module<a class="headerlink" href="#module-package_aab.src.Automata" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.Automata.Automata">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.Automata.</span></span><span class="sig-name descname"><span class="pre">Automata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphabet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Automata.html#Automata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Automata.Automata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class implemented for the search of patterns in nucleotide sequences.
+This pattern search method processes a sequence in a linear way,
+reading from left to right.
+The search started at the first state of the “machine” and at the first character of the text,
+at each step of the search the next character of the sequence is considered, the next state is searched
+state and moves to a new state.
+The number of states is equal to the length of the pattern plus one.
+The pattern is found when the pattern being searched for is equal to the length of the pattern entered.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Automata.Automata.applyNextState">
+<span class="sig-name descname"><span class="pre">applyNextState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/Automata.html#Automata.applyNextState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Automata.Automata.applyNextState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns a list of all next states.
+:param seq: sequence entered
+:return: list of next states</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Automata.Automata.buildTransitionTable">
+<span class="sig-name descname"><span class="pre">buildTransitionTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Automata.html#Automata.buildTransitionTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Automata.Automata.buildTransitionTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that constructs the transition table. The transition table returns the next
+state of the automata machine from the current state and previous states.
+:param pattern: pattern to search in the sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Automata.Automata.nextState">
+<span class="sig-name descname"><span class="pre">nextState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/Automata.html#Automata.nextState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Automata.Automata.nextState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns the next state.
+:param current: current state
+:param char: character of the pattern to search for
+:return: the next state</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Automata.Automata.patternSeqPosition">
+<span class="sig-name descname"><span class="pre">patternSeqPosition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/Automata.html#Automata.patternSeqPosition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Automata.Automata.patternSeqPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns the list of positions where an occurrence of the pattern in the sequence starts.
+:param: sequence entered
+:return: list of the positions where an occurrence of the pattern in the sequence starts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Automata.Automata.printAutomata">
+<span class="sig-name descname"><span class="pre">printAutomata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Automata.html#Automata.printAutomata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Automata.Automata.printAutomata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that prints the results of the pattern search using the automata.
+:return : automata printed</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.Automata.overlap">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.Automata.</span></span><span class="sig-name descname"><span class="pre">overlap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/Automata.html#overlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Automata.overlap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that overlaps two sequences and checks for matching
+:param seq1: first string
+:param seq2: second string
+:return: last position of the smallest string that matches</p>
+</dd></dl>
+
+</section>
+<section id="module-package_aab.src.BWT">
+<span id="package-aab-src-bwt-module"></span><h2>package_aab.src.BWT module<a class="headerlink" href="#module-package_aab.src.BWT" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.BWT.</span></span><span class="sig-name descname"><span class="pre">BWT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buildsufarray</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for implementing the Burrows-Hweeler algorithm. The algorithm is useful for
+compressing large sequences, thus reducing their space. Moreover, it is possible to find patterns in the
+compression format efficiently.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT.build_bwt">
+<span class="sig-name descname"><span class="pre">build_bwt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buildsufarray</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT.build_bwt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT.build_bwt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that generates rotations of the text and sorts them to construct the BWT string.
+:param text:
+:param buildsufarray:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT.bw_matching">
+<span class="sig-name descname"><span class="pre">bw_matching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern=&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT.bw_matching"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT.bw_matching" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for searching for patterns from BWT sequence
+:param pattern: pattern to search
+:return: list of matches found</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT.bw_matching_pos">
+<span class="sig-name descname"><span class="pre">bw_matching_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT.bw_matching_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT.bw_matching_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that searches for matching patterns
+:param patt: pattern to search
+:return: list of matches found</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT.check_seqs">
+<span class="sig-name descname"><span class="pre">check_seqs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT.check_seqs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT.check_seqs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that checks if the sequence introduced is a string
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT.findithocc">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">findithocc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">le</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT.findithocc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT.findithocc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that allows the discovered of the i-ésima occurence of
+an symbol in the list
+:param le:
+:param elem:
+:param index:
+:return: -1 in the cases where doesn’t occur</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT.get_first_col">
+<span class="sig-name descname"><span class="pre">get_first_col</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT.get_first_col"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT.get_first_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that recovers the first column of BWT sequence.
+The first column correspond the BWT sequence sorted.
+:return: first column of Matrix M</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT.inverse_bwt">
+<span class="sig-name descname"><span class="pre">inverse_bwt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT.inverse_bwt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT.inverse_bwt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method recovers the original sequence from its BWT.
+:return: string of the original sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT.last_to_first">
+<span class="sig-name descname"><span class="pre">last_to_first</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT.last_to_first"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT.last_to_first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a list mapping each character in the BWT sequence to its corresponding index in the first column.
+:return: list of indices</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BWT.BWT.set_bwt">
+<span class="sig-name descname"><span class="pre">set_bwt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/BWT.html#BWT.set_bwt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BWT.BWT.set_bwt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that sets the BWT string directly for a BTW instance. It is useful in scenarios where we
+have a precomputed BWT string and want to assign it to the bwt attribute of the BWT instance
+without recomputing it using the build_bwt method.
+:param bw:
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-package_aab.src.BoyerMoore">
+<span id="package-aab-src-boyermoore-module"></span><h2>package_aab.src.BoyerMoore module<a class="headerlink" href="#module-package_aab.src.BoyerMoore" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.BoyerMoore.BoyerMoore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.BoyerMoore.</span></span><span class="sig-name descname"><span class="pre">BoyerMoore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphabet=&lt;class</span> <span class="pre">'str'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern=&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/BoyerMoore.html#BoyerMoore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BoyerMoore.BoyerMoore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BoyerMoore.BoyerMoore.process_bcr">
+<span class="sig-name descname"><span class="pre">process_bcr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/BoyerMoore.html#BoyerMoore.process_bcr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BoyerMoore.BoyerMoore.process_bcr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bad Character rule implementation.
+This rule is used to skip over characters in the text that do not match the corresponding character in the
+pattern. It precomputes the last occurrence of each character in the pattern and uses this information to
+determine the number of positions to shift the pattern relative to the text when there is a mismatch.
+Method where a dictionary is created with all possible symbols (occ) as keys, and the values define
+the rightmost position at which the symbol appears in the pattern (-1 means it does not occur). This allows you
+to quickly calculate the number of positions to follow to search according to the mismatch in the pattern
+(value for the symbol in the dictionary). Note that this value can be negative, meaning that the rule in this case
+is not useful and is ignored in the next iteration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BoyerMoore.BoyerMoore.process_gsr">
+<span class="sig-name descname"><span class="pre">process_gsr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/BoyerMoore.html#BoyerMoore.process_gsr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BoyerMoore.BoyerMoore.process_gsr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Good Suffix rule implementation.
+Calculates the value of the f list (the length of the longest proper suffix that matches the suffix of the pattern),
+and s list (the length of the longest proper suffix that matches the prefix of the pattern).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.BoyerMoore.BoyerMoore.search_pattern">
+<span class="sig-name descname"><span class="pre">search_pattern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text=&lt;class</span> <span class="pre">'str'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/package_aab/src/BoyerMoore.html#BoyerMoore.search_pattern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.BoyerMoore.BoyerMoore.search_pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method allows to find a pattern in a given text, based on the object of the class that contains the
+pattern and its alphabet.
+:param text: string of the text where we want to look for our pattern
+:return: list with the indexes where the pattern starts</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="package-aab-src-eamotifs-module">
+<h2>package_aab.src.EAMotifs module<a class="headerlink" href="#package-aab-src-eamotifs-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="package-aab-src-evolalgorithm-module">
+<h2>package_aab.src.EvolAlgorithm module<a class="headerlink" href="#package-aab-src-evolalgorithm-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-package_aab.src.Indiv">
+<span id="package-aab-src-indiv-module"></span><h2>package_aab.src.Indiv module<a class="headerlink" href="#module-package_aab.src.Indiv" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.Indiv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.Indiv.</span></span><span class="sig-name descname"><span class="pre">Indiv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#Indiv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.Indiv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p># The Indiv class represents an individual in a genetic algorithm.
+It contains methods for initialization, mutation, crossover, and fitness evaluation.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.Indiv.crossover">
+<span class="sig-name descname"><span class="pre">crossover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indiv2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#Indiv.crossover"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.Indiv.crossover" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.Indiv.getFitness">
+<span class="sig-name descname"><span class="pre">getFitness</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#Indiv.getFitness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.Indiv.getFitness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.Indiv.getGenes">
+<span class="sig-name descname"><span class="pre">getGenes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#Indiv.getGenes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.Indiv.getGenes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.Indiv.initRandom">
+<span class="sig-name descname"><span class="pre">initRandom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#Indiv.initRandom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.Indiv.initRandom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.Indiv.mutation">
+<span class="sig-name descname"><span class="pre">mutation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#Indiv.mutation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.Indiv.mutation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.Indiv.one_pt_crossover">
+<span class="sig-name descname"><span class="pre">one_pt_crossover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indiv2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#Indiv.one_pt_crossover"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.Indiv.one_pt_crossover" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.Indiv.setFitness">
+<span class="sig-name descname"><span class="pre">setFitness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fit</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#Indiv.setFitness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.Indiv.setFitness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.IndivInt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.Indiv.</span></span><span class="sig-name descname"><span class="pre">IndivInt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#IndivInt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.IndivInt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#package_aab.src.Indiv.Indiv" title="package_aab.src.Indiv.Indiv"><code class="xref py py-class docutils literal notranslate"><span class="pre">Indiv</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.IndivInt.initRandom">
+<span class="sig-name descname"><span class="pre">initRandom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#IndivInt.initRandom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.IndivInt.initRandom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that generates a list of genes of the individual (random int numbers between upper and lower bounds)
+:param size:  number of genes to generate
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.IndivInt.mutation">
+<span class="sig-name descname"><span class="pre">mutation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#IndivInt.mutation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.IndivInt.mutation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.IndivReal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.Indiv.</span></span><span class="sig-name descname"><span class="pre">IndivReal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#IndivReal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.IndivReal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#package_aab.src.Indiv.Indiv" title="package_aab.src.Indiv.Indiv"><code class="xref py py-class docutils literal notranslate"><span class="pre">Indiv</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.IndivReal.initRandom">
+<span class="sig-name descname"><span class="pre">initRandom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#IndivReal.initRandom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.IndivReal.initRandom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that generates a list of genes of the individual with random values in the interval [lb, ub].
+:param size:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Indiv.IndivReal.mutation">
+<span class="sig-name descname"><span class="pre">mutation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/Indiv.html#IndivReal.mutation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Indiv.IndivReal.mutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for real representations that alters a single gene (mutation)
+The mutation method performs a mutation operation on one randomly selected gene in the individual.
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="package-aab-src-metabolicnetwork-module">
+<h2>package_aab.src.MetabolicNetwork module<a class="headerlink" href="#package-aab-src-metabolicnetwork-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-package_aab.src.MotifFinding">
+<span id="package-aab-src-motiffinding-module"></span><h2>package_aab.src.MotifFinding module<a class="headerlink" href="#module-package_aab.src.MotifFinding" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.MotifFinding.</span></span><span class="sig-name descname"><span class="pre">MotifFinding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seqs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class implemented for searching for recurrent patterns in a biological sequence,
+which can be DNA or proteins.
+The pattern to look for can be an exact sequence or a degenerate consensus in which there are
+ambiguous characters.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.branchAndBound">
+<span class="sig-name descname"><span class="pre">branchAndBound</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.branchAndBound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.branchAndBound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that implements to iterate over the initial position of the list of solutions to find the best solution
+motif.
+:return:  the vector of starting positions s (representative of the best motif found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.bypass">
+<span class="sig-name descname"><span class="pre">bypass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.bypass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.bypass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method implemented to bypass the condition explained above.
+:param s: index list of the motifs in the entered sequences.
+:return: list of indexes with zeros in the non-corresponding positions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.createMotifFromIndexes">
+<span class="sig-name descname"><span class="pre">createMotifFromIndexes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.createMotifFromIndexes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.createMotifFromIndexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that implements probabilistic motifs of type MyMotif.
+:param indexes: list of the indexes of the initial positions of the motif
+of the sub-sequences used to create the motif.
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.exhaustiveSearch">
+<span class="sig-name descname"><span class="pre">exhaustiveSearch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.exhaustiveSearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.exhaustiveSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method implemented to find the motif with the vector of best scores.
+This method allows to derive the profile and the consensus sequence.
+:return: vector of best scores</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.gibbs">
+<span class="sig-name descname"><span class="pre">gibbs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.gibbs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.gibbs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that implements the Gibbs Sampling algorithm, by choosing new segments at random (increasing
+the possibilities of converging to a correct solution). The algorithm starts with a set of randomly
+selected motif positions, and then in each iteration, it chooses one sequence at random, removes it from
+consideration, and recomputes the motif position based on the remaining sequences. This process continues
+for a fixed number of iterations, after which the algorithm returns the best set of motif positions found so far.
+:param num_iterations: number of iterations
+:return: list of best scores</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.heuristicConsensus">
+<span class="sig-name descname"><span class="pre">heuristicConsensus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.heuristicConsensus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.heuristicConsensus" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘’’Method that computes the heuristic consensus algorithm:
+- Considering only the first two sequences, choose the initial positions s1 and s2 that give a better score.
+- For each of the following sequences, iteratively, choose the best starting position in the sequence, in order</p>
+<blockquote>
+<div><p>to maximize the score.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of starting positions s (representative of the best motif found)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.heuristicStochastic">
+<span class="sig-name descname"><span class="pre">heuristicStochastic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.heuristicStochastic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.heuristicStochastic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that computes the heuristic stochastic consensus algorithm, using the most likely segments to adjust
+starting positions to achieve the best profile (motif)
+:return: the vector of starting positions s (representative of the best motif found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.nextSol">
+<span class="sig-name descname"><span class="pre">nextSol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.nextSol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.nextSol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auxiliary method (to exhaustiveSearch) that gives the next vector of starting positions.
+Method implemented to iterate over all the possible values of the motif position in the entered sequence.
+:param s: list of the motif indexes in the entered sequence.
+:return: list of all the possible values of the position of the motif in the entered sequence.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.nextVertex">
+<span class="sig-name descname"><span class="pre">nextVertex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.nextVertex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.nextVertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method implemented to find the next vertex.
+:param s: list of indices of the motifs in the entered sequences.
+:return: list of next vertices</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.readFile">
+<span class="sig-name descname"><span class="pre">readFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.readFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.readFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that reads the sequence file.
+param file: sequence file.
+param type: type of the sequences.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.roulette">
+<span class="sig-name descname"><span class="pre">roulette</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.roulette"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.roulette" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method implemented to simulate examples of a roulette wheel.
+The probability of choosing a certain position is proportional to your score.
+:param f: list of positions
+:return: chosen value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.score">
+<span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method implemented for the scoring function.
+The scoring function iterates over all motif positions and determines the maximum
+value of the motif score.
+:param s: list of motif indices in the entered sequences.
+:return: maximum score of the motif score.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.scoreMult">
+<span class="sig-name descname"><span class="pre">scoreMult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.scoreMult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.scoreMult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method implemented for the multiplication of the maximum motif scores.
+The scoreMult() method provides a way to quantify the importance of each occurrence of a motif by calculating
+the maximum score for each position in the motif, and then multiplying these scores together to get an overall
+score.
+:param s: list of the motif indexes in the introduced sequences.
+:return: multiplication of maximum scores.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.MotifFinding.seqSize">
+<span class="sig-name descname"><span class="pre">seqSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#MotifFinding.seqSize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.MotifFinding.seqSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns the length of the sequence.
+:param i: index of the sequence in the sequence list.
+:return: length of the sequence with index i from the sequence list.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.random">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MotifFinding.</span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">interval</span> <span class="pre">[0,</span> <span class="pre">1).</span></span></span><a class="headerlink" href="#package_aab.src.MotifFinding.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.test1_1">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MotifFinding.</span></span><span class="sig-name descname"><span class="pre">test1_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#test1_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.test1_1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.test1_2">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MotifFinding.</span></span><span class="sig-name descname"><span class="pre">test1_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#test1_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.test1_2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.test1_3">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MotifFinding.</span></span><span class="sig-name descname"><span class="pre">test1_3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#test1_3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.test1_3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.test1_4">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MotifFinding.</span></span><span class="sig-name descname"><span class="pre">test1_4</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#test1_4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.test1_4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.test1_5">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MotifFinding.</span></span><span class="sig-name descname"><span class="pre">test1_5</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#test1_5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.test1_5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MotifFinding.test2">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MotifFinding.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MotifFinding.html#test2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MotifFinding.test2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-package_aab.src.MyGraph">
+<span id="package-aab-src-mygraph-module"></span><h2>package_aab.src.MyGraph module<a class="headerlink" href="#module-package_aab.src.MyGraph" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.MyGraph.</span></span><span class="sig-name descname"><span class="pre">MyGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for implementation of graphs. Class MyGraph is a parent class of different
+ones such as: MetabolicNetwork, OverlapGraph and DeBruijnGraph. This class essentially builds
+graphs with a given dictionary of values or strings.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.add_edge">
+<span class="sig-name descname"><span class="pre">add_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.add_edge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.add_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that add edge to the graph; if vertices do not exist, they are added to the graph
+:param o: vertice do arco
+:param d: vertice do arco
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.add_vertex">
+<span class="sig-name descname"><span class="pre">add_vertex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.add_vertex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.add_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that adds a vertex to the graph and tests if vertex exists or not, adding if True
+:param v: element to add in the graph</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.all_clustering_coefs">
+<span class="sig-name descname"><span class="pre">all_clustering_coefs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.all_clustering_coefs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.all_clustering_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that calculates all coefficients
+:return: dictionary of coefficients of each node where the key corresponds to each node and each coefficient</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.all_degrees">
+<span class="sig-name descname"><span class="pre">all_degrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deg_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inout'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.all_degrees"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.all_degrees" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Method that computes the degree (of a given type) for all nodes.</dt><dd><p>“Deg_type” can be “in”, “out”, or “inout”</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>deg_type</strong> – tipo de grau (entrada, saída ou ambos)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns the degrees</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.betweenness_centrality">
+<span class="sig-name descname"><span class="pre">betweenness_centrality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.betweenness_centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.betweenness_centrality" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.check_balanced_graph">
+<span class="sig-name descname"><span class="pre">check_balanced_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.check_balanced_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.check_balanced_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checking method if the graph is balanced
+return:value of “False” or “True”, if the graph is unbalanced or balanced, respectively</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.check_balanced_node">
+<span class="sig-name descname"><span class="pre">check_balanced_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.check_balanced_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.check_balanced_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to check if a node is balanced
+:param node: node
+:return: value of “False” or “True”, if the node’s input degree is not equal/or is equal to the node’s output degree, respectively</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.check_if_hamiltonian_path">
+<span class="sig-name descname"><span class="pre">check_if_hamiltonian_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.check_if_hamiltonian_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.check_if_hamiltonian_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method checking if path is Hamiltonian
+:param p: path
+:return: value of “False” or “True” if the Hamiltonian path is invalid or valid, respectively.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.check_if_valid_path">
+<span class="sig-name descname"><span class="pre">check_if_valid_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.check_if_valid_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.check_if_valid_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method of checking if path is correct
+:param p:path
+:return: value of “False” or “True” if path is invalid or valid, respectively.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.check_nearly_balanced_graph">
+<span class="sig-name descname"><span class="pre">check_nearly_balanced_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.check_nearly_balanced_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.check_nearly_balanced_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to check if the graph is semi-balanced
+:return: returns none (if the graph is not semi-balanced) or the tuples</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.closeness_centrality">
+<span class="sig-name descname"><span class="pre">closeness_centrality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.closeness_centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.closeness_centrality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method of averaging approach to distances travelled between affected nodes
+:param node: node
+:return: returns the average distance between affected nodes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.clustering_coef">
+<span class="sig-name descname"><span class="pre">clustering_coef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.clustering_coef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.clustering_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clustering coefficient calculation method, to measure the extent to which each node is embedded in a cohesive group
+:param v: node
+:return: clustering coefficient</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.degree">
+<span class="sig-name descname"><span class="pre">degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that obtains the number of degree. Represents the number
+adjacentes nodes of the given one
+:param v: node
+:return: returns degree of node v</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that calculates the distance between two nodes, s and d, in a graph represented as an adjacency list
+:param s: node s where the path begins
+:param d: node d where the path ends
+:return: returns the distance between the nodes s and d</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.eulerian_cycle">
+<span class="sig-name descname"><span class="pre">eulerian_cycle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.eulerian_cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.eulerian_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Eulerian cycle passes through all arcs of the examining graph once, returning to the starting node
+:return: value of “None” (if not an Eulerian cycle) or the list res (cycle list)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.eulerian_path">
+<span class="sig-name descname"><span class="pre">eulerian_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.eulerian_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.eulerian_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Eulerian path method, if existent
+:return: returns the path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.get_adjacents">
+<span class="sig-name descname"><span class="pre">get_adjacents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.get_adjacents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.get_adjacents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that obtains adjacents of the given element
+:param v: node
+:return: returns the list of nodes adjacent to node v</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.get_edges">
+<span class="sig-name descname"><span class="pre">get_edges</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.get_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.get_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that gets the edges in the graph as a list of tuples (origin, destination)
+v represent the origin
+d represent the destination</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.get_nodes">
+<span class="sig-name descname"><span class="pre">get_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.get_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.get_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that obtain list of nodes in the graph</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.get_predecessors">
+<span class="sig-name descname"><span class="pre">get_predecessors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.get_predecessors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.get_predecessors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that obtains predecessors of the given element
+:param v: node
+:return: returns a list of predecessor nodes of node v</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.get_successors">
+<span class="sig-name descname"><span class="pre">get_successors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.get_successors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.get_successors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that obtains the successors of the given element
+:param v: node
+:return: returns a list of successor nodes of node v</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.has_cycle">
+<span class="sig-name descname"><span class="pre">has_cycle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.has_cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.has_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that checks if the graph has a loop, that is if the path is closed
+:return: value of “False” or “True” if the path is not closed or closed, respectively.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.highest_closeness">
+<span class="sig-name descname"><span class="pre">highest_closeness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.highest_closeness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.highest_closeness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.highest_degrees">
+<span class="sig-name descname"><span class="pre">highest_degrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_deg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inout'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.highest_degrees"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.highest_degrees" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that calculates higher degrees
+param all_deg: input and output grades, or both
+param deg_type: degree type (input, output or both)
+:return: list of the highest degrees</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.in_degree">
+<span class="sig-name descname"><span class="pre">in_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.in_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.in_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that obtains number of in degree. Represents the number of
+predecessors this node of the graph possesses
+:param v: nodo
+:return: returns degree of entry from node</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.is_connected">
+<span class="sig-name descname"><span class="pre">is_connected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.is_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.is_connected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for checking whether it is connected or not
+:return: value of “False” or “True”, if not connected or connected, respectively</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.mean_clustering_coef">
+<span class="sig-name descname"><span class="pre">mean_clustering_coef</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.mean_clustering_coef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.mean_clustering_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method of the global average of coefficients
+:return: the value of the average of all coefficients</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.mean_clustering_perdegree">
+<span class="sig-name descname"><span class="pre">mean_clustering_perdegree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deg_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inout'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.mean_clustering_perdegree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.mean_clustering_perdegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that calculates values for the average of coefficients for all nodes
+:param deg_type: type of degree (input, output or both)
+:return: returns the dictionary of nodes and their coefficient</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.mean_degree">
+<span class="sig-name descname"><span class="pre">mean_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deg_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inout'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.mean_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.mean_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate the average degrees
+:param deg_type: type of degree (input, output or both)
+:return: returns the average degrees</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.mean_distances">
+<span class="sig-name descname"><span class="pre">mean_distances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.mean_distances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.mean_distances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that calculates the cverage distance dethod for Each Node
+:return: returns the average distance and the proportion of nodes reachable</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.node_has_cycle">
+<span class="sig-name descname"><span class="pre">node_has_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.node_has_cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.node_has_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to check if the node has a cycle, that is if it begins and ends in the same node
+:param v: node
+:return: value of “False” or “True” if the node has no cycle or has a cycle, respectively</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.out_degree">
+<span class="sig-name descname"><span class="pre">out_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.out_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.out_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that obtains the number of out degree. Represents the number
+of successors/ramifications this node of the graph possesses
+:param v: node
+:return: returns degree of exit from node</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.print_graph">
+<span class="sig-name descname"><span class="pre">print_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.print_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.print_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that prints the content of the graph as adjacency list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.prob_degree">
+<span class="sig-name descname"><span class="pre">prob_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deg_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inout'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.prob_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.prob_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for calculating degree probability
+:param deg_type: type of degree (input, output or both)
+:return: returns the probability of degrees</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.reachable_bfs">
+<span class="sig-name descname"><span class="pre">reachable_bfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.reachable_bfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.reachable_bfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method of nodes reachable from v
+starts with the source node, then visits all its successors, followed by its successors
+until all possible nodes are visited
+:param v: starting node
+:return: returns list of nodes reachable from v</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.reachable_dfs">
+<span class="sig-name descname"><span class="pre">reachable_dfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.reachable_dfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.reachable_dfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method of nodes reachable from v, from left to right (in depth)
+starts with the source node, explores its first successor, then its first successor
+until no further exploration is possible, then returns to explore more alternatives.
+:param v: node
+:return: returns list of nodes reachable from v</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.reachable_with_dist">
+<span class="sig-name descname"><span class="pre">reachable_with_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.reachable_with_dist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.reachable_with_dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns a list of the reachable nodes from the given “s” and respective distance needed
+:param s: node s
+:return:  list of tuples of the reachable nodes and distance: (Node, Distance)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.search_hamiltonian_path">
+<span class="sig-name descname"><span class="pre">search_hamiltonian_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.search_hamiltonian_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.search_hamiltonian_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>”
+Hamiltonian pathfinding method
+:return: if p is different from None returns p otherwise returns None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.search_hamiltonian_path_from_node">
+<span class="sig-name descname"><span class="pre">search_hamiltonian_path_from_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.search_hamiltonian_path_from_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.search_hamiltonian_path_from_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hamiltonian pathfinding method on the graph
+:param start: initial node
+:return: Hamiltonian path in list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.shortest_path">
+<span class="sig-name descname"><span class="pre">shortest_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.shortest_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.shortest_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns the shortest path between s and d (list of nodes it passes through)
+:param s: node s, node where the path begins
+:param d: node d, node where the path ends
+:return: return the shortest path, list of nodes it passes through</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.MyGraph.size">
+<span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#MyGraph.size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.MyGraph.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that obtains the size of the graph: number of nodes and number of edges</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph.is_in_tuple_list">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MyGraph.</span></span><span class="sig-name descname"><span class="pre">is_in_tuple_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph.html#is_in_tuple_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph.is_in_tuple_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-package_aab.src.MyGraph1">
+<span id="package-aab-src-mygraph1-module"></span><h2>package_aab.src.MyGraph1 module<a class="headerlink" href="#module-package_aab.src.MyGraph1" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.MyGraph1.</span></span><span class="sig-name descname"><span class="pre">MyGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.add_edge">
+<span class="sig-name descname"><span class="pre">add_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.add_edge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.add_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add edge to the graph; if vertices do not exist, they are added to the graph
+:param o: represents the origin (starting) vertex
+:param d: represents the destination (ending) vertex of the edge</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.add_vertex">
+<span class="sig-name descname"><span class="pre">add_vertex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.add_vertex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.add_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a vertex to the graph; tests if vertex exists not adding if it does</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.degree">
+<span class="sig-name descname"><span class="pre">degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that calculates degree of node v (all adjacent nodes either forerunners or successors)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that calculates the distance between two nodes, s and d, in a graph represented as an adjacency list
+:param s: node s where the path begins
+:param d: node d where the path ends
+:return: returns the distance between the nodes s and d</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.get_adjacents">
+<span class="sig-name descname"><span class="pre">get_adjacents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.get_adjacents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.get_adjacents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to obtain adjacents of the given element</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.get_edges">
+<span class="sig-name descname"><span class="pre">get_edges</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.get_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.get_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method returning the list of arcs
+v represent the origin node
+d represent the destination node</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.get_nodes">
+<span class="sig-name descname"><span class="pre">get_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.get_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.get_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns the list of nodes in the graph</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.get_predecessors">
+<span class="sig-name descname"><span class="pre">get_predecessors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.get_predecessors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.get_predecessors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to obtain predecessors of the given element</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.get_successors">
+<span class="sig-name descname"><span class="pre">get_successors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.get_successors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.get_successors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for obtain successors of the given element</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.has_cycle">
+<span class="sig-name descname"><span class="pre">has_cycle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.has_cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.has_cycle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.in_degree">
+<span class="sig-name descname"><span class="pre">in_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.in_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.in_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to obtain the number of in degree. Represents the number of predecessors this node of the graph possesses</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.node_has_cycle">
+<span class="sig-name descname"><span class="pre">node_has_cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.node_has_cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.node_has_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that verifies if a node has a cycle, i.e. if it starts and ends at the same node</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.out_degree">
+<span class="sig-name descname"><span class="pre">out_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.out_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.out_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to obtain the number of out degree. Represents the number of successors/ramifications
+this node of the graph possesses</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.print_graph">
+<span class="sig-name descname"><span class="pre">print_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.print_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.print_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the content of the graph as adjacency list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.reachable_bfs">
+<span class="sig-name descname"><span class="pre">reachable_bfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.reachable_bfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.reachable_bfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method of nodes reachable from v
+starts with the source node, then visits all its successors, followed by its successors
+until all possible nodes are visited
+:param v: starting node
+:return: returns list of nodes reachable from v</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.reachable_dfs">
+<span class="sig-name descname"><span class="pre">reachable_dfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.reachable_dfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.reachable_dfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method of nodes reachable from v, from left to right (in depth)
+starts with the source node, explores its first successor, then its first successor
+until no further exploration is possible, then returns to explore more alternatives.
+:param v: node
+:return: returns list of nodes reachable from v</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.reachable_with_dist">
+<span class="sig-name descname"><span class="pre">reachable_with_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.reachable_with_dist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.reachable_with_dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns a list of the reachable nodes from the given “s” and respective distance needed
+:param s: node s
+:return:  list of tuples of the reachable nodes and distance: (Node, Distance)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.shortest_path">
+<span class="sig-name descname"><span class="pre">shortest_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.shortest_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.shortest_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns the shortest path between s and d (list of nodes it passes through)
+:param s: node s, node where the path begins
+:param d: node d, node where the path ends
+:return: return the shortest path, list of nodes it passes through</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.MyGraph.size">
+<span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#MyGraph.size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.MyGraph.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns the size of the graph : number of nodes, number of edges</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.is_in_tuple_list">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MyGraph1.</span></span><span class="sig-name descname"><span class="pre">is_in_tuple_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#is_in_tuple_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.is_in_tuple_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.test1">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MyGraph1.</span></span><span class="sig-name descname"><span class="pre">test1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#test1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.test1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.test2">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MyGraph1.</span></span><span class="sig-name descname"><span class="pre">test2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#test2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.test2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.test3">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MyGraph1.</span></span><span class="sig-name descname"><span class="pre">test3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#test3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.test3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.test4">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MyGraph1.</span></span><span class="sig-name descname"><span class="pre">test4</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#test4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.test4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MyGraph1.test5">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MyGraph1.</span></span><span class="sig-name descname"><span class="pre">test5</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyGraph1.html#test5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyGraph1.test5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-package_aab.src.MyMotifs">
+<span id="package-aab-src-mymotifs-module"></span><h2>package_aab.src.MyMotifs module<a class="headerlink" href="#module-package_aab.src.MyMotifs" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.MyMotifs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.MyMotifs.</span></span><span class="sig-name descname"><span class="pre">MyMotifs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lseqs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pwm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#MyMotifs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.MyMotifs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class that presents the methods that allow the manipulation and search of recurring patterns (motifs)
+in biology sequences and also do PWM.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.MyMotifs.consensus">
+<span class="sig-name descname"><span class="pre">consensus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#MyMotifs.consensus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.MyMotifs.consensus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that generates a consensus sequence. Consensus sequences store the most conserved characters in each
+position of the pattern, that is, the highest value of each column of the count matrix.
+:return: string of the consensus sequence.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.MyMotifs.createPWM">
+<span class="sig-name descname"><span class="pre">createPWM</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#MyMotifs.createPWM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.MyMotifs.createPWM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that creates the probabilistic matrix. PWMs are probabilistic representations of the characters
+in biological sequences. It calculates the probability of nucleotide i being found at position j.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.MyMotifs.doCounts">
+<span class="sig-name descname"><span class="pre">doCounts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#MyMotifs.doCounts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.MyMotifs.doCounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that implements the counting matrices.
+:return: counts matrix</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.MyMotifs.maskedConsensus">
+<span class="sig-name descname"><span class="pre">maskedConsensus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#MyMotifs.maskedConsensus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.MyMotifs.maskedConsensus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that generates the consensus sequence that is obtained with the characters
+that have an incidence higher than 50%.
+:return: string of the consensus sequence with incidence higher than 50%.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.MyMotifs.mostProbableSeq">
+<span class="sig-name descname"><span class="pre">mostProbableSeq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#MyMotifs.mostProbableSeq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.MyMotifs.mostProbableSeq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method implemented to determine the sub-sequence with the highest probability of matching
+the pattern being searched.
+:param seq: sequence introduced
+return: the index of the sub-sequence with higher probability of matching the pattern in search.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.MyMotifs.probAllPositions">
+<span class="sig-name descname"><span class="pre">probAllPositions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#MyMotifs.probAllPositions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.MyMotifs.probAllPositions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method implemented to calculate the probability of finding patterns in longer sequences
+and calculate the probability of the pattern occurring at each character in the sequence, ie,
+of occurring at each sub-sequence of the pattern size. For example, if the pattern size is 3 and the sequence is
+“ATCGTACG”, the method would calculate the probability of the pattern occurring at each of the sub-sequences of
+size 3, which are “ATC”, “TCG”, “CGT”, “GTA”, “TAC”, “ACG”.
+:param seq: sequence introduced
+:return: list of probabilities of the pattern occurring at each subsequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.MyMotifs.probabSeq">
+<span class="sig-name descname"><span class="pre">probabSeq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#MyMotifs.probabSeq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.MyMotifs.probabSeq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that calculates the probability of a pattern being found in a sequence.
+:param seq: sequence intoduced
+:return: the probability of a pattern being found in the sequence</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.createMatZeros">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MyMotifs.</span></span><span class="sig-name descname"><span class="pre">createMatZeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#createMatZeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.createMatZeros" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that creates the matrix of zeros.
+The matrix of zeros is used as a base to store the counts or probabilities
+of each character in each position of the biological sequences that
+are being analyzed.
+:param line_num: number of lines in the matrix
+:param col_num: number of columns in the matrix
+:return: matrix of zeros</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.MyMotifs.printMat">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.MyMotifs.</span></span><span class="sig-name descname"><span class="pre">printMat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MyMotifs.html#printMat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MyMotifs.printMat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to prints the matrix
+:param mat: matrix</p>
+</dd></dl>
+
+</section>
+<section id="module-package_aab.src.MySeq">
+<span id="package-aab-src-myseq-module"></span><h2>package_aab.src.MySeq module<a class="headerlink" href="#module-package_aab.src.MySeq" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.MySeq.</span></span><span class="sig-name descname"><span class="pre">MySeq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class presenting the methods that allow the manipulation of DNA, RNA and protein sequences.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.allProtein">
+<span class="sig-name descname"><span class="pre">allProtein</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.allProtein"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.allProtein" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that constructs of a list with all the existing and possible proteins in the sequence. The sequence can be proteic or DNA
+Only executes in case the object is a DNA or AMINO sequence
+:return: DNA or amino sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.alphabet">
+<span class="sig-name descname"><span class="pre">alphabet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.alphabet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.alphabet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that verifies the type of sequence
+:return: returns the possible characters of the sequence.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.codonTranslate">
+<span class="sig-name descname"><span class="pre">codonTranslate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cod</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.codonTranslate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.codonTranslate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that translates codons into their respective amino acids.
+:param cod: codon to look for in the codon table
+:return: amino acid sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.largestOrfProtein">
+<span class="sig-name descname"><span class="pre">largestOrfProtein</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.largestOrfProtein"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.largestOrfProtein" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the bigger protein in the sequence
+:return: string with the bigger protein</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.longestProteinSeq">
+<span class="sig-name descname"><span class="pre">longestProteinSeq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.longestProteinSeq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.longestProteinSeq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method searching for the longest protein sequence
+:return: longest proteic sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.orfs">
+<span class="sig-name descname"><span class="pre">orfs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.orfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.orfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that determines the open reading frames (ORF), i.e. the sequences between the initiation codon
+and the STOP codon. It generates six reading frames of the DNA sequence and the reverse complement.
+:return: returns ORF’s</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.printSeq">
+<span class="sig-name descname"><span class="pre">printSeq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.printSeq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.printSeq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that prints the complete sequence
+:return: string of the complete sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.reverseComplement">
+<span class="sig-name descname"><span class="pre">reverseComplement</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.reverseComplement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.reverseComplement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that inverts and complements the sequence
+Only executes in case the object is a DNA sequence
+:return: DNA sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.rnaCodon">
+<span class="sig-name descname"><span class="pre">rnaCodon</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.rnaCodon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.rnaCodon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that searches for the codons in the sequence.
+:returns: list of codons</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.seqTranslation">
+<span class="sig-name descname"><span class="pre">seqTranslation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.seqTranslation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.seqTranslation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that performs the translation of the sequence
+:param initial_pos: determines the initial position of the reading sequence
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.transcription">
+<span class="sig-name descname"><span class="pre">transcription</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.transcription"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.transcription" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that returns the transcript sequence. Replacing of the thymine base ‘T’ for the uracil base ‘U’
+Only executes in case the object is a DNA sequence
+:return: RNA sequence</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.valida">
+<span class="sig-name descname"><span class="pre">valida</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.valida"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.valida" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that checks if all the characters in sequence are present in the alphabet defined
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.MySeq.MySeq.validateSeqRE">
+<span class="sig-name descname"><span class="pre">validateSeqRE</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/MySeq.html#MySeq.validateSeqRE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.MySeq.MySeq.validateSeqRE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that validates the sequence according to the type of characters present through regular expressions.
+:return: value True or False if the sequences are valid or invalid, respectively</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="package-aab-src-popul-module">
+<h2>package_aab.src.Popul module<a class="headerlink" href="#package-aab-src-popul-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-package_aab.src.SuffixTree">
+<span id="package-aab-src-suffixtree-module"></span><h2>package_aab.src.SuffixTree module<a class="headerlink" href="#module-package_aab.src.SuffixTree" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.SuffixTree.SuffixTree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.SuffixTree.</span></span><span class="sig-name descname"><span class="pre">SuffixTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seqs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/SuffixTree.html#SuffixTree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.SuffixTree.SuffixTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class that creates a suffix tree of a pattern that will be searched in a sequence.
+It allows pre-processing a target sequence, making its search more efficient.
+It is the solution to pre-process very large sequences, discovering which trees contain a given pattern,
+finding out the longest common substring in a set of sequences and calculating the maximum overlap of a set of
+sequences.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.SuffixTree.SuffixTree.add_node">
+<span class="sig-name descname"><span class="pre">add_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/SuffixTree.html#SuffixTree.add_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.SuffixTree.SuffixTree.add_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that adds nodes to the tree.
+:param origin: current node
+:param symbol: character referring to the node to be added
+:param leaf_num: leaf number (-1 is default, correspond to an internal node)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.SuffixTree.SuffixTree.add_suffix">
+<span class="sig-name descname"><span class="pre">add_suffix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suf_num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/SuffixTree.html#SuffixTree.add_suffix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.SuffixTree.SuffixTree.add_suffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that adds suffix to the tree.
+:param p: pattern
+:param suf_num: suffix number for leaves or -1 for non-leaves</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.SuffixTree.SuffixTree.check_seqs">
+<span class="sig-name descname"><span class="pre">check_seqs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/SuffixTree.html#SuffixTree.check_seqs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.SuffixTree.SuffixTree.check_seqs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that verifies if the sequence introduced is a string</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.SuffixTree.SuffixTree.find_pattern">
+<span class="sig-name descname"><span class="pre">find_pattern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/SuffixTree.html#SuffixTree.find_pattern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.SuffixTree.SuffixTree.find_pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that looks for patterns (trie) starting from the root until it reaches the end node or fails the search.
+:param pattern: pattern to search for
+:return: list of sheets below a given node or none (if search fails)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.SuffixTree.SuffixTree.get_leafes_below">
+<span class="sig-name descname"><span class="pre">get_leafes_below</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/SuffixTree.html#SuffixTree.get_leafes_below"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.SuffixTree.SuffixTree.get_leafes_below" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auxiliary method to collect all the leafes below a given node.
+param node: node from which the information of the sheets below this one are searched.
+:return: list of sheets below a given node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.SuffixTree.SuffixTree.print_tree">
+<span class="sig-name descname"><span class="pre">print_tree</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/SuffixTree.html#SuffixTree.print_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.SuffixTree.SuffixTree.print_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that prints the tree structure (dictionary)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.SuffixTree.SuffixTree.suffix_tree_from_seq">
+<span class="sig-name descname"><span class="pre">suffix_tree_from_seq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/SuffixTree.html#SuffixTree.suffix_tree_from_seq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.SuffixTree.SuffixTree.suffix_tree_from_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that creates the suffix tree by adding a symbol (“$”) at the end of the sequence and calls the previous method
+for each suffix in the sequence -&gt; no suffix will be prefixed with another suffix.
+:param text: sequence that will be added to the tree</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.SuffixTree.test">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.SuffixTree.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/SuffixTree.html#test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.SuffixTree.test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-package_aab.src.Trie">
+<span id="package-aab-src-trie-module"></span><h2>package_aab.src.Trie module<a class="headerlink" href="#module-package_aab.src.Trie" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.Trie.Trie">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.Trie.</span></span><span class="sig-name descname"><span class="pre">Trie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seqs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Trie.html#Trie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Trie.Trie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class responsible for implementing the prefix tree that allows pre-processing
+of a set of patterns. The symbols of a given alphabet are associated with the arcs of a tree.
+The trie is built from a set of patterns, starting from the root node and iterating
+each pattern, adding the necessary nodes so that the tree contains the path from the root to the leaf,
+representing the pattern.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Trie.Trie.check_seqs">
+<span class="sig-name descname"><span class="pre">check_seqs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Trie.html#Trie.check_seqs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Trie.Trie.check_seqs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that verifies if the sequence is a string</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Trie.Trie.insert">
+<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/Trie.html#Trie.insert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Trie.Trie.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that inserts the sequences into the trie
+:param seq: sequences introduced
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Trie.Trie.insert_sequence">
+<span class="sig-name descname"><span class="pre">insert_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/package_aab/src/Trie.html#Trie.insert_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Trie.Trie.insert_sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that inserts a single sequence into the trie.
+:param seq: sequence introduced
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Trie.Trie.matches">
+<span class="sig-name descname"><span class="pre">matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/package_aab/src/Trie.html#Trie.matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Trie.Trie.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method  that verifies if a given sequence matches any sequence present in the trie
+:param seq: sequence introduced
+:return: booleano</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.Trie.Trie.print_trie">
+<span class="sig-name descname"><span class="pre">print_trie</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/Trie.html#Trie.print_trie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.Trie.Trie.print_trie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that prints the tree structure (dictionary)</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-package_aab.src.debrujin">
+<span id="package-aab-src-debrujin-module"></span><h2>package_aab.src.debrujin module<a class="headerlink" href="#module-package_aab.src.debrujin" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="package_aab.src.debrujin.DeBruijnGraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">package_aab.src.debrujin.</span></span><span class="sig-name descname"><span class="pre">DeBruijnGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/debrujin.html#DeBruijnGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.debrujin.DeBruijnGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#package_aab.src.MyGraph.MyGraph" title="package_aab.src.MyGraph.MyGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">MyGraph</span></code></a></p>
+<p>Class implemented to represent Bruijn graphs. These represent the fragments (k-mers) as
+arcs of the graph and the nodes as sequences of size k-1, corresponding to prefixes or suffixes of the
+fragments.
+This class is a subclass of MyGraph and thus inherits all the methods defined in it.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.debrujin.DeBruijnGraph.add_edge">
+<span class="sig-name descname"><span class="pre">add_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/debrujin.html#DeBruijnGraph.add_edge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.debrujin.DeBruijnGraph.add_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that adds the arc (o,d) to the graph, checking that it doesn’t already exist there
+param o: arc vertice
+param d: vertex of arc</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.debrujin.DeBruijnGraph.create_deBruijn_graph">
+<span class="sig-name descname"><span class="pre">create_deBruijn_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/package_aab/src/debrujin.html#DeBruijnGraph.create_deBruijn_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.debrujin.DeBruijnGraph.create_deBruijn_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method implementing the creation of a DeBruijn graph
+:param frags: a set of sequences</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.debrujin.DeBruijnGraph.in_degree">
+<span class="sig-name descname"><span class="pre">in_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/package_aab/src/debrujin.html#DeBruijnGraph.in_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.debrujin.DeBruijnGraph.in_degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that calculates the degree of entry of node v
+:param v: node
+:return: returns the node’s degree of entry</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="package_aab.src.debrujin.DeBruijnGraph.seq_from_path">
+<span class="sig-name descname"><span class="pre">seq_from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/package_aab/src/debrujin.html#DeBruijnGraph.seq_from_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.debrujin.DeBruijnGraph.seq_from_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that gets the sequence from the constructed path.
+param path: path of the list graph
+:return: returns the sequence represented by the constructed path</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.debrujin.composition">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.debrujin.</span></span><span class="sig-name descname"><span class="pre">composition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/package_aab/src/debrujin.html#composition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.debrujin.composition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that recovers the original sequence, giving as input values the obtained sequence and the value of k
+param k: size of the fragments
+param seq: sequence obtained
+:return: returns the original sequence in list</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.debrujin.prefix">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.debrujin.</span></span><span class="sig-name descname"><span class="pre">prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/package_aab/src/debrujin.html#prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.debrujin.prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that gets the sequence prefix obtained in the “seq_from_path” method.
+:param seq: sequence represented by the constructed path
+:return: returns the sequence prefix seq, which corresponds to the sequence except the last character</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="package_aab.src.debrujin.suffix">
+<span class="sig-prename descclassname"><span class="pre">package_aab.src.debrujin.</span></span><span class="sig-name descname"><span class="pre">suffix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/package_aab/src/debrujin.html#suffix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#package_aab.src.debrujin.suffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method that gets the sequence suffix obtained in the “seq_from_path” method.
+:param seq: sequence represented by the constructed path
+:return: returns the sequence suffix seq, which corresponds to the sequence except the first character</p>
+</dd></dl>
+
+</section>
+<section id="module-package_aab.src">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-package_aab.src" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">aab</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">AABB</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">AABB</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/package_aab.src.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

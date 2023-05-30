@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package_aab.src.MyGraph1 &#8212; aab a documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for package_aab.src.MyGraph1</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+
+<div class="viewcode-block" id="MyGraph"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph">[docs]</a><span class="k">class</span> <span class="nc">MyGraph</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}):</span>
+        <span class="sd">&#39;&#39;&#39; Constructor - takes dictionary to fill the graph as input; default is empty dictionary &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">g</span>
+<div class="viewcode-block" id="MyGraph.print_graph"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.print_graph">[docs]</a>    <span class="k">def</span> <span class="nf">print_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Prints the content of the graph as adjacency list &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s2">&quot; -&gt; &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">])</span></div>
+
+    <span class="c1">## get basic info</span>
+
+<div class="viewcode-block" id="MyGraph.get_nodes"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.get_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39; Method that returns the list of nodes in the graph &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="MyGraph.get_edges"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.get_edges">[docs]</a>    <span class="k">def</span> <span class="nf">get_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39; Method returning the list of arcs</span>
+<span class="sd">        v represent the origin node</span>
+<span class="sd">        d represent the destination node&#39;&#39;&#39;</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">edges</span></div>
+
+<div class="viewcode-block" id="MyGraph.size"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.size">[docs]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39; Method that returns the size of the graph : number of nodes, number of edges &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">()),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_edges</span><span class="p">())</span></div>
+
+    <span class="c1">## add nodes and edges</span>
+
+<div class="viewcode-block" id="MyGraph.add_vertex"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.add_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">add_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
+        <span class="sd">&#39;&#39;&#39; Add a vertex to the graph; tests if vertex exists not adding if it does &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>  <span class="c1"># checks if the vertex v is already in the graph&#39;s dictionary</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># adds the new vertex v to the graph by creating a new key in the graph dictionary</span></div>
+            <span class="c1"># with the value of an empty list</span>
+
+<div class="viewcode-block" id="MyGraph.add_edge"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.add_edge">[docs]</a>    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">d</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
+        <span class="sd">&#39;&#39;&#39; Add edge to the graph; if vertices do not exist, they are added to the graph</span>
+<span class="sd">        :param o: represents the origin (starting) vertex</span>
+<span class="sd">        :param d: represents the destination (ending) vertex of the edge</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Check if origin vertex is already present in the graph</span>
+        <span class="k">if</span> <span class="n">o</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>  <span class="c1"># se o não exista, é adicionado vertice o</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>  <span class="c1"># verifica se o vertice d está no dicionário, caso não esteja é adicionado</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">o</span><span class="p">]:</span>  <span class="c1"># verifica se o vertice d é um valor de vertice o</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></div>
+
+    <span class="c1">## successors, predecessors, adjacent nodes</span>
+
+<div class="viewcode-block" id="MyGraph.get_successors"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.get_successors">[docs]</a>    <span class="k">def</span> <span class="nf">get_successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Method for obtain successors of the given element&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>  <span class="c1"># needed to avoid list being overwritten of result of the function is used</span></div>
+
+<div class="viewcode-block" id="MyGraph.get_predecessors"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.get_predecessors">[docs]</a>    <span class="k">def</span> <span class="nf">get_predecessors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Method to obtain predecessors of the given element&quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MyGraph.get_adjacents"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.get_adjacents">[docs]</a>    <span class="k">def</span> <span class="nf">get_adjacents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Method to obtain adjacents of the given element &quot;&quot;&quot;</span>
+        <span class="n">suc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_successors</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_predecessors</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">pred</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">suc</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+    <span class="c1">## degrees</span>
+
+<div class="viewcode-block" id="MyGraph.out_degree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.out_degree">[docs]</a>    <span class="k">def</span> <span class="nf">out_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Method to obtain the number of out degree. Represents the number of successors/ramifications</span>
+<span class="sd">            this node of the graph possesses &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="MyGraph.in_degree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.in_degree">[docs]</a>    <span class="k">def</span> <span class="nf">in_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Method to obtain the number of in degree. Represents the number of predecessors this node of the graph possesses&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_predecessors</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MyGraph.degree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.degree">[docs]</a>    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Method that calculates degree of node v (all adjacent nodes either forerunners or successors)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_adjacents</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></div>
+
+    <span class="c1">## BFS and DFS searches</span>
+
+<div class="viewcode-block" id="MyGraph.reachable_bfs"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.reachable_bfs">[docs]</a>    <span class="k">def</span> <span class="nf">reachable_bfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Method of nodes reachable from v</span>
+<span class="sd">        starts with the source node, then visits all its successors, followed by its successors</span>
+<span class="sd">        until all possible nodes are visited</span>
+<span class="sd">        :param v: starting node</span>
+<span class="sd">        :return: returns list of nodes reachable from v</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize a list with the starting node v</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="c1"># Initialize an empty list to store the reachable nodes</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Start a while loop that runs as long as there are nodes in l</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Remove the first node from the list l using pop(0) and assign it to the variable node</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># If the node is not the starting node v, append it to the reachable nodes list res</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="c1"># Loop over all the adjacent nodes elem of the node using the adjacency list self.graph[node]</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="c1"># If the adjacent node elem is not already in the reachable nodes list res, and</span>
+                <span class="c1"># it is not in the queue l, and it is not equal to the current node, add it to the queue l</span>
+                <span class="k">if</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span> <span class="ow">and</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">l</span> <span class="ow">and</span> <span class="n">elem</span> <span class="o">!=</span> <span class="n">node</span><span class="p">:</span>
+                    <span class="c1"># If all the conditions are satisfied, add the adjacent node elem to the queue l</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+        <span class="c1"># Return the reachable nodes list res</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MyGraph.reachable_dfs"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.reachable_dfs">[docs]</a>    <span class="k">def</span> <span class="nf">reachable_dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Method of nodes reachable from v, from left to right (in depth)</span>
+<span class="sd">        starts with the source node, explores its first successor, then its first successor</span>
+<span class="sd">        until no further exploration is possible, then returns to explore more alternatives.</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: returns list of nodes reachable from v&quot;&quot;&quot;</span>
+        <span class="c1"># Initialize a list containing the starting node</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="c1"># Initialize a list to store the nodes visited so far</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Continue as long as there are nodes in l</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Remove the first node from the list l using pop(0) and assign it to the variable node</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="c1"># Initialize a variable to keep track of the position to insert the next successor node</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1"># Iterate over all successors of the current node</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="c1"># If the successor node has not already been visited and is not already in l</span>
+                <span class="k">if</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span> <span class="ow">and</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+                    <span class="c1"># Insert the successor node at the beginning of l</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span>
+                    <span class="c1"># Increment the position counter (index)</span>
+                    <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Return the list of visited nodes</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MyGraph.distance"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.distance">[docs]</a>    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">d</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that calculates the distance between two nodes, s and d, in a graph represented as an adjacency list</span>
+<span class="sd">        :param s: node s where the path begins</span>
+<span class="sd">        :param d: node d where the path ends</span>
+<span class="sd">        :return: returns the distance between the nodes s and d&quot;&quot;&quot;</span>
+        <span class="c1"># Check if s and d are the same node</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+
+        <span class="n">queue</span> <span class="o">=</span> <span class="p">[(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>  <span class="c1"># Use a queue instead of a list for better performance</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1">#  stores the visited nodes</span>
+
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Take the first element from the queue</span>
+
+            <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>  <span class="c1"># Skip processing if node has been visited before</span>
+                <span class="k">continue</span>
+
+            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>  <span class="c1"># Mark node as visited</span>
+
+            <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>  <span class="c1"># Check if the current node is the destination node</span>
+                <span class="k">return</span> <span class="n">dist</span>
+
+            <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>  <span class="c1"># Explore neighbors of the current node</span>
+                <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>  <span class="c1"># Check if the neighbor has not been visited</span>
+                    <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># Add neighbor to the queue with updated distance</span>
+        <span class="c1"># If the loop completes without finding the destination node, return None</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="MyGraph.shortest_path"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.shortest_path">[docs]</a>    <span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">d</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;Method that returns the shortest path between s and d (list of nodes it passes through)</span>
+<span class="sd">        :param s: node s, node where the path begins</span>
+<span class="sd">        :param d: node d, node where the path ends</span>
+<span class="sd">        :return: return the shortest path, list of nodes it passes through&quot;&quot;&quot;</span>
+        <span class="c1"># Check if s and d are the same node</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="c1"># Initialize the list l with (s, []) and visited with s</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[(</span><span class="n">s</span><span class="p">,</span> <span class="p">[])]</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        <span class="c1"># Loop while there are nodes in the list l</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Pop the first element of l and assign its node and predecessors to node and preds, respectively</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">preds</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># Loop through each element elem in the adjacency list of node</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="c1"># Check if elem is the destination node d</span>
+                <span class="k">if</span> <span class="n">elem</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>
+                    <span class="c1"># Return the predecessors plus the current node and d</span>
+                    <span class="k">return</span> <span class="n">preds</span> <span class="o">+</span> <span class="p">[</span><span class="n">node</span><span class="p">,</span> <span class="n">elem</span><span class="p">]</span>
+                <span class="c1"># Check if elem has not been visited before</span>
+                <span class="k">elif</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                    <span class="c1"># Append elem to visited and add (elem, preds + [node]) to the list l</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">elem</span><span class="p">,</span> <span class="n">preds</span> <span class="o">+</span> <span class="p">[</span><span class="n">node</span><span class="p">]))</span>
+                    <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+        <span class="c1"># If the loop completes without finding d, return None</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="MyGraph.reachable_with_dist"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.reachable_with_dist">[docs]</a>    <span class="k">def</span> <span class="nf">reachable_with_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;Method that returns a list of the reachable nodes from the given &quot;s&quot; and respective distance needed</span>
+<span class="sd">        :param s: node s</span>
+<span class="sd">        :return:  list of tuples of the reachable nodes and distance: (Node, Distance)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Initialize an empty list to store reachable nodes and distances</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Initialize a list with the starting node and distance 0</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+        <span class="c1"># Loop until all reachable nodes have been processed</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Remove the first node from the list and its distance</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># If the node is not the starting node, add it to the result list</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">!=</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node</span><span class="p">,</span> <span class="n">dist</span><span class="p">))</span>
+            <span class="c1"># For each neighbor of the current node</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="c1"># If the neighbor is not already in the list of nodes to explore and not in the result list</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">is_in_tuple_list</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_in_tuple_list</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">elem</span><span class="p">):</span>
+                    <span class="c1"># Add the neighbor to the list of nodes to explore with distance increased by 1</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">elem</span><span class="p">,</span> <span class="n">dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="c1"># Return the list of reachable nodes and their distances</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+    <span class="c1">## cycles</span>
+<div class="viewcode-block" id="MyGraph.node_has_cycle"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.node_has_cycle">[docs]</a>    <span class="k">def</span> <span class="nf">node_has_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;Method that verifies if a node has a cycle, i.e. if it starts and ends at the same node&#39;&#39;&#39;</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">elem</span> <span class="o">==</span> <span class="n">v</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+                    <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MyGraph.has_cycle"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.MyGraph.has_cycle">[docs]</a>    <span class="k">def</span> <span class="nf">has_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_has_cycle</span><span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">res</span></div></div>
+
+
+<div class="viewcode-block" id="is_in_tuple_list"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.is_in_tuple_list">[docs]</a><span class="k">def</span> <span class="nf">is_in_tuple_list</span><span class="p">(</span><span class="n">tl</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tl</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span> <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="test1"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.test1">[docs]</a><span class="k">def</span> <span class="nf">test1</span><span class="p">():</span>
+    <span class="n">gr</span> <span class="o">=</span> <span class="n">MyGraph</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]})</span>
+    <span class="n">gr</span><span class="o">.</span><span class="n">print_graph</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">get_edges</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="test2"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.test2">[docs]</a><span class="k">def</span> <span class="nf">test2</span><span class="p">():</span>
+    <span class="n">gr2</span> <span class="o">=</span> <span class="n">MyGraph</span><span class="p">()</span>
+    <span class="n">gr2</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">gr2</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">gr2</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">gr2</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">gr2</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">gr2</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">gr2</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">gr2</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">gr2</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">gr2</span><span class="o">.</span><span class="n">print_graph</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="test3"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.test3">[docs]</a><span class="k">def</span> <span class="nf">test3</span><span class="p">():</span>
+    <span class="n">gr</span> <span class="o">=</span> <span class="n">MyGraph</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]})</span>
+    <span class="n">gr</span><span class="o">.</span><span class="n">print_graph</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">get_successors</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">get_predecessors</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">get_adjacents</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">out_degree</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="test4"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.test4">[docs]</a><span class="k">def</span> <span class="nf">test4</span><span class="p">():</span>
+    <span class="n">gr</span> <span class="o">=</span> <span class="n">MyGraph</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]})</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">reachable_with_dist</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">reachable_with_dist</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+    <span class="n">gr2</span> <span class="o">=</span> <span class="n">MyGraph</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[],</span> <span class="mi">5</span><span class="p">:</span> <span class="p">[]})</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">reachable_with_dist</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">reachable_with_dist</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="test5"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph1.test5">[docs]</a><span class="k">def</span> <span class="nf">test5</span><span class="p">():</span>
+    <span class="n">gr</span> <span class="o">=</span> <span class="n">MyGraph</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">node_has_cycle</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">node_has_cycle</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr</span><span class="o">.</span><span class="n">has_cycle</span><span class="p">())</span>
+
+    <span class="n">gr2</span> <span class="o">=</span> <span class="n">MyGraph</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="mi">4</span><span class="p">:</span> <span class="p">[],</span> <span class="mi">5</span><span class="p">:</span> <span class="p">[]})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">node_has_cycle</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">has_cycle</span><span class="p">())</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">test1</span><span class="p">()</span>
+    <span class="c1"># test2()</span>
+    <span class="c1"># test3()</span>
+    <span class="c1"># test4()</span>
+    <span class="c1"># test5()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aab</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

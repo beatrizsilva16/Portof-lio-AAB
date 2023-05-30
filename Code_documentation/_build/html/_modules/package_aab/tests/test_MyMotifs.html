@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package_aab.tests.test_MyMotifs &#8212; aab a documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for package_aab.tests.test_MyMotifs</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">package_aab.src.MyMotifs</span> <span class="kn">import</span> <span class="n">MyMotifs</span>
+<span class="kn">from</span> <span class="nn">package_aab.src.MySeq</span> <span class="kn">import</span> <span class="n">MySeq</span>
+
+<div class="viewcode-block" id="test_MyMotifs"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MyMotifs.test_MyMotifs">[docs]</a><span class="k">class</span> <span class="nc">test_MyMotifs</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="test_MyMotifs.setUp"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MyMotifs.test_MyMotifs.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq1</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;AAAGTT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq2</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;CACGTG&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq3</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;TTGGGT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq4</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;GACCGT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq5</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;AACCAT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq6</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;AACCCT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq7</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;AAACCT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq8</span> <span class="o">=</span> <span class="n">MySeq</span><span class="p">(</span><span class="s2">&quot;GAACCT&quot;</span><span class="p">,</span> <span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lseqs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">seq1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq6</span><span class="p">,</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">seq7</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq8</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motifs</span> <span class="o">=</span> <span class="n">MyMotifs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lseqs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MyMotifs.test_mat_count"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MyMotifs.test_MyMotifs.test_mat_count">[docs]</a>    <span class="k">def</span> <span class="nf">test_mat_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motifs</span><span class="o">.</span><span class="n">mat_count</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;[4, 7, 3, 0, 1, 0]&quot;</span><span class="p">,</span> <span class="s2">&quot;[1, 0, 4, 5, 3, 0]&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;[2, 0, 1, 3, 2, 1]&quot;</span><span class="p">,</span> <span class="s2">&quot;[1, 1, 0, 0, 2, 7]&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">test</span><span class="p">,</span> <span class="n">truth</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">),</span> <span class="n">truth</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MyMotifs.test_pwm"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MyMotifs.test_MyMotifs.test_pwm">[docs]</a>    <span class="k">def</span> <span class="nf">test_pwm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motifs</span><span class="o">.</span><span class="n">pwm</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;[0.5, 0.875, 0.375, 0.0, 0.125, 0.0]&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;[0.125, 0.0, 0.5, 0.625, 0.375, 0.0]&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;[0.25, 0.0, 0.125, 0.375, 0.25, 0.125]&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;[0.125, 0.125, 0.0, 0.0, 0.25, 0.875]&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">test</span><span class="p">,</span> <span class="n">truth</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">),</span> <span class="n">truth</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MyMotifs.test_consensus"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MyMotifs.test_MyMotifs.test_consensus">[docs]</a>    <span class="k">def</span> <span class="nf">test_consensus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motifs</span><span class="o">.</span><span class="n">consensus</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;AACCCT&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MyMotifs.test_maskedConsensus"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MyMotifs.test_MyMotifs.test_maskedConsensus">[docs]</a>    <span class="k">def</span> <span class="nf">test_maskedConsensus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motifs</span><span class="o">.</span><span class="n">maskedConsensus</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;-A-C-T&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="test_MyMotifs.test_probabSeq"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MyMotifs.test_MyMotifs.test_probabSeq">[docs]</a>    <span class="k">def</span> <span class="nf">test_probabSeq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="s2">&quot;AAACCT&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motifs</span><span class="o">.</span><span class="n">probabSeq</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;0.0336456298828125&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MyMotifs.test_probAllPosition"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MyMotifs.test_MyMotifs.test_probAllPosition">[docs]</a>    <span class="k">def</span> <span class="nf">test_probAllPosition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="s2">&quot;AAACCT&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motifs</span><span class="o">.</span><span class="n">probAllPositions</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;[0.0336456298828125]&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="test_MyMotifs.test_mostProbableSeq"><a class="viewcode-back" href="../../../package_aab.tests.html#package_aab.tests.test_MyMotifs.test_MyMotifs.test_mostProbableSeq">[docs]</a>    <span class="k">def</span> <span class="nf">test_mostProbableSeq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="s2">&quot;CTATAAACCTTACATC&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motifs</span><span class="o">.</span><span class="n">mostProbableSeq</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;4&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span></div></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aab</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

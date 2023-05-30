@@ -1,9 +1,3 @@
-
-"""
-Class: MyMotifs
-"""
-
-
 def createMatZeros(line_num: int, col_num: int) -> list:
     """
     Method that creates the matrix of zeros.
@@ -15,15 +9,15 @@ def createMatZeros(line_num: int, col_num: int) -> list:
     :return: matrix of zeros
     """
     mat_z = []  # empty list to create the matrix of zeros
-    for i in range(0, line_num):  # por cada linha de zero ao número de linhas desejado
+    for i in range(0, line_num):
         mat_z.append([0]*col_num)  # add a zero * col_num
     return mat_z
 
 
 def printMat(mat: list):
     """
-    Method to print the matrix
-    :param mat: matrix to print
+    Method to prints the matrix
+    :param mat: matrix
     """
     for lin in range(len(mat)):
         for col in range(len(mat[lin])):
@@ -33,8 +27,8 @@ def printMat(mat: list):
 
 class MyMotifs:
     """
-    Class that presents the methods that allow the manipulation and search of recurring patterns (motifis)
-    in biology sequences and do PWM.
+    Class that presents the methods that allow the manipulation and search of recurring patterns (motifs)
+    in biology sequences and also do PWM.
     """
 
     def __init__(self, lseqs: list = [], pwm: list = [], alphabet: str = None):
@@ -58,12 +52,14 @@ class MyMotifs:
     def __len__(self):
         """
         Method that returns the length of the sequence
+        :return: length of the sequence
         """
         return self.size
 
     def doCounts(self):
         """
         Method that implements the counting matrices.
+        :return: counts matrix
         """
         self.mat_count = createMatZeros(len(self.alphabet), self.size)  # define uma instância correspondente
         # à matriz probabilística, em que o número de linhas é o número de caracteres do alfabeto e o número

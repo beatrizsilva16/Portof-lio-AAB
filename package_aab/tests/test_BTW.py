@@ -1,11 +1,10 @@
 import unittest
-from package_aab.src.BTW import BWT
+from package_aab.src.BWT import BWT
 
 
 class test_BWT(unittest.TestCase):
     def setUp(self):
         self.bwt = BWT("TAGACAGAGA$")
-
 
 class test_BWtMethods(test_BWT):
     def test_runTest(self):

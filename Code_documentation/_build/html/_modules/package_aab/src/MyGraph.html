@@ -1,0 +1,743 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package_aab.src.MyGraph &#8212; aab a documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for package_aab.src.MyGraph</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="MyGraph"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph">[docs]</a><span></span><span class="k">class</span> <span class="nc">MyGraph</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class for implementation of graphs. Class MyGraph is a parent class of different</span>
+<span class="sd">    ones such as: MetabolicNetwork, OverlapGraph and DeBruijnGraph. This class essentially builds</span>
+<span class="sd">    graphs with a given dictionary of values or strings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor - takes dictionary to fill the graph as input; default is empty dictionary</span>
+<span class="sd">        :param g: dictionary that stores the graph</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">g</span>
+
+<div class="viewcode-block" id="MyGraph.print_graph"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.print_graph">[docs]</a>    <span class="k">def</span> <span class="nf">print_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that prints the content of the graph as adjacency list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s2">&quot; -&gt; &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="MyGraph.get_nodes"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.get_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">get_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that obtain list of nodes in the graph</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<span class="c1"># Basic info</span>
+
+<div class="viewcode-block" id="MyGraph.get_edges"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.get_edges">[docs]</a>    <span class="k">def</span> <span class="nf">get_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that gets the edges in the graph as a list of tuples (origin, destination)</span>
+<span class="sd">        v represent the origin</span>
+<span class="sd">        d represent the destination</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> <span class="c1">#os arcos são o par de nodos anterior e seguinte</span>
+        <span class="k">return</span> <span class="n">edges</span></div>
+
+<div class="viewcode-block" id="MyGraph.size"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.size">[docs]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that obtains the size of the graph: number of nodes and number of edges</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">()),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_edges</span><span class="p">())</span></div>
+
+<span class="c1"># add nodes and edges</span>
+<div class="viewcode-block" id="MyGraph.add_vertex"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.add_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">add_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that adds a vertex to the graph and tests if vertex exists or not, adding if True</span>
+<span class="sd">        :param v: element to add in the graph</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#caso v não exista, é adicionado</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="MyGraph.add_edge"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.add_edge">[docs]</a>    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that add edge to the graph; if vertices do not exist, they are added to the graph</span>
+<span class="sd">        :param o: vertice do arco</span>
+<span class="sd">        :param d: vertice do arco</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&#39;&#39;&#39; Add edge to the graph; if vertices do not exist, they are added to the graph &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">o</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#se o não exista, é adicionado vertice o</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#verifica se o vertice d está no dicionário, caso não esteja é adicionado</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">o</span><span class="p">]:</span> <span class="c1">#verifica se o vertice d é um valor de vertice o</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#adiciona o valor d ao o</span></div>
+
+
+<span class="c1">## successors, predecessors, adjacent nodes</span>
+
+<div class="viewcode-block" id="MyGraph.get_successors"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.get_successors">[docs]</a>    <span class="k">def</span> <span class="nf">get_successors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that obtains the successors of the given element</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: returns a list of successor nodes of node v</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="MyGraph.get_predecessors"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.get_predecessors">[docs]</a>    <span class="k">def</span> <span class="nf">get_predecessors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that obtains predecessors of the given element</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: returns a list of predecessor nodes of node v</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MyGraph.get_adjacents"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.get_adjacents">[docs]</a>    <span class="k">def</span> <span class="nf">get_adjacents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that obtains adjacents of the given element</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: returns the list of nodes adjacent to node v</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">suc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_successors</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_predecessors</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">pred</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">suc</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+    <span class="c1">## degrees</span>
+<div class="viewcode-block" id="MyGraph.out_degree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.out_degree">[docs]</a>    <span class="k">def</span> <span class="nf">out_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that obtains the number of out degree. Represents the number</span>
+<span class="sd">        of successors/ramifications this node of the graph possesses</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: returns degree of exit from node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="MyGraph.in_degree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.in_degree">[docs]</a>    <span class="k">def</span> <span class="nf">in_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that obtains number of in degree. Represents the number of</span>
+<span class="sd">        predecessors this node of the graph possesses</span>
+<span class="sd">        :param v: nodo</span>
+<span class="sd">        :return: returns degree of entry from node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_predecessors</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MyGraph.degree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.degree">[docs]</a>    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that obtains the number of degree. Represents the number</span>
+<span class="sd">        adjacentes nodes of the given one</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: returns degree of node v</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_adjacents</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MyGraph.all_degrees"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.all_degrees">[docs]</a>    <span class="k">def</span> <span class="nf">all_degrees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deg_type</span><span class="o">=</span><span class="s2">&quot;inout&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that computes the degree (of a given type) for all nodes.</span>
+<span class="sd">         &quot;Deg_type&quot; can be &quot;in&quot;, &quot;out&quot;, or &quot;inout&quot;</span>
+<span class="sd">        :param deg_type: tipo de grau (entrada, saída ou ambos)</span>
+<span class="sd">        :return: returns the degrees</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">degs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">deg_type</span> <span class="o">==</span> <span class="s2">&quot;out&quot;</span> <span class="ow">or</span> <span class="n">deg_type</span> <span class="o">==</span> <span class="s2">&quot;inout&quot;</span><span class="p">:</span> <span class="c1">#Se for graus de saida ou de entrada e saída</span>
+                <span class="n">degs</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="c1">#</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">degs</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">deg_type</span> <span class="o">==</span> <span class="s2">&quot;in&quot;</span> <span class="ow">or</span> <span class="n">deg_type</span> <span class="o">==</span> <span class="s2">&quot;inout&quot;</span><span class="p">:</span> <span class="c1">#Se for graus de entrada ou de entrada e saída</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada key no grafo</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span> <span class="c1">#para cada valor de v</span>
+                    <span class="k">if</span> <span class="n">deg_type</span> <span class="o">==</span> <span class="s2">&quot;in&quot;</span> <span class="ow">or</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">d</span><span class="p">]:</span> <span class="c1">#Se for graus de entrada ou v não for um valor de d no grafo</span>
+                        <span class="n">degs</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">degs</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>   <span class="c1">#adiciona +1 ao valor de d</span>
+        <span class="k">return</span> <span class="n">degs</span></div>
+
+<div class="viewcode-block" id="MyGraph.highest_degrees"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.highest_degrees">[docs]</a>    <span class="k">def</span> <span class="nf">highest_degrees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">all_deg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">deg_type</span><span class="o">=</span><span class="s2">&quot;inout&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that calculates higher degrees</span>
+<span class="sd">        param all_deg: input and output grades, or both</span>
+<span class="sd">        param deg_type: degree type (input, output or both)</span>
+<span class="sd">        :return: list of the highest degrees</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">all_deg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">all_deg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_degrees</span><span class="p">(</span><span class="n">deg_type</span><span class="p">)</span>
+        <span class="n">ord_deg</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">all_deg</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ord_deg</span><span class="p">[:</span><span class="n">top</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="MyGraph.mean_degree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.mean_degree">[docs]</a>    <span class="k">def</span> <span class="nf">mean_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deg_type</span><span class="o">=</span><span class="s2">&quot;inout&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to calculate the average degrees</span>
+<span class="sd">        :param deg_type: type of degree (input, output or both)</span>
+<span class="sd">        :return: returns the average degrees</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">degs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_degrees</span><span class="p">(</span><span class="n">deg_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">degs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">degs</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MyGraph.prob_degree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.prob_degree">[docs]</a>    <span class="k">def</span> <span class="nf">prob_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deg_type</span><span class="o">=</span><span class="s2">&quot;inout&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method for calculating degree probability</span>
+<span class="sd">        :param deg_type: type of degree (input, output or both)</span>
+<span class="sd">        :return: returns the probability of degrees</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">degs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_degrees</span><span class="p">(</span><span class="n">deg_type</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">degs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">degs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">degs</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">degs</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">degs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<span class="c1">## BFS and DFS searches</span>
+
+<div class="viewcode-block" id="MyGraph.reachable_bfs"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.reachable_bfs">[docs]</a>    <span class="k">def</span> <span class="nf">reachable_bfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Method of nodes reachable from v</span>
+<span class="sd">        starts with the source node, then visits all its successors, followed by its successors</span>
+<span class="sd">        until all possible nodes are visited</span>
+<span class="sd">        :param v: starting node</span>
+<span class="sd">        :return: returns list of nodes reachable from v</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#enquanto há elementos na lista l</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#isolar o primeiro elemento da lista l, queue de nodos</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="c1">#se o nodo for diferente de v, adicionar o nodo a res</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span> <span class="c1">#para todos os sucessores do nodo</span>
+                <span class="k">if</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span> <span class="ow">and</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">l</span> <span class="ow">and</span> <span class="n">elem</span> <span class="o">!=</span> <span class="n">node</span><span class="p">:</span> <span class="c1">#se não existe em res e em l e se o sucessor é diferente do nodo</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="c1">#adicionar na queue para verificar</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MyGraph.reachable_dfs"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.reachable_dfs">[docs]</a>    <span class="k">def</span> <span class="nf">reachable_dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Method of nodes reachable from v, from left to right (in depth)</span>
+<span class="sd">        starts with the source node, explores its first successor, then its first successor</span>
+<span class="sd">        until no further exploration is possible, then returns to explore more alternatives.</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: returns list of nodes reachable from v</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#enquanto há elementos na lista l, queue de nodos</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#isolar o primeiro elemento da lista l</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="c1">#se o nodo for diferente de v, adicionar o nodo a res</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#ira ser usado para criar o stack//é reposto a 0 antes do loop for abaixo</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span> <span class="c1">#para todos os sucessores do nodo</span>
+                <span class="k">if</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span> <span class="ow">and</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span> <span class="c1">#se não existe em res e em l e se o sucessor é diferente do nodo</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span> <span class="c1">#cria um stack/vai voltar a verificar o mais recente/insere no inicio da lista</span>
+                    <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1">#caso haja multiplos sucessores, o s vai aumentar de forma a colocar as proximas iteraçoes na posicao depois da iteraçao anterior (stack)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MyGraph.distance"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.distance">[docs]</a>    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that calculates the distance between two nodes, s and d, in a graph represented as an adjacency list</span>
+<span class="sd">        :param s: node s where the path begins</span>
+<span class="sd">        :param d: node d where the path ends</span>
+<span class="sd">        :return: returns the distance between the nodes s and d</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if s and d are the same node</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="p">[(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>  <span class="c1"># Use a queue instead of a list for better performance</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># stores the visited nodes</span>
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Take the first element from the queue</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>  <span class="c1"># Skip processing if node has been visited before</span>
+                <span class="k">continue</span>
+            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>  <span class="c1"># Mark node as visited</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>  <span class="c1"># Check if the current node is the destination node</span>
+                <span class="k">return</span> <span class="n">dist</span>
+            <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>  <span class="c1"># Explore neighbors of the current node</span>
+                <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>  <span class="c1"># Check if the neighbor has not been visited</span>
+                    <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># Add neighbor to the queue with updated distance</span>
+        <span class="c1"># If the loop completes without finding the destination node, return None</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="MyGraph.shortest_path"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.shortest_path">[docs]</a>    <span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Method that returns the shortest path between s and d (list of nodes it passes through)</span>
+<span class="sd">        :param s: node s, node where the path begins</span>
+<span class="sd">        :param d: node d, node where the path ends</span>
+<span class="sd">        :return: return the shortest path, list of nodes it passes through&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[(</span><span class="n">s</span><span class="p">,</span> <span class="p">[])]</span> <span class="c1">#lista com um tuplo com o nodo e o caminho</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="c1">#nodos visitados</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">preds</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">elem</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">preds</span> <span class="o">+</span> <span class="p">[</span><span class="n">node</span><span class="p">,</span> <span class="n">elem</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">elem</span><span class="p">,</span> <span class="n">preds</span> <span class="o">+</span> <span class="p">[</span><span class="n">node</span><span class="p">]))</span>
+                    <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="MyGraph.reachable_with_dist"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.reachable_with_dist">[docs]</a>    <span class="k">def</span> <span class="nf">reachable_with_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Method that returns a list of the reachable nodes from the given &quot;s&quot; and respective distance needed</span>
+<span class="sd">        :param s: node s</span>
+<span class="sd">        :return:  list of tuples of the reachable nodes and distance: (Node, Distance)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="c1">#lista com tuplo com s e distância de s a s(0)</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#enquanto há elementos na lista l, queue de nodos</span>
+            <span class="n">node</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">!=</span> <span class="n">s</span><span class="p">:</span> <span class="c1">#se nodo for diferente de s</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node</span><span class="p">,</span> <span class="n">dist</span><span class="p">))</span> <span class="c1">#não conta o s</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span> <span class="c1">#para</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">is_in_tuple_list</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_in_tuple_list</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">elem</span><span class="p">):</span> <span class="c1"># vai ver se o p se encontra dentro de l ou em res</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">elem</span><span class="p">,</span> <span class="n">dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="c1"># adiciona o vertice a que se liga</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MyGraph.mean_distances"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.mean_distances">[docs]</a>    <span class="k">def</span> <span class="nf">mean_distances</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that calculates the cverage distance dethod for Each Node</span>
+<span class="sd">        :return: returns the average distance and the proportion of nodes reachable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">num_reachable</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#números de nodos no grafo ligados entre si</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada key no grafo</span>
+            <span class="n">distsk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reachable_with_dist</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="c1">#a lista correspondente aos nodos atingidos e a respetiva distância</span>
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">distsk</span><span class="p">:</span> <span class="c1">#para cada carater correspondente à distancia na lista</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">dist</span> <span class="c1">#vamos adicionar o valor da distância ao total</span>
+            <span class="n">num_reachable</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">distsk</span><span class="p">)</span> <span class="c1">#número de nodos atingidos vai corresponder ao comprimento da lista (distsk) obtida, todas as ligações entre todos os nodos</span>
+        <span class="n">meandist</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">total</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_reachable</span> <span class="c1">#média da distancia total dos nodos atingidos</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">())</span> <span class="c1">#número total de nodos</span>
+        <span class="k">return</span> <span class="n">meandist</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">num_reachable</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MyGraph.closeness_centrality"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.closeness_centrality">[docs]</a>    <span class="k">def</span> <span class="nf">closeness_centrality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method of averaging approach to distances travelled between affected nodes</span>
+<span class="sd">        :param node: node</span>
+<span class="sd">        :return: returns the average distance between affected nodes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reachable_with_dist</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="c1">#a lista correspondente aos nodos atingidos e a respetiva distância</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#se o número de nodos atingidos for igual a 0</span>
+            <span class="k">return</span> <span class="mf">0.0</span> <span class="c1">#retorna 0</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dist</span><span class="p">:</span> <span class="n">s</span> <span class="o">+=</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#para cada nodo é adicionada a distância à variavel s</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span></div>
+
+<div class="viewcode-block" id="MyGraph.highest_closeness"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.highest_closeness">[docs]</a>    <span class="k">def</span> <span class="nf">highest_closeness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">cc</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">#dicionário</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada key no grafo</span>
+            <span class="n">cc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="c1">#nodo corresponde</span>
+        <span class="n">ord_cl</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cc</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ord_cl</span><span class="p">[:</span><span class="n">top</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="MyGraph.betweenness_centrality"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.betweenness_centrality">[docs]</a>    <span class="k">def</span> <span class="nf">betweenness_centrality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">total_sp</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">sps_with_node</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">s</span> <span class="o">!=</span> <span class="n">t</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">!=</span> <span class="n">node</span> <span class="ow">and</span> <span class="n">t</span> <span class="o">!=</span> <span class="n">node</span><span class="p">:</span>
+                    <span class="n">sp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">sp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">total_sp</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">sp</span><span class="p">:</span> <span class="n">sps_with_node</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">sps_with_node</span> <span class="o">/</span> <span class="n">total_sp</span></div>
+
+    <span class="c1">## cycles</span>
+<div class="viewcode-block" id="MyGraph.node_has_cycle"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.node_has_cycle">[docs]</a>    <span class="k">def</span> <span class="nf">node_has_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to check if the node has a cycle, that is if it begins and ends in the same node</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: value of &quot;False&quot; or &quot;True&quot; if the node has no cycle or has a cycle, respectively</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="c1">#vai buscar o nodo v e cria uma lista</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="c1">#lista de nodos visitados</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#enquanto há elementos na lista l, queue de nodos</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#isolar o primeiro elemento da lista l</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span> <span class="c1">#para cada elemento vai buscar ao grafo (dicionário) o nodo adjacente</span>
+                <span class="k">if</span> <span class="n">elem</span> <span class="o">==</span> <span class="n">v</span><span class="p">:</span>   <span class="c1">#se o elemento da lista corresponder ao nodo</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span> <span class="c1">#caso o elemento da lista não corresponder ao nodo visitado</span>
+                    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="c1">#adiciona o elemento à lista l</span>
+                    <span class="n">visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="c1">#adiciona o elemento à lista de nodos visitados</span>
+        <span class="k">return</span> <span class="n">res</span> <span class="c1">#retorna False</span></div>
+
+<div class="viewcode-block" id="MyGraph.has_cycle"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.has_cycle">[docs]</a>    <span class="k">def</span> <span class="nf">has_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that checks if the graph has a loop, that is if the path is closed</span>
+<span class="sd">        :return: value of &quot;False&quot; or &quot;True&quot; if the path is not closed or closed, respectively.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>  <span class="c1">#para cada nodo vai buscar ao grafo (dicionário) o nodo adjacente</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_has_cycle</span><span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="c1">#se o nodo tiver ciclo</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">res</span> <span class="c1">#retorna False</span></div>
+
+    <span class="c1">## clustering</span>
+
+<div class="viewcode-block" id="MyGraph.clustering_coef"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.clustering_coef">[docs]</a>    <span class="k">def</span> <span class="nf">clustering_coef</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clustering coefficient calculation method, to measure the extent to which each node is embedded in a cohesive group</span>
+<span class="sd">        :param v: node</span>
+<span class="sd">        :return: clustering coefficient</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">adjs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_adjacents</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="c1">#lista de nodos adjacentes</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">adjs</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span> <span class="c1">#se o número de nodos adjacentes for inferior ou igual a 1, só terá 1 ou 0 nodos adjacentes</span>
+            <span class="k">return</span> <span class="mf">0.0</span> <span class="c1">#logo, não tem nodos suficientes para formar pares</span>
+        <span class="n">ligs</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">adjs</span><span class="p">:</span> <span class="c1">#para cada nodo i (anterior) adjacente</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">adjs</span><span class="p">:</span> <span class="c1">#para cada nodo j (seguinte) adjacente</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span> <span class="c1">#se nodo i diferente de nodo j</span>
+                    <span class="k">if</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="c1">#se nodo j estiver no grafo adjacente a i ou i estiver no grafo adjacente a j</span>
+                        <span class="n">ligs</span> <span class="o">=</span> <span class="n">ligs</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">ligs</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adjs</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adjs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span></div>
+        <span class="c1">#o número de pares de nodos adjacentes a dividir pelo número de pares que é possivel serem formados</span>
+
+<div class="viewcode-block" id="MyGraph.all_clustering_coefs"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.all_clustering_coefs">[docs]</a>    <span class="k">def</span> <span class="nf">all_clustering_coefs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that calculates all coefficients</span>
+<span class="sd">        :return: dictionary of coefficients of each node where the key corresponds to each node and each coefficient</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ccs</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">#dicionário de coeficientes</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada key no grafo</span>
+            <span class="n">ccs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clustering_coef</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="c1">#cálculo do coeficiente de cada nodo, valor adicionado no dicionário ccs</span>
+        <span class="k">return</span> <span class="n">ccs</span></div>
+
+<div class="viewcode-block" id="MyGraph.mean_clustering_coef"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.mean_clustering_coef">[docs]</a>    <span class="k">def</span> <span class="nf">mean_clustering_coef</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method of the global average of coefficients</span>
+<span class="sd">        :return: the value of the average of all coefficients</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ccs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_clustering_coefs</span><span class="p">()</span> <span class="c1">#cálculo de todos os coeficientes</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ccs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ccs</span><span class="p">))</span> <span class="c1">#cálculo da média</span></div>
+
+<div class="viewcode-block" id="MyGraph.mean_clustering_perdegree"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.mean_clustering_perdegree">[docs]</a>    <span class="k">def</span> <span class="nf">mean_clustering_perdegree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deg_type</span><span class="o">=</span><span class="s2">&quot;inout&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that calculates values for the average of coefficients for all nodes</span>
+<span class="sd">        :param deg_type: type of degree (input, output or both)</span>
+<span class="sd">        :return: returns the dictionary of nodes and their coefficient</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">degs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_degrees</span><span class="p">(</span><span class="n">deg_type</span><span class="p">)</span> <span class="c1">#graus de entrada e saída, ou ambos para todos os nodos do grafo</span>
+        <span class="n">ccs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_clustering_coefs</span><span class="p">()</span> <span class="c1">#coeficiente de todos os nodos em dicionário</span>
+        <span class="n">degs_k</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">#dicionário de grau k</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">degs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada k grau</span>
+            <span class="k">if</span> <span class="n">degs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">in</span> <span class="n">degs_k</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#se cada grau k de entrada e saída, ou ambos está dentro</span>
+                <span class="n">degs_k</span><span class="p">[</span><span class="n">degs</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="c1">#o que estava no dicionário passa para uma lista</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1">#senão</span>
+                <span class="n">degs_k</span><span class="p">[</span><span class="n">degs</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="c1">#grau k permanece no dicionário</span>
+        <span class="n">ck</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">#dicionário da média dos coeficientes considerando nodos de grau k.</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">degs_k</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span><span class="c1">#para cada k grau</span>
+            <span class="n">tot</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">degs_k</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">tot</span> <span class="o">+=</span> <span class="n">ccs</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+            <span class="c1">#para grau v calcular o total, o coeficiente de todos os nodos (dicionário)</span>
+            <span class="n">ck</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tot</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">degs_k</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+            <span class="c1">#calcula o coeficiente a dividir pelo comprimento do grau k</span>
+        <span class="k">return</span> <span class="n">ck</span></div>
+
+    <span class="c1">## Hamiltonian</span>
+
+<div class="viewcode-block" id="MyGraph.check_if_valid_path"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.check_if_valid_path">[docs]</a>    <span class="k">def</span> <span class="nf">check_if_valid_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method of checking if path is correct</span>
+<span class="sd">        :param p:path</span>
+<span class="sd">        :return: value of &quot;False&quot; or &quot;True&quot; if path is invalid or valid, respectively.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#se o primeiro nodo do caminho não pertencer ao grafo</span>
+            <span class="k">return</span> <span class="kc">False</span> <span class="c1">#caminho inválido</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)):</span> <span class="c1">#para cada nodo no caminho</span>
+            <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]:</span>
+                <span class="c1">#se o nodo não pertencer ao grafo ou não for o primeiro no caminho</span>
+                <span class="k">return</span> <span class="kc">False</span> <span class="c1">#caminho inválido</span>
+        <span class="k">return</span> <span class="kc">True</span> <span class="c1">#caminho válido</span></div>
+
+<div class="viewcode-block" id="MyGraph.check_if_hamiltonian_path"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.check_if_hamiltonian_path">[docs]</a>    <span class="k">def</span> <span class="nf">check_if_hamiltonian_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method checking if path is Hamiltonian</span>
+<span class="sd">        :param p: path</span>
+<span class="sd">        :return: value of &quot;False&quot; or &quot;True&quot; if the Hamiltonian path is invalid or valid, respectively.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_if_valid_path</span><span class="p">(</span><span class="n">p</span><span class="p">):</span> <span class="c1">#se não for um caminho válido</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">to_visit</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">())</span> <span class="c1">#lista dos nodos a visitar</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_visit</span><span class="p">):</span> <span class="c1">#verifica se o número de nodos do caminho for diferente do número de nodos a visitar</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)):</span> <span class="c1">#para cada nodo no caminho</span>
+        <span class="c1">#verifica se os nodos no caminho e na lista a visitar são iguais</span>
+            <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">to_visit</span><span class="p">:</span> <span class="c1">#se o nodo tiver na lista a visitar</span>
+                <span class="n">to_visit</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="c1">#remove da lista dos nodos a visitar</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">to_visit</span><span class="p">:</span> <span class="c1">#caso contrário,se os nodos na lista de nodos não tiverem presentes na lista a visitar</span>
+            <span class="k">return</span> <span class="kc">True</span> <span class="c1"># é um caminho hamiltonian pois passou por todos os nodos e não existem mais nodos a visitar</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1">#se houver nodos na lista a visitar</span>
+            <span class="k">return</span> <span class="kc">False</span> <span class="c1">#não é um caminho hamiltonian</span></div>
+
+<div class="viewcode-block" id="MyGraph.search_hamiltonian_path"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.search_hamiltonian_path">[docs]</a>    <span class="k">def</span> <span class="nf">search_hamiltonian_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&quot;</span>
+<span class="sd">        Hamiltonian pathfinding method</span>
+<span class="sd">        :return: if p is different from None returns p otherwise returns None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">ke</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada key no grafo</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_hamiltonian_path_from_node</span><span class="p">(</span><span class="n">ke</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">p</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="MyGraph.search_hamiltonian_path_from_node"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.search_hamiltonian_path_from_node">[docs]</a>    <span class="k">def</span> <span class="nf">search_hamiltonian_path_from_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span> <span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Hamiltonian pathfinding method on the graph</span>
+<span class="sd">        :param start: initial node</span>
+<span class="sd">        :return: Hamiltonian path in list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">start</span> <span class="c1">#para iniciar o nodo atual tem de ser o nodo inicial</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">{</span><span class="n">start</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+        <span class="c1">#dicionário em que as key é o nodo atual e os values o index</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="c1">#caminho em lista dos nodos</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">()):</span>
+        <span class="c1">#enquanto o caminho for menor que o número de nodos do grafo</span>
+            <span class="n">nxt_index</span> <span class="o">=</span> <span class="n">visited</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="c1">#o proximo index corresponde ao index atual</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">current</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">nxt_index</span><span class="p">:</span>
+            <span class="c1">#se o comprimento do grafo até ao nodo atual for superior ao próximo index</span>
+                <span class="n">nxtnode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">current</span><span class="p">][</span><span class="n">nxt_index</span><span class="p">]</span>
+                <span class="c1">#o próximo nodo é o nodo adjacente ao nodo atual</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1">#para percorrer todos os nodos adjacente ao nodo atual</span>
+                <span class="k">if</span> <span class="n">nxtnode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                <span class="c1">#se o próximo nodo não tiver no caminho (lista)</span>
+                    <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nxtnode</span><span class="p">)</span>
+                    <span class="c1">#adicionar à lista path o próximo nodo</span>
+                    <span class="n">visited</span><span class="p">[</span><span class="n">nxtnode</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="c1">#adicionar o nodo adjacente que visitamos ao dicionário de nodos visitados</span>
+                    <span class="c1">#e guarda o valor como zero para ler os nodos adjacentes a partir da primeira posição</span>
+                    <span class="n">current</span> <span class="o">=</span> <span class="n">nxtnode</span>
+                    <span class="c1">#o nodo atual passa a ser o próximo nodo</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1">#se não</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1">#se houver um caminho,ou seja, o comprimento da lista for maior que um</span>
+                    <span class="n">rmvnode</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1">#remove o nodo da lista path e retorna o nodo removido</span>
+                    <span class="k">del</span> <span class="n">visited</span><span class="p">[</span><span class="n">rmvnode</span><span class="p">]</span> <span class="c1">#elimina o nodo removido do diciónario de nodos visitados</span>
+                    <span class="n">current</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#inicia a nova procura de um caminho a partir do ultimo nodo da lista</span>
+                <span class="k">else</span><span class="p">:</span> <span class="c1">#senão</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">path</span> <span class="c1">#caminho hamiltonianos em lista</span></div>
+
+    <span class="c1"># Eulerian</span>
+        <span class="c1">#Caminho que passa por todos os arcos do grafo exatamente uma vez</span>
+
+<div class="viewcode-block" id="MyGraph.check_balanced_node"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.check_balanced_node">[docs]</a>    <span class="k">def</span> <span class="nf">check_balanced_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to check if a node is balanced</span>
+<span class="sd">        :param node: node</span>
+<span class="sd">        :return: value of &quot;False&quot; or &quot;True&quot;, if the node&#39;s input degree is not equal/or is equal to the node&#39;s output degree, respectively</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_degree</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MyGraph.check_balanced_graph"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.check_balanced_graph">[docs]</a>    <span class="k">def</span> <span class="nf">check_balanced_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checking method if the graph is balanced</span>
+<span class="sd">        return:value of &quot;False&quot; or &quot;True&quot;, if the graph is unbalanced or balanced, respectively</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada key do grafo</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_balanced_node</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1">#se não for um nó balanceado</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="MyGraph.check_nearly_balanced_graph"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.check_nearly_balanced_graph">[docs]</a>    <span class="k">def</span> <span class="nf">check_nearly_balanced_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method to check if the graph is semi-balanced</span>
+<span class="sd">        :return: returns none (if the graph is not semi-balanced) or the tuples</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span> <span class="c1">#forma um tuplo</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada key do grafo</span>
+            <span class="n">indeg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1">#indeg vai corresponder ao indice do grau de entrada</span>
+            <span class="n">outdeg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_degree</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1">#outdeg vai corresponder ao indice do grau de saída</span>
+            <span class="k">if</span> <span class="n">indeg</span> <span class="o">-</span> <span class="n">outdeg</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1">#se o grau de entrada a subtrair pelo de saída corresponder a 1 e o tuplo de indice 1 for none</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span> <span class="c1">#o tuplo vai passar o ter o valor de n</span>
+            <span class="k">elif</span> <span class="n">indeg</span> <span class="o">-</span> <span class="n">outdeg</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1">#se o grau de entrada a subtrair pelo de saída corresponder a -1  e o tuplo de indice 0 for none</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#vai subtituir o valor de n no tuplo de indice 0</span>
+            <span class="k">elif</span> <span class="n">indeg</span> <span class="o">==</span> <span class="n">outdeg</span><span class="p">:</span>
+            <span class="c1">#se o grau de entrada e saída forem iguais</span>
+                <span class="k">pass</span> <span class="c1">#passa</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="MyGraph.is_connected"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.is_connected">[docs]</a>    <span class="k">def</span> <span class="nf">is_connected</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method for checking whether it is connected or not</span>
+<span class="sd">        :return: value of &quot;False&quot; or &quot;True&quot;, if not connected or connected, respectively</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">#para cada key do grafo</span>
+            <span class="n">reachable_v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reachable_bfs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="c1">#lista de nodos atingíveis a partir de v</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reachable_v</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">total</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="MyGraph.eulerian_cycle"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.eulerian_cycle">[docs]</a>    <span class="k">def</span> <span class="nf">eulerian_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Eulerian cycle passes through all arcs of the examining graph once, returning to the starting node</span>
+<span class="sd">        :return: value of &quot;None&quot; (if not an Eulerian cycle) or the list res (cycle list)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_connected</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_balanced_graph</span><span class="p">():</span>
+        <span class="c1">#se não estiver conetado ou não o grafo não tiver balanceado, ou seja verifica se é Euleriano</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">edges_visit</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_edges</span><span class="p">())</span> <span class="c1">#arcos a visitar vai ser a lista de arcos</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#lista vazia</span>
+        <span class="k">while</span> <span class="n">edges_visit</span><span class="p">:</span> <span class="c1">#enquanto os arcos a visitar</span>
+            <span class="n">pair</span> <span class="o">=</span> <span class="n">edges_visit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1">#par dos nodos correspondentes a arcos a visitar do grafo</span>
+            <span class="c1"># vai buscar no tuplo da primeira posição da lista de arcos</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#define o index como 1, para mudar a posição</span>
+            <span class="k">if</span> <span class="n">res</span> <span class="o">!=</span> <span class="p">[]:</span> <span class="c1">#se a lista não for vazia</span>
+                <span class="k">while</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span> <span class="c1">#enquanto o primeiro par de nodos não tiver na lista correspondente ao ciclo</span>
+                    <span class="n">pair</span> <span class="o">=</span> <span class="n">edges_visit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1">#guarda o par de nodos da posição i</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">#incrementa o index da lista de par de nodos para ir lendo a lista</span>
+            <span class="n">edges_visit</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="c1">#remove o par da lista de arcos a visitar porque vai visitar</span>
+            <span class="n">start</span><span class="p">,</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">pair</span> <span class="c1">#pega no par de nodos e define o primeiro nodo como o start e o segundo nodo como o nxt</span>
+            <span class="n">cycle</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="n">nxt</span><span class="p">]</span> <span class="c1">#lista do ciclo em que o star é o nodo inicial e o nxt é o último nodo</span>
+            <span class="k">while</span> <span class="n">nxt</span> <span class="o">!=</span> <span class="n">start</span><span class="p">:</span> <span class="c1">#enquanto o próximo for diferente do inicial, para andar para a frente no grafo</span>
+                <span class="k">for</span> <span class="n">adj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">nxt</span><span class="p">]:</span> <span class="c1">#itera cada nodo adjacente ao próximo nodo</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">nxt</span><span class="p">,</span> <span class="n">adj</span><span class="p">)</span> <span class="ow">in</span> <span class="n">edges_visit</span><span class="p">:</span> <span class="c1">#verifica se o próximo nodo e o nodo adjacente têm um arco</span>
+                        <span class="n">pair</span> <span class="o">=</span> <span class="p">(</span><span class="n">nxt</span><span class="p">,</span> <span class="n">adj</span><span class="p">)</span> <span class="c1">#se sim, define como arco</span>
+                        <span class="n">nxt</span> <span class="o">=</span> <span class="n">adj</span> <span class="c1">#define o adjacente como próximo.</span>
+                        <span class="n">cycle</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nxt</span><span class="p">)</span> <span class="c1">#adiciona o próximo nodo ao ciclo.</span>
+                        <span class="n">edges_visit</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="c1">#remove o par acabado de visitar</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">res</span><span class="p">:</span> <span class="c1">#se a lista for vazia</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">cycle</span> <span class="c1">#a lista de nodos do ciclo passa a ser a lista de resolução</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1">#caso já tenha conteúdo</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">cycle</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#cria a variavel pos, indice do ciclo na primeira posição</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span> <span class="c1">#itera as posições dos nodos na lista cycle</span>
+                    <span class="n">res</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cycle</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                    <span class="c1">#insere na lista res na dada posição (pos+i+1) o nodo da lista cycle(da posição i+1)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="MyGraph.eulerian_path"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.MyGraph.eulerian_path">[docs]</a>    <span class="k">def</span> <span class="nf">eulerian_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Eulerian path method, if existent</span>
+<span class="sd">        :return: returns the path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">unb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_nearly_balanced_graph</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">unb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">unb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span> <span class="c1">#se não houver pontos semibalanciados não há caminho</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">unb</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unb</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">cycle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eulerian_cycle</span><span class="p">()</span> <span class="c1">#função do ciclo euleriano</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span> <span class="c1">#itera as posições dos nós</span>
+            <span class="k">if</span> <span class="n">cycle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">unb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">cycle</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">unb</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="c1">#quando o nó da lista cycle na posição i for igual ao segundo nodo semibalanceado e</span>
+            <span class="c1"># o nó seguinte for igual ao primeiro nodo semibalanceado</span>
+                <span class="k">break</span> <span class="c1">#quebra o loop</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">cycle</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="c1">#o path fica os nodos do ciclo começando na posição i+1 e</span>
+        <span class="c1"># os nodos desde a segunda posição até i+1</span>
+        <span class="k">return</span> <span class="n">path</span></div></div>
+
+
+<div class="viewcode-block" id="is_in_tuple_list"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyGraph.is_in_tuple_list">[docs]</a><span class="k">def</span> <span class="nf">is_in_tuple_list</span><span class="p">(</span><span class="n">tl</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tl</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aab</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

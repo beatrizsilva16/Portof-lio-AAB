@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package_aab.src.MyMotifs &#8212; aab a documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for package_aab.src.MyMotifs</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="createMatZeros"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.createMatZeros">[docs]</a><span></span><span class="k">def</span> <span class="nf">createMatZeros</span><span class="p">(</span><span class="n">line_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">col_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method that creates the matrix of zeros.</span>
+<span class="sd">    The matrix of zeros is used as a base to store the counts or probabilities</span>
+<span class="sd">    of each character in each position of the biological sequences that</span>
+<span class="sd">    are being analyzed.</span>
+<span class="sd">    :param line_num: number of lines in the matrix</span>
+<span class="sd">    :param col_num: number of columns in the matrix</span>
+<span class="sd">    :return: matrix of zeros</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mat_z</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># empty list to create the matrix of zeros</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">line_num</span><span class="p">):</span>
+        <span class="n">mat_z</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">col_num</span><span class="p">)</span>  <span class="c1"># add a zero * col_num</span>
+    <span class="k">return</span> <span class="n">mat_z</span></div>
+
+
+<div class="viewcode-block" id="printMat"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.printMat">[docs]</a><span class="k">def</span> <span class="nf">printMat</span><span class="p">(</span><span class="n">mat</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method to prints the matrix</span>
+<span class="sd">    :param mat: matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">lin</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="n">lin</span><span class="p">])):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="n">lin</span><span class="p">][</span><span class="n">col</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="MyMotifs"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.MyMotifs">[docs]</a><span class="k">class</span> <span class="nc">MyMotifs</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class that presents the methods that allow the manipulation and search of recurring patterns (motifs)</span>
+<span class="sd">    in biology sequences and also do PWM.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lseqs</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">pwm</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">alphabet</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that keeps the values used in the methods</span>
+<span class="sd">        :param lseqs: list of sequences introduced</span>
+<span class="sd">        :param pwm:  probability matrix</span>
+<span class="sd">        :param alphabet: type of caracters of the sequence introduced</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">lseqs</span><span class="p">:</span>  <span class="c1"># if the parameter introduced is a sequence, it must have the following instances.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lseqs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># character length of the sequences</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seqs</span> <span class="o">=</span> <span class="n">lseqs</span>  <span class="c1"># objects of class MySeq</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="n">lseqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">alphabet</span><span class="p">()</span>  <span class="c1"># object of class Myseq, checks the type</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">doCounts</span><span class="p">()</span>  <span class="c1"># creates the matrix of counts of the characters of the sequences</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">createPWM</span><span class="p">()</span>  <span class="c1"># creates the PWN matrix (probability matrix)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># if the parameter introduced is not a sequence it is a PWM</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pwm</span> <span class="o">=</span> <span class="n">pwm</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pwm</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># length of the first value in the list</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span> <span class="o">=</span> <span class="n">alphabet</span>  <span class="c1"># character type of the sequence entered</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that returns the length of the sequence</span>
+<span class="sd">        :return: length of the sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+
+<div class="viewcode-block" id="MyMotifs.doCounts"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.MyMotifs.doCounts">[docs]</a>    <span class="k">def</span> <span class="nf">doCounts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that implements the counting matrices.</span>
+<span class="sd">        :return: counts matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span> <span class="o">=</span> <span class="n">createMatZeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>  <span class="c1"># define uma instância correspondente</span>
+        <span class="c1"># à matriz probabilística, em que o número de linhas é o número de caracteres do alfabeto e o número</span>
+        <span class="c1"># de colunas é o comprimento da sequência.</span>
+        <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">seqs</span><span class="p">:</span>  <span class="c1"># para cada sequência na lista de sequências</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># para cada índice da sequência</span>
+                <span class="n">lin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># as linhas da matriz correspondem à ordem dos caracteres no alfabeto</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span><span class="p">[</span><span class="n">lin</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment the count of the character at position i and row lin</span></div>
+                                             <span class="c1"># in the counting matrix.</span>
+
+<div class="viewcode-block" id="MyMotifs.createPWM"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.MyMotifs.createPWM">[docs]</a>    <span class="k">def</span> <span class="nf">createPWM</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that creates the probabilistic matrix. PWMs are probabilistic representations of the characters</span>
+<span class="sd">        in biological sequences. It calculates the probability of nucleotide i being found at position j.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># if the matrix of counts is not done</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">doCounts</span><span class="p">()</span>  <span class="c1"># do the matrix of counts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pwm</span> <span class="o">=</span> <span class="n">createMatZeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>  <span class="c1"># creates the matrix of zeros to structure the PWM</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)):</span>  <span class="c1"># percorre o tipo de caracteres da sequência</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># percorre a sequência</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pwm</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqs</span><span class="p">)</span></div>
+                <span class="c1"># calculates the probability for each cell using the formula:</span>
+                <span class="c1"># counts checked / number of sequences.</span>
+
+<div class="viewcode-block" id="MyMotifs.consensus"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.MyMotifs.consensus">[docs]</a>    <span class="k">def</span> <span class="nf">consensus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that generates a consensus sequence. Consensus sequences store the most conserved characters in each</span>
+<span class="sd">        position of the pattern, that is, the highest value of each column of the count matrix.</span>
+<span class="sd">        :return: string of the consensus sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cons_seq</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># opens an empty string to enter the sequence of characters</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># runs through the columns of the matrix that have the same length as the sequence</span>
+            <span class="n">max_col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>  <span class="c1"># stores the value of the first row of column j</span>
+            <span class="n">index_maxval</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># sets as initial value</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)):</span>  <span class="c1"># runs all lines, i.e,</span>
+                <span class="c1"># the characters of the sequence type</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_col</span><span class="p">:</span>  <span class="c1"># if the count value is greater than the last saved value</span>
+                    <span class="n">max_col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>  <span class="c1"># returns it</span>
+                    <span class="n">index_maxval</span> <span class="o">=</span> <span class="n">i</span>  <span class="c1"># stores the index of the character with the highest count value</span>
+            <span class="n">cons_seq</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">[</span><span class="n">index_maxval</span><span class="p">]</span>  <span class="c1"># adds to the string the character</span>
+        <span class="k">return</span> <span class="n">cons_seq</span></div>
+
+<div class="viewcode-block" id="MyMotifs.maskedConsensus"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.MyMotifs.maskedConsensus">[docs]</a>    <span class="k">def</span> <span class="nf">maskedConsensus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that generates the consensus sequence that is obtained with the characters</span>
+<span class="sd">        that have an incidence higher than 50%.</span>
+<span class="sd">        :return: string of the consensus sequence with incidence higher than 50%.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cons_seq</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># opens an empty string to enter the sequence of characters</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># runs through the columns of the matrix that have the same length as the sequence</span>
+            <span class="n">max_col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>  <span class="c1"># returns the value of the first row of column j</span>
+            <span class="n">index_maxval</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># sets as initial value</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)):</span>  <span class="c1"># percorre todas as linhas, ou seja,</span>
+                <span class="c1"># os caracteres do tipo de sequência</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_col</span><span class="p">:</span>  <span class="c1"># se o valor da contagem for superior ao último valor guardado</span>
+                    <span class="n">max_col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat_count</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>  <span class="c1"># devolve o valor em causa</span>
+                    <span class="n">index_maxval</span> <span class="o">=</span> <span class="n">i</span>  <span class="c1"># guarda o index do caractér com maior valor de contagem</span>
+            <span class="k">if</span> <span class="n">max_col</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqs</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># se o valor máximo da coluna for superior a metade do número de sequências</span>
+                <span class="n">cons_seq</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="p">[</span><span class="n">index_maxval</span><span class="p">]</span>  <span class="c1"># devolve o caractér</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cons_seq</span> <span class="o">+=</span> <span class="s2">&quot;-&quot;</span>  <span class="c1"># se não tiver uma incidência superior a 50% não devolve um caracter</span>
+        <span class="k">return</span> <span class="n">cons_seq</span></div>
+
+<div class="viewcode-block" id="MyMotifs.probabSeq"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.MyMotifs.probabSeq">[docs]</a>    <span class="k">def</span> <span class="nf">probabSeq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that calculates the probability of a pattern being found in a sequence.</span>
+<span class="sd">        :param seq: sequence intoduced</span>
+<span class="sd">        :return: the probability of a pattern being found in the sequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># sets the initial probability to 1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># runs the sequence from zero to the length of the sequences entered</span>
+            <span class="n">lin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># the lines of the matrix correspond to the order of the characters in the alphabet</span>
+            <span class="n">prob</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pwm</span><span class="p">[</span><span class="n">lin</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># multiplies the cell value by the initially set value</span>
+        <span class="k">return</span> <span class="n">prob</span></div>
+
+<div class="viewcode-block" id="MyMotifs.probAllPositions"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.MyMotifs.probAllPositions">[docs]</a>    <span class="k">def</span> <span class="nf">probAllPositions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method implemented to calculate the probability of finding patterns in longer sequences</span>
+<span class="sd">        and calculate the probability of the pattern occurring at each character in the sequence, ie,</span>
+<span class="sd">        of occurring at each sub-sequence of the pattern size. For example, if the pattern size is 3 and the sequence is</span>
+<span class="sd">        &quot;ATCGTACG&quot;, the method would calculate the probability of the pattern occurring at each of the sub-sequences of</span>
+<span class="sd">        size 3, which are &quot;ATC&quot;, &quot;TCG&quot;, &quot;CGT&quot;, &quot;GTA&quot;, &quot;TAC&quot;, &quot;ACG&quot;.</span>
+<span class="sd">        :param seq: sequence introduced</span>
+<span class="sd">        :return: list of probabilities of the pattern occurring at each subsequence</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">subseq_prob</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># empty list to return probabilities</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># runs through the entered sequence minus the length of the pattern</span>
+            <span class="c1"># plus one, in order to scroll the entire sequence until a match is reached</span>
+            <span class="n">subseq_prob</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">probabSeq</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>  <span class="c1"># add the prob to the list</span>
+        <span class="k">return</span> <span class="n">subseq_prob</span></div>
+
+<div class="viewcode-block" id="MyMotifs.mostProbableSeq"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.MyMotifs.MyMotifs.mostProbableSeq">[docs]</a>    <span class="k">def</span> <span class="nf">mostProbableSeq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method implemented to determine the sub-sequence with the highest probability of matching</span>
+<span class="sd">        the pattern being searched.</span>
+<span class="sd">        :param seq: sequence introduced</span>
+<span class="sd">        return: the index of the sub-sequence with higher probability of matching the pattern in search.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_p</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">1.0</span>  <span class="c1"># defines the minimum probability, which is a value that is lower than any probability that</span>
+        <span class="c1"># can be obtained.This is done to ensure that the first calculated probability will be greater than max_p and</span>
+        <span class="c1"># will be used to update max_p and max_ind.</span>
+        <span class="n">max_ind</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># sets the initial value for the index with the highest probability</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># runs through the entire sequence minus the length of the pattern</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">probabSeq</span><span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">k</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">])</span>  <span class="c1"># calculates the probability of finding the corresponding sub-sequence</span>
+            <span class="c1"># da posição k à posição k + o comprimento da</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">&gt;</span> <span class="n">max_p</span><span class="p">):</span>  <span class="c1"># se a probabilidade for superior a - 1.0</span>
+                <span class="n">max_p</span> <span class="o">=</span> <span class="n">p</span>  <span class="c1"># define p como a probabilidade máxima</span>
+                <span class="n">max_ind</span> <span class="o">=</span> <span class="n">k</span>  <span class="c1"># define o índice atual como o índice com o valor máximo de probabilidade</span>
+        <span class="k">return</span> <span class="n">max_ind</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aab</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>package_aab.src.Trie &#8212; aab a documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for package_aab.src.Trie</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pprint</span>
+
+
+<div class="viewcode-block" id="Trie"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.Trie.Trie">[docs]</a><span class="k">class</span> <span class="nc">Trie</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class responsible for implementing the prefix tree that allows pre-processing</span>
+<span class="sd">    of a set of patterns. The symbols of a given alphabet are associated with the arcs of a tree.</span>
+<span class="sd">    The trie is built from a set of patterns, starting from the root node and iterating</span>
+<span class="sd">    each pattern, adding the necessary nodes so that the tree contains the path from the root to the leaf,</span>
+<span class="sd">    representing the pattern.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seqs</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trie</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Trie structure represented as a dictionary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seqs</span> <span class="o">=</span> <span class="n">seqs</span>  <span class="c1"># Input sequences</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_seqs</span><span class="p">()</span>  <span class="c1"># Check if sequences are strings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>  <span class="c1"># Insert sequences into the trie</span>
+
+<div class="viewcode-block" id="Trie.check_seqs"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.Trie.Trie.check_seqs">[docs]</a>    <span class="k">def</span> <span class="nf">check_seqs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that verifies if the sequence is a string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqs</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input sequence must be a string.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Trie.print_trie"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.Trie.Trie.print_trie">[docs]</a>    <span class="k">def</span> <span class="nf">print_trie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that prints the tree structure (dictionary)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trie</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Print the trie structure</span></div>
+
+<div class="viewcode-block" id="Trie.insert"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.Trie.Trie.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that inserts the sequences into the trie</span>
+<span class="sd">        :param seq: sequences introduced</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39; &#39;</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>  <span class="c1"># If multiple sequences are given as a single string</span>
+            <span class="n">seqs</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seqs</span><span class="p">:</span>  <span class="c1"># Insert each sequence separately</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">insert_sequence</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">insert_sequence</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>  <span class="c1"># Insert the single sequence</span></div>
+
+<div class="viewcode-block" id="Trie.insert_sequence"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.Trie.Trie.insert_sequence">[docs]</a>    <span class="k">def</span> <span class="nf">insert_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method that inserts a single sequence into the trie.</span>
+<span class="sd">        :param seq: sequence introduced</span>
+<span class="sd">        :return: </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trie</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>  <span class="c1"># Traverse through each character in the sequence</span>
+            <span class="k">if</span> <span class="n">char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>  <span class="c1"># Create a new node if the character is not present</span>
+                <span class="n">node</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">char</span><span class="p">]</span>  <span class="c1"># Move to the next node</span>
+        <span class="n">node</span><span class="p">[</span><span class="s2">&quot;#$#&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Mark the end of a sequence with a special key</span></div>
+
+<div class="viewcode-block" id="Trie.matches"><a class="viewcode-back" href="../../../package_aab.src.html#package_aab.src.Trie.Trie.matches">[docs]</a>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method  that verifies if a given sequence matches any sequence present in the trie</span>
+<span class="sd">        :param seq: sequence introduced</span>
+<span class="sd">        :return: booleano</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trie</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>  <span class="c1"># Traverse through each character in the sequence</span>
+            <span class="k">if</span> <span class="n">char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>  <span class="c1"># If any character is not present, the sequence is not a match</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">char</span><span class="p">]</span>  <span class="c1"># Move to the next node</span>
+        <span class="k">return</span> <span class="s2">&quot;#$#&quot;</span> <span class="ow">in</span> <span class="n">node</span>  <span class="c1"># Check if the end marker is present in the last node</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">aab</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">AABB</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

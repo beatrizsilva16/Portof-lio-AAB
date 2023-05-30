@@ -1,6 +1,6 @@
 import unittest
-from package_aab.src import MyMotifs
-from package_aab.src import MySeq
+from package_aab.src.MyMotifs import MyMotifs
+from package_aab.src.MySeq import MySeq
 
 class test_MyMotifs(unittest.TestCase):
     def setUp(self) -> None:
