@@ -10,12 +10,9 @@ class Popul:
 
         Parameters
         ----------
-        popsize : int
-            size of population
-        indsize : int
-            size of individuals (list of genes)
-        indivs : list, optional
-            list of genes, by default []
+        :param: popsize : size of population
+        :param: indsize : size of individuals (list of genes)
+        :param: indivs : list of genes, by default []
         '''
         self.popsize = popsize
         self.indsize = indsize
@@ -26,16 +23,8 @@ class Popul:
 
     def getIndiv(self, index: int) -> list:
         '''Method that returns a specific individual from the list, given its index.
-
-        Parameters
-        ----------
-        index : int
-            index of the individual on the list self.indivs
-
-        Returns
-        -------
-        list
-            list of information about individual: list of genes and fitness (Instance of the class Indiv)
+        :param: index : index of the individual on the list self.indivs
+        :returns: list of information about individual: list of genes and fitness (Instance of the class Indiv)
         '''
         return self.indivs[index]
 
@@ -49,16 +38,8 @@ class Popul:
 
     def getFitnesses(self, indivs: list = None) -> list:
         '''Method that returns the fitness information about all the individuals
-
-        Parameters
-        ----------
-        indivs : list, optional
-            list of individuals, by default None
-
-        Returns
-        -------
-        list
-            list of fitness of all the individuals
+        :param: list of individuals, by default None
+        :returns: list of fitness of all the individuals
         '''
         fitnesses = []
         if not indivs:
@@ -69,39 +50,22 @@ class Popul:
 
     def bestSolution(self) -> list:
         '''Method that returns the best solution of all the individuals (that has the best fitness).
-
-        Returns
-        -------
-        list
-            the best solution
+        :returns: the best solution
         '''
         return max(self.indivs)
 
     def bestFitness(self) -> Union[int, float]:
         '''Method that returns the best fitness of all the individuals
-
-        Returns
-        -------
-        int or float
-            the best fitness
+        :returns:the best fitness
         '''
         indv = self.bestSolution()
         return indv.getFitness()
 
     def selection(self, n: int, indivs: list = None) -> list:
-        '''_summary_
-
-        Parameters
-        ----------
-        n : int
-            size of selection (parents)
-        indivs : _type_, optional
-            list that represents the individuals, by default None
-
-        Returns
-        -------
-        list
-            individual (selection list)
+        '''
+        :param: n : size of selection (parents)
+        :param: indivs : list that represents the individuals, by default None
+        :returns: individual (selection list)
         '''
         res = []
         fitnesses = list(self.linscaling(self.getFitnesses(indivs)))
@@ -113,16 +77,8 @@ class Popul:
 
     def roulette(self, f: list) -> int:
         '''Method that selects a specific individual based on the probability of its fitnesses
-
-        Parameters
-        ----------
-        f : list
-            list of fitnesses
-
-        Returns
-        -------
-        int
-            index of individual selected
+        :param: list of fitnesses
+        :returns: index of individual selected
         '''
         tot = sum(f)
         val = random()
@@ -135,16 +91,8 @@ class Popul:
 
     def linscaling(self, fitnesses: list) -> list:
         '''Method that normalizes the fitnesses values (0,1)
-
-        Parameters
-        ----------
-        fitnesses : list
-            list of fitnesses
-
-        Returns
-        -------
-        list
-            list of normalized fitnesses
+        :param: list of fitnesses
+        :returns: list of normalized fitnesses
         '''
         mx = max(fitnesses)
         mn = min(fitnesses)
@@ -156,18 +104,9 @@ class Popul:
 
     def recombination(self, parents: list, noffspring: int) -> list:
         '''Method that returns the offspring after crossover between two parents and mutation.
-
-        Parameters
-        ----------
-        parents : list
-            list of individuals (parents)
-        noffspring : int
-            number of offspring individuals to create
-
-        Returns
-        -------
-        list
-            list of individuals (offspring)
+        :param: list of individuals (parents)
+        :param: number of offspring individuals to create
+        :returns: list of individuals (offspring)
         '''
         offspring = []
         new_inds = 0
@@ -184,11 +123,7 @@ class Popul:
 
     def reinsertion(self, offspring: list) -> None:
         '''Method that reinserts individuals (offspring)
-
-        Parameters
-        ----------
-        offspring : list
-            list of individuals (offspring)
+        :param: list of individuals (offspring)
         '''
         tokeep = self.selection(self.popsize - len(offspring))
         ind_offsp = 0
@@ -202,17 +137,6 @@ class PopulInt(Popul):
 
     def __init__(self, popsize: int, indsize: int, ub: int, indivs: list = []) -> None:
         '''Subclass that implements a binary representation of the population with a given size.
-
-        Parameters
-        ----------
-        popsize : int
-            size of population
-        indsize : int
-            size of individuals (list of genes)
-        ub : int
-            upper limits of the range for representing genes
-        indivs : list, optional
-            list of genes, by default []
         '''
         self.ub = ub
         Popul.__init__(self, popsize, indsize, indivs)
@@ -230,19 +154,6 @@ class PopulReal(Popul):
 
     def __init__(self, popsize: int, indsize: int, lb: float = 0.0, ub: float = 1.0, indivs: list = []) -> None:
         '''Subclass that implements a real representation of the population with a given size.
-
-        Parameters
-        ----------
-        popsize : int
-            size of population
-        indsize : int
-            size of individuals (list of genes)
-        lb : float, optional
-            lower limits of the range for representing genes, by default 0.0
-        ub : float, optional
-            upper limits of the range for representing genes, by default 1.0
-        indivs : list, optional
-            list of genes, by default []
         '''
         self.ub = ub
         self.lb = lb
