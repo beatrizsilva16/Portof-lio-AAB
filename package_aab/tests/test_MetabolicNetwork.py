@@ -1,67 +1,51 @@
-def test1():
-    m = MetabolicNetwork("metabolite-reaction")
-    m.add_vertex_type("R1", "reaction")
-    m.add_vertex_type("R2", "reaction")
-    m.add_vertex_type("R3", "reaction")
-    m.add_vertex_type("M1", "metabolite")
-    m.add_vertex_type("M2", "metabolite")
-    m.add_vertex_type("M3", "metabolite")
-    m.add_vertex_type("M4", "metabolite")
-    m.add_vertex_type("M5", "metabolite")
-    m.add_vertex_type("M6", "metabolite")
-    m.add_edge("M1", "R1")
-    m.add_edge("M2", "R1")
-    m.add_edge("R1", "M3")
-    m.add_edge("R1", "M4")
-    m.add_edge("M4", "R2")
-    m.add_edge("M6", "R2")
-    m.add_edge("R2", "M3")
-    m.add_edge("M4", "R3")
-    m.add_edge("M5", "R3")
-    m.add_edge("R3", "M6")
-    m.add_edge("R3", "M4")
-    m.add_edge("R3", "M5")
-    m.add_edge("M6", "R3")
-    m.print_graph()
-    print("Reactions: ", m.get_nodes_type("reaction"))
-    print("Metabolites: ", m.get_nodes_type("metabolite"))
+import unittest
+from package_aab.src.MyGraph import MyGraph
+from package_aab.src.MetabolicNetwork import MetabolicNetwork
+from unittest.mock import MagicMock, Mock
 
+class test_MetabolicNetwork(unittest.TestCase):
+    def setUp(self):
+        self.m = MetabolicNetwork("metabolite-reaction")
+        self.v1 = self.m.add_vertex_type("R1", "reaction")
+        self.v2 = self.m.add_vertex_type("R2", "reaction")
+        self.v3 = self.m.add_vertex_type("R3", "reaction")
+        self.v4 = self.m.add_vertex_type("M1", "metabolite")
+        self.v5 = self.m.add_vertex_type("M2", "metabolite")
+        self.v6 = self.m.add_vertex_type("M3", "metabolite")
+        self.v7 = self.m.add_vertex_type("M4", "metabolite")
+        self.v8 = self.m.add_vertex_type("M5", "metabolite")
+        self.v9 = self.m.add_vertex_type("M6", "metabolite")
+        self.e1 = self.m.add_edge("M1", "R1")
+        self.e2 = self.m.add_edge("M2", "R1")
+        self.e3 = self.m.add_edge("R1", "M3")
+        self.e4 = self.m.add_edge("R1", "M4")
+        self.e5 = self.m.add_edge("M4", "R2")
+        self.e6 = self.m.add_edge("M6", "R2")
+        self.e7 = self.m.add_edge("R2", "M3")
+        self.e8 = self.m.add_edge("M4", "R3")
+        self.e9 = self.m.add_edge("M5", "R3")
+        self.e10 = self.m.add_edge("R3", "M6")
+        self.e11 = self.m.add_edge("R3", "M4")
+        self.e12 = self.m.add_edge("R3", "M5")
+        self.e13 = self.m.add_edge("M6", "R3")
 
-def test2():
-    print("metabolite-reaction network:")
-    mrn = MetabolicNetwork("metabolite-reaction")
-    mrn.load_from_file("example-net.txt")
-    mrn.print_graph()
-    print("Reactions: ", mrn.get_nodes_type("reaction"))
-    print("Metabolites: ", mrn.get_nodes_type("metabolite"))
-    print()
+    def test_getNodeType(self):
+        x = self.m.get_nodes_type("reaction")
+        y = ["R1", "R2", "R3"]
+        for test, truth in zip(x, y):
+            self.assertEqual(str(test), truth)
 
-    print("metabolite-metabolite network:")
-    mmn = MetabolicNetwork("metabolite-metabolite")
-    mmn.load_from_file("example-net.txt")
-    mmn.print_graph()
-    print()
+    def test_getNodeType(self):
+        x = self.m.get_nodes_type("reaction")
+        y = ["R1", "R2", "R3"]
+        for test, truth in zip(x, y):
+            self.assertEqual(str(test), truth)
 
-    print("reaction-reaction network:")
-    rrn = MetabolicNetwork("reaction-reaction")
-    rrn.load_from_file("example-net.txt")
-    rrn.print_graph()
-    print()
+    def test_getNodeType(self):
+        x = self.m.get_nodes_type("metabolite")
+        y = ["M1", "M2", "M3", "M4", "M5", "M6"]
+        for test, truth in zip(x, y):
+            self.assertEqual(str(test), truth)
 
-    print("metabolite-reaction network (splitting reversible):")
-    mrsn = MetabolicNetwork("metabolite-reaction", True)
-    mrsn.load_from_file("example-net.txt")
-    mrsn.print_graph()
-    print()
-
-    print("reaction-reaction network (splitting reversible):")
-    rrsn = MetabolicNetwork("reaction-reaction", True)
-    rrsn.load_from_file("example-net.txt")
-    rrsn.print_graph()
-    print()
-
-
-test1()
-print()
-test2()
-
+if __name__ == '__main__':
+    unittest.main()
