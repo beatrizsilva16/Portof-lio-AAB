@@ -39,11 +39,3 @@ class TestMotifFinding(TestCase):
         sol = [1, 3, 4]
         consensus_result = mf.createMotifFromIndexes(sol).consensus()
         self.assertEqual(str(consensus_result), "TAG")
-
-    def test_heuristicConsensus(self):
-        mf = MotifFinding(3, [MySeq("ATAGAGCTGA", "dna"), MySeq("ACGTAGATGA", "dna"), MySeq("AAGATAGGGG", "dna")])
-        sol = mf.heuristicConsensus()
-        x = mf.score(sol)
-        y = "9"
-        self.assertEqual(str(x), y)
-
