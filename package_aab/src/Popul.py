@@ -1,13 +1,22 @@
-# -*- coding: utf-8 -*-
-
 from package_aab.src.Indiv import Indiv, IndivInt, IndivReal
 from random import random
+from typing import Union
 
 
 class Popul:
 
-    # Initializes the population with random individuals or with a list of individuals if provided
-    def __init__(self, popsize: int, indsize: int, indivs: list=[]) -> None:
+    def __init__(self, popsize: int, indsize: int, indivs: list = []) -> None:
+        '''Class that implements the population with a given size.
+
+        Parameters
+        ----------
+        popsize : int
+            size of population
+        indsize : int
+            size of individuals (list of genes)
+        indivs : list, optional
+            list of genes, by default []
+        '''
         self.popsize = popsize
         self.indsize = indsize
         if indivs:
@@ -15,19 +24,42 @@ class Popul:
         else:
             self.initRandomPop()
 
-    # Returns the individual at the specified index
-    def getIndiv(self, index: int) -> None:
+    def getIndiv(self, index: int) -> list:
+        '''Method that returns a specific individual from the list, given its index.
+
+        Parameters
+        ----------
+        index : int
+            index of the individual on the list self.indivs
+
+        Returns
+        -------
+        list
+            list of information about individual: list of genes and fitness (Instance of the class Indiv)
+        '''
         return self.indivs[index]
 
-    # Initializes the population with random individuals
     def initRandomPop(self) -> None:
+        '''Method that initializes the population (creates instances of Indiv class)
+        '''
         self.indivs = []
         for _ in range(self.popsize):
             indiv_i = Indiv(self.indsize, [])
             self.indivs.append(indiv_i)
 
-    # Returns a list of fitness values for the population or a subset of it
-    def getFitnesses(self, indivs: list=None) -> list:
+    def getFitnesses(self, indivs: list = None) -> list:
+        '''Method that returns the fitness information about all the individuals
+
+        Parameters
+        ----------
+        indivs : list, optional
+            list of individuals, by default None
+
+        Returns
+        -------
+        list
+            list of fitness of all the individuals
+        '''
         fitnesses = []
         if not indivs:
             indivs = self.indivs
@@ -35,17 +67,42 @@ class Popul:
             fitnesses.append(ind.getFitness())
         return fitnesses
 
-    # Returns the best solution (individual) in the population
     def bestSolution(self) -> list:
+        '''Method that returns the best solution of all the individuals (that has the best fitness).
+
+        Returns
+        -------
+        list
+            the best solution
+        '''
         return max(self.indivs)
 
-    # Returns the fitness value of the best solution (individual) in the population
     def bestFitness(self) -> Union[int, float]:
+        '''Method that returns the best fitness of all the individuals
+
+        Returns
+        -------
+        int or float
+            the best fitness
+        '''
         indv = self.bestSolution()
         return indv.getFitness()
 
-    # Performs selection of n individuals using roulette wheel selection
-    def selection(self, n: int, indivs: list=None) -> list:
+    def selection(self, n: int, indivs: list = None) -> list:
+        '''_summary_
+
+        Parameters
+        ----------
+        n : int
+            size of selection (parents)
+        indivs : _type_, optional
+            list that represents the individuals, by default None
+
+        Returns
+        -------
+        list
+            individual (selection list)
+        '''
         res = []
         fitnesses = list(self.linscaling(self.getFitnesses(indivs)))
         for _ in range(n):
@@ -54,8 +111,19 @@ class Popul:
             res.append(sel)
         return res
 
-    # Performs roulette wheel selection given a list of fitness values
-    def roulette(self, f: list) -> list:
+    def roulette(self, f: list) -> int:
+        '''Method that selects a specific individual based on the probability of its fitnesses
+
+        Parameters
+        ----------
+        f : list
+            list of fitnesses
+
+        Returns
+        -------
+        int
+            index of individual selected
+        '''
         tot = sum(f)
         val = random()
         acum = 0.0
@@ -63,25 +131,49 @@ class Popul:
         while acum < val:
             acum += (f[ind] / tot)
             ind += 1
-        return ind-1
+        return ind - 1
 
-    # Performs linear scaling of fitness values to the range [0,1]
     def linscaling(self, fitnesses: list) -> list:
+        '''Method that normalizes the fitnesses values (0,1)
+
+        Parameters
+        ----------
+        fitnesses : list
+            list of fitnesses
+
+        Returns
+        -------
+        list
+            list of normalized fitnesses
+        '''
         mx = max(fitnesses)
         mn = min(fitnesses)
         res = []
         for f in fitnesses:
-            val = (f-mn)/(mx-mn)
+            val = (f - mn) / (mx - mn)
             res.append(val)
         return res
 
-    # Performs recombination of parent individuals to generate offspring individuals
     def recombination(self, parents: list, noffspring: int) -> list:
+        '''Method that returns the offspring after crossover between two parents and mutation.
+
+        Parameters
+        ----------
+        parents : list
+            list of individuals (parents)
+        noffspring : int
+            number of offspring individuals to create
+
+        Returns
+        -------
+        list
+            list of individuals (offspring)
+        '''
         offspring = []
         new_inds = 0
         while new_inds < noffspring:
             parent1 = self.indivs[parents[new_inds]]
-            parent2 = self.indivs[parents[new_inds+1]]
+            parent2 = self.indivs[parents[new_inds + 1]]
             offsp1, offsp2 = parent1.crossover(parent2)
             offsp1.mutation()
             offsp2.mutation()
@@ -90,9 +182,15 @@ class Popul:
             new_inds += 2
         return offspring
 
-    # Performs reinsertion of offspring individuals into the population
     def reinsertion(self, offspring: list) -> None:
-        tokeep = self.selection(self.popsize-len(offspring))
+        '''Method that reinserts individuals (offspring)
+
+        Parameters
+        ----------
+        offspring : list
+            list of individuals (offspring)
+        '''
+        tokeep = self.selection(self.popsize - len(offspring))
         ind_offsp = 0
         for i in range(self.popsize):
             if i not in tokeep:
@@ -102,17 +200,28 @@ class Popul:
 
 class PopulInt(Popul):
 
-    def __init__(self, popsize: int, indsize: int, ub: int, indivs: list=[]) -> None:
+    def __init__(self, popsize: int, indsize: int, ub: int, indivs: list = []) -> None:
+        '''Subclass that implements a binary representation of the population with a given size.
+
+        Parameters
+        ----------
+        popsize : int
+            size of population
+        indsize : int
+            size of individuals (list of genes)
+        ub : int
+            upper limits of the range for representing genes
+        indivs : list, optional
+            list of genes, by default []
+        '''
         self.ub = ub
-        # Call the constructor of the base class with the given arguments
         Popul.__init__(self, popsize, indsize, indivs)
 
     def initRandomPop(self) -> None:
+        '''Method that initializes the population (creates instances of IndivInt class)
+        '''
         self.indivs = []
-        # Create a new IndivInt object for each individual in the population
         for _ in range(self.popsize):
-            # Set the minimum value for the genes to 0
-            # Set the maximum value for the genes to ub (the upper bound)
             indiv_i = IndivInt(self.indsize, [], 0, self.ub)
             self.indivs.append(indiv_i)
 
@@ -120,21 +229,29 @@ class PopulInt(Popul):
 class PopulReal(Popul):
 
     def __init__(self, popsize: int, indsize: int, lb: float = 0.0, ub: float = 1.0, indivs: list = []) -> None:
-        # Call the constructor of the base class with the given arguments
-        Popul.__init__(self, popsize, indsize, indivs)
-        self.lb = lb
+        '''Subclass that implements a real representation of the population with a given size.
+
+        Parameters
+        ----------
+        popsize : int
+            size of population
+        indsize : int
+            size of individuals (list of genes)
+        lb : float, optional
+            lower limits of the range for representing genes, by default 0.0
+        ub : float, optional
+            upper limits of the range for representing genes, by default 1.0
+        indivs : list, optional
+            list of genes, by default []
+        '''
         self.ub = ub
+        self.lb = lb
         Popul.__init__(self, popsize, indsize, indivs)
 
     def initRandomPop(self) -> None:
-        """
-        Method that initializes the population (creates instances of IndivReal class)
-        :return:
-        """
+        '''Method that initializes the population (creates instances of IndivReal class)
+        '''
         self.indivs = []
-        # Create a new IndivReal object for each individual in the population
         for _ in range(self.popsize):
-            # Set the minimum value for the genes to lb (the lower bound)
-            # Set the maximum value for the genes to ub (the upper bound)
-            indiv_i = IndivReal(self.indsize, [], self.lb, self.ub)
-            self.indivs.append(indiv_i)
+            indiv_r = IndivReal(self.indsize, [], self.lb, self.ub)
+            self.indivs.append(indiv_r)
